@@ -1,40 +1,41 @@
+/* Tried running this and the latest error I'm getting
+ * is "CS0246: The type or namespace name 'UnityEngine'
+   could not be found"
+ */
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class LoverBaseClass {
 
-public class LoverBaseClass
-{
+    public string firstName;
+    public string lastName;
+    public int age;
+    public string occupation;
 
-    // Data Values to get and set
-    public string FirstName { get; set };
-    public string LastName { get; set };
-    public int Age { get; set };
-    public string Occupation { get; set };
+    public LoverBaseClass(String title, String author){
 
-
-    //  Constructer that will set these data values
-    public LoverBaseClass (string firstName, string lastName, int age, string occupation) {
-
-        FirstName = firstName;
-        LastName = lastName;
-        Age = age;
-        Occupation = occupation;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.occupation = occupation;
 
     }
 
-        LoverBaseClass lover = new LoverBaseClass("Jeremy", "Balls", "34", "Construction Worker");
-
-
-    public static void(main[] args) {
-        // Create a new instance of a lover
-
-
-        Console.Write("Hi, my name is " + firstName + ", " + firstName + " " + firstName + " " + lastName ".");
-
-
+    public void loverInfo(){
+        Console.WriteLine("My name is " + this.firstName + " " + this.lastName + ".");
     }
 
-    
+}
+
+class Lover {
+
+    static void Main() {
+
+        LoverBaseClass lover = new LoverBaseClass("Jeremy", "Balls", "35", "Construction Worker");
+
+    }
 
 }

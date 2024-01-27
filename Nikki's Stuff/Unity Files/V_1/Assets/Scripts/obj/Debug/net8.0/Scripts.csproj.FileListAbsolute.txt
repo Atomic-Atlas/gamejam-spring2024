@@ -1,0 +1,5 @@
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\Unity Files\V_1\Assets\Scripts\obj\Debug\net8.0\Scripts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\Unity Files\V_1\Assets\Scripts\obj\Debug\net8.0\Scripts.AssemblyInfoInputs.cache
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\Unity Files\V_1\Assets\Scripts\obj\Debug\net8.0\Scripts.AssemblyInfo.cs
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\Unity Files\V_1\Assets\Scripts\obj\Debug\net8.0\Scripts.csproj.CoreCompileInputs.cache
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\Unity Files\V_1\Assets\Scripts\obj\Debug\net8.0\Scripts.sourcelink.json
