@@ -9,9 +9,8 @@ public class DisplayManager : MonoBehaviour
     private int _width;
     public (int, int) screenSize;
     private List<GameObject> myPanels = new();
-
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         screenSize = GetScreenSize();
         int max= gameObject.transform.childCount;

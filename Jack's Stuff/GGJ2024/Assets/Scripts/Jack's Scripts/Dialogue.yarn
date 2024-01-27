@@ -1,0 +1,18 @@
+﻿title: Start
+---
+Wow!
+My first ever Yarn script in Unity!
+<<declare $points = 0>>
+<<declare $optionSelected to false>>
+-> Gosh! 
+	<<set $points to 100>> 
+	<<set $optionSelected to true>>
+-> Incredible! 
+	<<set $points to 1>>
+	<<set $optionSelected to true>>
+-> I'm amazed!
+	<<set $points to 4>> 
+	<<set $optionSelected to true>>
+
+Anyway, time to get writing!
+===

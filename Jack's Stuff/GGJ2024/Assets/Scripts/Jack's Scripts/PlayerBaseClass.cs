@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class PlayerBaseClass 
 {
-    public int score { private set; get; }
-
+    public int score { set; get; }
     //scenario arrays
     string[] dinnerStages = new string[3] { "Apps", "Main Course", "Desserts" };
     string[] _apps = new string[3] { "Full points", "Half points,", "No points" };
@@ -14,10 +14,11 @@ public class PlayerBaseClass
     string[] _currentStage = new string[3];
 
     //index
-    int index = 0;
+    int answerIndex = 0;
+
     public string[] GetCurrentStage()
     {
-        string currentStageName = dinnerStages[index];
+        string currentStageName = dinnerStages[GameManager.stageIndex];
         switch (currentStageName)
         {
             case "Apps":
