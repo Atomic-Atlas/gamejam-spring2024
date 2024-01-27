@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBaseClass 
+public class LoverBaseClass 
 {
     public int score { private set; get; }
 
