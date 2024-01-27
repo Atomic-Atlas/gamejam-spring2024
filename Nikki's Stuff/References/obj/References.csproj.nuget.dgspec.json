@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj": {}
+    "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\References\\References.csproj": {}
   },
   "projects": {
-    "c:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj": {
+    "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\References\\References.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj",
-        "projectName": "Nikki's Stuff",
-        "projectPath": "c:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj",
+        "projectUniqueName": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\References\\References.csproj",
+        "projectName": "References",
+        "projectPath": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\References\\References.csproj",
         "packagesPath": "C:\\Users\\nikki\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\obj\\",
+        "outputPath": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\References\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nikki\\AppData\\Roaming\\NuGet\\NuGet.Config"
