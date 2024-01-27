@@ -8,7 +8,7 @@ public class DisplayManager : MonoBehaviour
     private int _height;
     private int _width;
     public (int, int) screenSize;
-    private List<GameObject> myPanels = new();
+    public List<GameObject> myPanels = new();
     // Start is called before the first frame update
     void Awake()
     {

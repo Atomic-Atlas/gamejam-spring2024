@@ -1,18 +1,44 @@
 ﻿title: Start
 ---
-Wow!
-My first ever Yarn script in Unity!
+Jeremy: We're at dinner...
+Jeremy: Time to get blackout drunk!
 <<declare $points = 0>>
 <<declare $optionSelected to false>>
--> Gosh! 
+<<declare $moveOn to false>>
+
+-> Hell yeah brother! 
 	<<set $points to 100>> 
 	<<set $optionSelected to true>>
--> Incredible! 
-	<<set $points to 1>>
+	Jeremy: Cheers!
+-> I'll probably just get a little tipsy! 
+	<<set $points to 50>>
 	<<set $optionSelected to true>>
--> I'm amazed!
-	<<set $points to 4>> 
+	Jeremy: Better than being sober I guess
+-> I don't Drink!
+	<<set $points to 0>> 
 	<<set $optionSelected to true>>
+	Jeremy: So you're a boring one, got it.
 
-Anyway, time to get writing!
+
+<<set $moveOn to true>>
+
+Jeremy: Here come the apps!
+Jeremy: I like me my octopus tentacles, if you know what I mean 
+
+
+-> I know exactly what you mean *wink* 
+	<<set $points to 100>> 
+	<<set $optionSelected to true>>
+	Jeremy: Wow, a fellow person who appriciates good plots!
+-> Octopus is pretty good I guess. 
+	<<set $points to 50>>
+	<<set $optionSelected to true>>
+	Jeremy: Yeah, for a lot of different things.
+-> I'm not sure what you mean
+	<<set $points to 0>> 
+	<<set $optionSelected to true>>
+	Jeremy: That's a shame... maybe if things go well you'll find out later tonight though.
+
+
+<<set $moveOn to true>>
 ===
