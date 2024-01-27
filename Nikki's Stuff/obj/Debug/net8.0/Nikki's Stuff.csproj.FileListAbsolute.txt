@@ -1,0 +1,15 @@
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\bin\Debug\net8.0\Nikki's Stuff.exe
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\bin\Debug\net8.0\Nikki's Stuff.deps.json
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\bin\Debug\net8.0\Nikki's Stuff.runtimeconfig.json
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\bin\Debug\net8.0\Nikki's Stuff.dll
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\bin\Debug\net8.0\Nikki's Stuff.pdb
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.AssemblyInfoInputs.cache
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.AssemblyInfo.cs
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.csproj.CoreCompileInputs.cache
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.sourcelink.json
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.dll
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\refint\Nikki's Stuff.dll
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.pdb
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\Nikki's Stuff.genruntimeconfig.cache
+C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\obj\Debug\net8.0\ref\Nikki's Stuff.dll

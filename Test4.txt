@@ -1,3 +1,0 @@
-Here's a file I will try to create locally and sync remotely.
-
-Making another edit.
