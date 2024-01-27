@@ -2,23 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoverBaseClass : MonoBehaviour
+public class PlayerBaseClass 
 {
+    public int score { private set; get; }
 
-    public class Book{
-            public string title;
-            public string author;
-            public static string staticAttribute = "My Static Attribute";
+    //scenario arrays
+    string[] dinnerStages = new string[3] { "Apps", "Main Course", "Desserts" };
+    string[] _apps = new string[3] { "Full points", "Half points,", "No points" };
+    string[] _mainCourse = new string[3] { "Full points", "Half points,", "No points" };
+    string[] _desserts = new string[3] { "Full points", "Half points,", "No points" };
+    string[] _currentStage = new string[3];
 
-            public void ReadBook(){
-            Console.WriteLine($"Reading {this.title} by {this.author}");
+    //index
+    int index = 0;
+    public string[] GetCurrentStage()
+    {
+        string currentStageName = dinnerStages[index];
+        switch (currentStageName)
+        {
+            case "Apps":
+                _currentStage = _apps;
+                break;
+            case "Main Course":
+                _currentStage = _mainCourse;
+                break;
+            case "Desserts":
+                _currentStage = _desserts;
+                break;
+            default:
+                break;
         }
+        return _currentStage;
     }
-
-        Book book1 = new Book();
-        book1.title = "Harry Potter";
-        book1.author = "JK Rowling";
-
-        book1.ReadBook();
-        Console.WriteLine(book1.title);
 }
