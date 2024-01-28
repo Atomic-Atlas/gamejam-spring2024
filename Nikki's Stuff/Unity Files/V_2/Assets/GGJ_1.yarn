@@ -36,8 +36,6 @@ title: tableofcontents
 <<jump job>>
 // 15. discord
 <<jump discord>>
-// 16. reddit
-<<jump reddit>>
 // 17. hobbies
 <<jump hobbies>>
 // 18. anime
@@ -63,31 +61,39 @@ position: -1063,-815
 <<declare $appetizerChoice = "x">> /// Assigned in appetizers; used inappServe.
 <<declare $entreeChoice = "x">> /// Assigned in entrees; used <>.
 <<declare $dessertChoice = "x">> /// Assigned in desserts; used <>.
-<<declare $jobQuestionAvail = 0>> // Default is 0. If it's 1, the second question is eliminated.
 <<declare $points = 0>> // Points that are added up at the end of the game
 <<declare $optionSelected to false>>
 <<declare $moveOn to false>>
 <<declare $expression to "Neutral">>
+<<declare $courseStage = 0>>
+
+// Question Availability -- optimize this feature later
+<<declare $jobAvailDiscord to true>>
+<<declare $hobbyAvailAnime to true>>
+<<declare $hobbyAvailMovie to true>>
+<<declare $factAvailFigurines to true>>
+<<declare $factAvailHeterochromia to true>>
+
 
 
 // Possibly prompt user for name here in future version -- Nikki (1/28/24)
 
 // Continue with intro scene
-Narrator: The rumbles of your stomach awake you from your stupor.
-Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
-You: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
-Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
-Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
-Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
-Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
-Narrator: *Card Declined*
-Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
-Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
-Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
-Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
-Narrator: You swipe through the endless list of people, searching for a suitable mark.
-Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
-Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
+// Narrator: The rumbles of your stomach awake you from your stupor.
+// Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
+// You: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
+// Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
+// Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
+// Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
+// Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
+// Narrator: *Card Declined*
+// Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
+// Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
+// Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
+// Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
+// Narrator: You swipe through the endless list of people, searching for a suitable mark.
+// Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
+// Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
 You: Hook, line, and sinker...
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
@@ -155,26 +161,29 @@ title: appServe
 // Transitional statement
 Narrator: *Exactly 8 minutes and 23 seconds later*
 
-//Insert chosen appetizer here
-if ({$appetizerChoice} = "Lobster Bisque" or "Charcuterie and Cheese Plate")
-    -> Waiter: Here is your {$appetizerChoice}.
-if ({$appetizerChoice} = "Escargots")
-    -> Waiter: Here are your {$appetizerChoice}.
+// Insert chosen appetizer here ("are"/"is")
+<<if $appetizerChoice == "Escargots">>
+    Waiter: Here are your {$appetizerChoice}.
+<<else>>
+    Waiter: Here is your {$appetizerChoice}.
+<<endif>> // end the if-statement
 
-if ({$appetizerChoice} = "Lobster Bisque")
-    -> Jeremy: Oh, its a soup? I didn't know what a bisque was. // POSITIVE
-if ({$appetizerChoice} = "Charcuterie and Cheese Plate")
-    -> Jeremy: Strange, I don't see any shark in this SHARK-cuterie. // POSITIVE
-if ({$appetizerChoice} = "Escargots")
+// Comment from Jeremy about the chosen food
+<<if $appetizerChoice == "Lobster Bisque">>
+    Jeremy: Oh, its a soup? I didn't know what a bisque was. // POSITIVE
+<<elseif $appetizerChoice == "Charcuterie and Cheese Plate">>
+    Jeremy: Strange, I don't see any shark in this SHARK-cuterie. // POSITIVE
+<<elseif $appetizerChoice == "Escargots">>
     Jeremy: Ewww... Are those SNAILS? //negative
+<<endif>> // end the if-statement
 
-//Comment from Jeremy about the chosen food
-Jeremy: So do you have any questions about me? // Question LVL 0
-    -> Ask about his job
+// Prompt user for questions
+Jeremy: So do you have any questions about me?
+    -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
-    -> Ask about his hobbies
+    -> Ask about his hobbies <<if $hobbyAvailAnime == true || $hobbyAvailMovie == true>>
         <<jump hobbies>>
-    -> Ask about himself
+    -> Ask about himself <<if $factAvailFigurines == true || $factAvailHeterochromia == true>>
         <<jump funFacts>>
 ===
 
@@ -211,6 +220,7 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 
 //Insert chosen appetizer here
 Waiter: Here is your {$entreeChoice}.
+
 <<if $appetizerChoice == "Lamb Shank">>
     Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. // NEUTRAL
 <<elseif $appetizerChoice == "Salmon">>
@@ -224,6 +234,7 @@ Waiter: Here is your {$entreeChoice}.
     -> No, thank you.
         Jeremy: Oh, okay... // POINTS: Negative | EXPRESSION: NEGATIVE
         <<set $points to $points - 2>> // Add 1 point to score
+<<endif>> // end the if-statement
 
 // Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
@@ -233,6 +244,7 @@ Jeremy: So do you have any other questions about me?
         <<jump hobbies>>
     -> Ask about himself
         <<jump funFacts>>
+
 ===
 
 title: dessert
@@ -289,37 +301,84 @@ title: billCheck
 title: dtf
 ---
 //You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
+Jeremy: You know what, I'll handle this. //positive EXPRESSION ONLY
+Jeremy: I had a fantastic time tonight! This may surprise you, but I don't get out too often. //positive EXPRESSION ONLY
+Jeremy: Or have many friends. Or talk to many people in general... //negative EXPRESSION ONLY
+Jeremy: But that's besides the point. I had a great evening with you and I... Uhh... //positive EXPRESSION ONLY
+Jeremy: I was wondering... If... Uhhh... //neutral
+Jeremy: If you'd like to come with me back to my place? //neutral
+    -> No thanks, I've got to work on my thesis
+        Jeremy: O-oh, of course! You mentioned that! //neutral
+        Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime... //neutral
+            -> Sure
+                Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
+                    //jump to dtfGoodEnd
+            -> No, I'd rather not
+                Jeremy: O-oh... I... I see... //negative EXPRESSION ONLY
+                Jeremy: Well... I-I had a good time at least... //negative EXPRESSION ONLY
+                Jeremy: I... I hope it wasn't too bad for you... //negative EXPRESSION ONLY
+                    //jump to dtfSadEnd
+    -> Sure, I'd love to!
+        Jeremy: O-oh, awesome! Great! //positive EXPRESSION ONLY
+        Jeremy: Just being up front, I'm not expecting you to... to p-put out or anything... //neutral
+        Jeremy: I just thought we could watch a movie or something... //neutral
+            -> A movie sounds nice
+                Jeremy: Yeah! Me too. Come on, we can talk movies on the way. //positive EXPRESSION ONLY
+                    //jump to dtfMovieEnd
+            -> We'll see where the night takes us~
+                Jeremy: O-o-oh-oh my... Uh... O-okay! We'll see, I g-guess! //positive EXPRESSION ONLY
+                Jeremy: This'll be... a-a first for me... I've never had someone over before... //positive EXPRESSION ONLY
+                    //jump to dtfHappyEnd
 ===
 
 title: goodEnd
 ---
-//You got Jeremy to pay the bill
+// You got him to pay the bill
+//You rejected Jeremy's offer to go home but agreed to set up another date
+Narrator: You return home on your own with your stomach fuller and your wallet no lighter. Fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a message from Jeremy the next day, asking about a future date. You agree and set up another date, this time at a pho restaurant he recommended.
+Narrator: Maybe wanted to get another meal out of him, maybe you just wanted to spend more time with him.
+Narrator: You're not entirely sure, but either way, you enjoyed your time.
+//THE END
+//Back to title screen or something
 ===
 
 title: splitEnd
 ---
 //You had to split the bill with Jeremy
+Jeremy: Should we split it? That seems fair to me. //neutral
+Narrator: Trapped by social convention, you reluctantly agree to split the bill.
+Narrator: You return home on your own with your stomach fuller and your wallet somewhat lighter. Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a message from Jeremy the next day, asking about a future date. You waffle back and forth. You figure you can probably get him to pay the whole bill this time, but he was a bit of a weirdo.
+Narrator: You eventually agree and set up another date, this time at a pho restaurant he recommended.
+//THE END
+//Back to title screen or something
 ===
 
 title: badEnd
 ---
 //Jeremy ditched you with the bill, forcing you to pay it
+Jeremy: Will excuse me for a moment? I have to use the restroom. //positive EXPRESSION ONLY
+Narrator: You wait for what seems like an eternity. Eventually you go to check the bathrooms, only to realize that Jeremy ditched you with the bill.
+Narrator: Seems like he didn't enjoy his time with you. With no other choice, you're forced to pay the bill.
+Narrator: You feel nauseous as you see the total on the bill and hand the check to the waiter with trembling hands. So much for saving money.
+Narrator: You return home on your own with your stomach fuller and your wallet significantly lighter.
+Narrator: Too exhausted to finish your thesis, decide to put it off until tomorrow, you've got plenty of time after all. You never got another message from Jeremy.
+//THE END
+//Back to title screen or something
 ===
 
 title: job
 ---
-// Jeremy tells us about job, which is either a moderator for
-// an MLP Discord server or as a moderator for a subreddit.
+// Jeremy tells us about job as MLP Discord server moderator.
 Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... real... job, so to speak.
     -> What do you mean by that?
         Jeremy: Well, my mom says its not real, but that's not true. I put a lot of work into it.
-Jeremy: I'm a moderator for two different online communities, though they overlap somewhat. One on Reddit and one on Discord.
-    -> Discord
-        <<set $jobQuestionAvail to 1>> // Eliminate job 1 from available list
-        <<jump discord>>
-    -> Reddit
-        <<set $jobQuestionAvail to 2>> // Eliminate job 2 from available list
-        <<jump reddit>>
+            -> What is it? <<if $jobAvailDiscord == true>>
+            <<set $jobAvailDiscord to false>> // Question has been visited. Now remove.
+            <<jump discord>>
+
+
 ===
 
 title: discord
@@ -337,22 +396,16 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                         -> Please no...
                            Jeremy: Oh, uh... Sorry... // NEGATIVE
                            <<set $points to $points - 2>> // Subtract 2 points from score
-                            <<jump entrees>> // Appetizers finished. Jump to entrees.
-
+                           <<jump entrees>> // Appetizers finished. Jump to entrees.
             -> No...
                 Jeremy: Oh, are you a fan of My Little Pony?
-                    -> Yes...? // EDITREACT: Evokes positive reaction
+                    -> Yes...? // REACTION: POSITIVE
                         Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony?
                             -> Uhh...
                                 <<jump entrees>> // Appetizers finished. Jump to entrees.
-                    -> Absolutely not // EDITREACT: Evokes negative reaction
+                    -> Absolutely not // REACTION: NEGATIVE
                         Jeremy: Oh, I see...
                             <<jump entrees>> // Appetizers finished. Jump to entrees.
-===
-
-title: reddit
----
-//Jeremy tells us about the subreddit he moderates
 ===
 
 title: hobbies
@@ -360,15 +413,54 @@ title: hobbies
 //Jeremy tells us about either his interest in harem anime or his favorite movie, Cannibal Holocaust
 Jeremy: I'm an otaku, that's a fan of Japanese culture, especially anime, if you didn't know.
 Jeremy: I'm also a bit of a film buff. I've watched and enjoyed a number of obscure films.
-    -> What's your favorite anime?
+    -> What's your favorite anime? <<if $hobbyAvailAnime == true>>
+        <<set $hobbyAvailAnime to false>> // Question has been visited. Now remove.
         <<jump anime>>
-    -> What's your favorite movie?
+    -> What's your favorite movie? <<if $hobbyAvailMovie == true>>
+        <<set $hobbyAvailMovie to false>> // Question has been visited. Now remove.
         <<jump cannibal>>
+
 ===
 
 title: anime
 ---
 //Jeremy tells us about the harem anime he is a fan of
+Jeremy: That would have to be Super Kawaii Girls 2: Revenge of the Black Heart! //positive
+Jeremy: Aw man, tell me you've seen it?
+    -> Oh yeah, the one with Mojo dojo, right?
+        Jeremy: Oh haha! You have! Is your favorite character my queen Alice Kartheart? Oh, and Lady Karila! Of course, I can't forget about- //positive
+            ->Wait, Alice, the one that looks like a child?
+                Jeremy: Technically, she is a 40000-year-old vampire goddess who happens to look like a child due to a curse. //neutral
+                    -> Fair enough...
+                        Jeremy: Yeah, it is a bit weird but she doesn't appear as often as some of the marketing would have you believe. //neutral
+                            //jump to next course
+                    -> Oh good, I'm glad there's an in world explanation that justifies making fanservice of a child
+                        Jeremy: Yeah... //negative
+                            //jump to next course
+    -> The stupid magic girl anime harem I heard about online?
+        Jeremy: Oh uh, yeah that one. //negative
+        Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love. //postive EXPRESSION ONLY
+        Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who- //postive EXPRESSION ONLY
+            -> Fascinating...
+                Jeremy: Anyway! I love all my girls, with all off my heart! You are a close fifteenth after all! //positive
+                    -> Oh? How...pleasant?
+                        Jeremy: Very much so, I will make a crown for you after this //positive EXPRESSION ONLY
+                            //jump to next course
+                    -> At least I'm in the top 20.
+                        Jeremy: Hmmm well, I might need to bump you down a few spots, depends on if tonight's episode reveals Maria Blackheart's face... //negative
+                        Jeremy: I have a love-hate relationship with her right now. //neutral
+                            //jump to next course
+            ->Wait, Alice, the one that looks like a child?
+                Jeremy: Technically, she is a 40000-year-old vampire goddess who happens to look like a child due to a curse. //negative
+                    -> Fair enough...
+                        Jeremy: Yeah, it is a bit weird but she doesn't appear as often as some of the marketing would have you believe. //neutral
+                            //jump to next course
+                    -> Oh good, I'm glad there's an in world explanation that justifies making fanservice of a child
+                        Jeremy: Yeah... //negative
+                            //jump to next course
+
+
+
 ===
 
 title: cannibal
@@ -419,6 +511,14 @@ Jeremy: That's easy! Cannibal Holocaust!
 title: funFacts
 ---
 //Jeremy tells us about either his pinkeye induced heterochromia or his troubles with fecal incontinence
+Jeremy: Well, there's a couple of fun facts about me.
+Jeremy: I'm a collector and there's something special about my eyes.
+    -> Collector <<if $factAvailFigurines == true>>
+        <<set $factAvailFigurines to false>> // Question has been visited. Now remove.
+        <<jump figurines>>
+    -> Eyes <<if $factAvailFigurines == true>>
+        <<set $factAvailHeterochromia to false>> // Question has been visited. Now remove.
+        <<jump heterochromia>>
 ===
 
 title: heterochromia
@@ -484,6 +584,22 @@ Jeremy: Look deep into my eyes, tell me what you see.
             -> Not really
                 Jeremy: Oh...
                     //Jump to next course
+===
+
+title: figurines
+---
+Jeremy: Do you -heh- own any collectibles? //positive
+    -> Collectibles, Do you mean like… Lego sets?
+        Jeremy: Oh no I mean figurines. I have a couple dozen of them in my room. They are really expensive. //neutral
+            -> Surely they cant be that expensive?
+                Jeremy: I took out a $30,000 loan to buy a few of the rare ones, like my pride and joy Alice Kartheart. //positive
+                Jeremy: She was so expensive that I had to keep her in a special showcase.
+                    -> Thats nice to hear, protecting a very questionable purchase. A nice case with good lighting?
+                        Jeremy: Oh no no! Regular LED lights will strip the paint! No, I put her in a pickle jar. //positive EXPRESSION ONLY
+                            -> I beg your pardon?
+                                    Jeremy: Yeah, had to use a special liquid to- //positive EXPRESSION ONLY
+                                        -> WAITER
+                                            //jump to next course
 ===
 
 title: incontinence
