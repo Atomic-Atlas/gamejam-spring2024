@@ -1,0 +1,47 @@
+title: Dinner
+position: -1063, -815
+---
+//Jermey begins to talk again, right before you get to put the fork to your mouth
+Jeremy: So, have seen last week's episode of Super Kawaii Girls 2: Revenge of the Black Heart?
+Jeremy: Aw man, tell me you've seen it?
+    -> Oh yeah, the one with Mojo dojo, right?
+// Expression changes to happy
+Jeremy: Oh haha! You have! Is your favorite character my queen Alice Kartheart? Oh, and lady Karila! Of course, I can’t forget about-// Pos
+    ->Wait, Alice, the one that looks like a child?
+Jeremy: Technically, she is a 40000-year-old vampire goddess who happens to look like a child due to a curse.
+
+
+    -> The sutpid magic girl anime harem I heard about online?
+// Expression upset
+Jeremy: Oh uh, yeah that one! It is my obsession! Especially when the 12 girls all fall in love with the handsome knight!
+Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who-
+
+Jeremy: Anyway! I love all my girls, with all off my heart! You are a close fifteenth after all!
+    -> Oh? How...pleasant?// pos
+    Jeremy: Very much so, I will make a crown for you after this
+//jump to dessert 
+    -> At least I'm in the top 20. //neg
+Jeremy: Hmmm well, I might need to bump you down a few spots, depends on if tonight’s episode shows Maria Blackheart
+Jeremy: I have a love hate relationship with her.
+
+
+//
+
+
+title: Figurines
+
+
+Jeremy: Since you are so well versed in Super Kawaii Girls 2: Revenge of the Black Heart.
+//Expression raised eyebrow (I don’t think we have that, fill in)
+Jeremy: Do you -heh- own any collectibles?
+    -> Collectibles, Do you mean like… Lego sets?
+Jeremy: Oh no I mean figurines. I have a couple dozen of them in my room. They are really expensive.
+	-> Surely they cant be that expensive?
+Jeremy: I took out a $30,000 loan to buy a few of the rare ones, like my bpride and joy Alice Kartheart.
+Jeremy: She was so expensive that I had to keep her in a special showcase.
+    -> Thats nice to hear, protecting a very questionable purchase. A nice case with good lighting?
+Jeremy: Oh no no! Regular LED lights will strip the paint! No, I put her in a pickle jar.
+    -> I beg your pardon?
+Jeremy: Yeah, had to use a special liquid to-
+
+===
