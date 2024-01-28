@@ -191,8 +191,8 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 //Insert chosen appetizer here
 Waiter: Here is your {$entreeChoice}.
 
-//Comment from Jeremy about the chosen food
-//Need to put a check here to eliminate the conversation topic that was previously chosen
+// Comment from Jeremy about the chosen food
+// Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
     -> Ask about his job
         <<jump job>>
