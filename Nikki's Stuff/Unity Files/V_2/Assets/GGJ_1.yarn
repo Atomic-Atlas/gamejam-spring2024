@@ -46,8 +46,6 @@ title: tableofcontents
 <<jump funFacts>>
 // 21. heterochromia
 <<jump heterochromia>>
-// 21. incontinence
-<<jump incontinence>>
 
 ===
 
@@ -510,7 +508,7 @@ Jeremy: That's easy! Cannibal Holocaust!
 
 title: funFacts
 ---
-//Jeremy tells us about either his pinkeye induced heterochromia or his troubles with fecal incontinence
+//Jeremy tells us about either his pinkeye induced heterochromia
 Jeremy: Well, there's a couple of fun facts about me.
 Jeremy: I'm a collector and there's something special about my eyes.
     -> Collector <<if $factAvailFigurines == true>>
@@ -600,9 +598,4 @@ Jeremy: Do you -heh- own any collectibles? //positive
                                     Jeremy: Yeah, had to use a special liquid to- //positive EXPRESSION ONLY
                                         -> WAITER
                                             //jump to next course
-===
-
-title: incontinence
----
-//Jeremy tells us about his bowel problems in excruciating detail
 ===
