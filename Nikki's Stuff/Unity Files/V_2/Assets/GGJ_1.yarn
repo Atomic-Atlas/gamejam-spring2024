@@ -68,7 +68,7 @@ position: -1063,-815
 
 // Continue with intro scene
 Narrator: The rumbles of your stomach awake you from your stupor.
-Narrator: You take a deep breath and attmept to refocus your eyes on the half-finished masters thesis on the desk in front of you.
+Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
 You: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
 Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
 Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
@@ -76,7 +76,7 @@ Narrator: You eventually settle on Dragon In Your Throat and fill your cart with
 Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
 Narrator: *Card Declined*
 Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
-Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptyness.
+Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
 Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
 Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
 Narrator: You swipe through the endless list of people, searching for a suitable mark.
@@ -96,7 +96,8 @@ Narrator: Eventually you hear a brief commotion near the entrance to the restaur
 
 // Insert player name here in future version -- Nikki (1/28/24)
 Jeremy: Hello, are you y/n? //**playername**?
-Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
+    -> That's me.
+        Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
 Jeremy: Oh that's right, my mom told me to ask people about themselves!
 Jeremy: So uh, what do you do?
     -> I'm a grad student working on my master's thesis.
@@ -306,7 +307,7 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                             -> Uhh...
                                 <<jump entrees>> // Appetizers finished. Jump to entrees.
                     -> Absolutely not // EDITREACT: Evokes negative reaction
-                        -> Oh, I see...
+                        Jeremy: Oh, I see...
                             <<jump entrees>> // Appetizers finished. Jump to entrees.
 ===
 
