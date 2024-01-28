@@ -1,4 +1,4 @@
-title: Start
+﻿title: Start
 position: -1063,-815
 ---
 
@@ -8,6 +8,7 @@ position: -1063,-815
 <<declare $entreeChoice = "x">> /// Assigned in entrees; used <>.
 <<declare $dessertChoice = "x">> /// Assigned in desserts; used <>.
 <<declare $points = 0>> // Points that are added up at the end of the game
+<<declare $score = 0>>
 <<declare $optionSelected to false>>
 <<declare $moveOn to false>>
 <<declare $expression to "Neutral">> // Alters between Negative, Neutral, and Positive
@@ -27,7 +28,7 @@ position: -1063,-815
 // Continue with intro scene
 // Narrator: The rumbles of your stomach awake you from your stupor.
 // Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
-// You: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
+// {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
 // Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
 // Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
 // Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
@@ -40,7 +41,7 @@ position: -1063,-815
 // Narrator: You swipe through the endless list of people, searching for a suitable mark.
 // Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
 // Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
-You: Hook, line, and sinker...
+{$playerName}: Hook, line, and sinker...
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
         <<jump meetup>>
@@ -77,7 +78,7 @@ title: appetizers
 
 // Transitional statement
 Narrator: The moment is interrupted by a waiter who glides swiftly up to your table, pen and notepad in hand.
-
+<<set $courseStage = 0>>
 // Waiter introduces appetizers.
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
 Waiter: We will offer you a choice for each course then give you some time to enjoy it.
@@ -87,7 +88,8 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
         Waiter: Very good, I will bring your food shortly.
         Jeremy: Bisque, haha that sounds kind of like bitch.
             <<set $appetizerChoice to "Lobster Bisque">> // appetizer is now Lobster Bisque
-            <<set $points to $points + 1>> // Add 1 point to score
+            <<set $points to 1>> // Add 1 point to score
+            <<set $optionSelected to true>>
             <<jump appServe>>
     -> Charcuterie and Cheese Plate // NEUTRAL
         <<set $expression to "Neutral">> // Set visuals to neutral expression
@@ -99,12 +101,14 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
         Waiter: Very good, I will bring your food shortly.
         Jeremy: What's an es-car-gouts? Sounds made up.
             <<set $appetizerChoice to "Escargots">> // appetizer is now Escargots
-            <<set $points to $points - 1>> // Subtract 1 point to score
+            <<set $points to - 1>> // Subtract 1 point to score
+            <<set $optionSelected to true>>
             <<jump appServe>>
 ===
 
 title: appServe
 ---
+<<set $courseStage = 1>>
 
 // Transitional statement
 Narrator: *Exactly 8 minutes and 23 seconds later*
@@ -119,10 +123,16 @@ Narrator: *Exactly 8 minutes and 23 seconds later*
 // Comment from Jeremy about the chosen food
 <<if $appetizerChoice == "Lobster Bisque">>
     Jeremy: Oh, its a soup? I didn't know what a bisque was. // POSITIVE
+    <<set $points to 1>>
+    <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Charcuterie and Cheese Plate">>
     Jeremy: Strange, I don't see any shark in this SHARK-cuterie. // POSITIVE
+    <<set $points to 1>>
+    <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Escargots">>
     Jeremy: Ewww... Are those SNAILS? //negative
+    <<set $points to 1>>
+    <<set $optionSelected to true>>
 <<endif>> // end the if-statement
 
 // Prompt user for questions
@@ -137,6 +147,7 @@ Jeremy: So do you have any questions about me?
 
 title: entrees
 ---
+<<set $courseStage = 2>>
 
 // Transitional statement
 Narrator: You finish your appetizers and once again the waiter approaches.
@@ -162,6 +173,7 @@ Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, an
 
 title: entServe
 ---
+<<set $courseStage = 3>>
 
 // Transitional statement
 Narrator: *Exactly 27 minutes and 49 seconds later*
@@ -175,17 +187,21 @@ Waiter: Here is your {$entreeChoice}.
 <<elseif $appetizerChoice == "Salmon">>
     <<set $expression to "Positive">>
     Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. Like my love of salmon and my solitary lifestyle. // POINTS: POSITIVE | EXPRESSION: POSITIVE
+    <<set $points to 2>>
+    <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Duck Confit">>
     Jeremy: Want to hear my Donald Duck impression? It's pretty good. // EXPRESSION: POSITIVE
     -> Sure! // POINTS: NEGATIVE & POSITIVE (because a bystandard was disturbed)
         <<set $expression to "Positive">>
         Narrator: Your date proceeds to let out a loud, ear-piercing rendition of the classic cartoon character. Chattering heads around the restaurant silence themselves and swivel in your direction.
         Narrator: Jeremy remains pleased, despite the sudden waterworks from a sleepy infant a few tables over.
-        <<set $points to $points + 3 - 1>> // Add 2 points to score
+        <<set $points to 2>> // Add 2 points to score
+        <<set $optionSelected to true>>
     -> No, thank you.
         <<set $expression to "Negative">>
         Jeremy: Oh, okay... // POINTS: Negative | EXPRESSION: NEGATIVE
-        <<set $points to $points - 2>> // Add 1 point to score
+        <<set $points to 1>> // Add 1 point to score
+        <<set $optionSelected to true>>
 <<endif>> // end the if-statement
 
 // Need to put a check here to eliminate the conversation topic that was previously chosen
@@ -201,6 +217,7 @@ Jeremy: So do you have any other questions about me?
 
 title: dessert
 ---
+ <<set $courseStage = 4>>
 
 // Transitional statement
 Narrator: You finish your appetizers and once again the waiter approaches.
@@ -226,6 +243,7 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
 
 title: desServe
 ---
+<<set $courseStage = 5>>
 
 // Transitional statement
 Narrator: *Exactly 16 minutes and 8 seconds later*
@@ -246,6 +264,8 @@ Jeremy: So do you have any other questions about me?
 
 title: billCheck
 ---
+<<set $courseStage = 6>>
+
 //Player's performance is checked
 //If player gets highest score, send to dtf, otherwise send to appropriate ending
 ===
@@ -269,16 +289,22 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
         Jeremy: O-oh, of course! You mentioned that! //neutral
         Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime... //neutral
             -> Sure
+                <<set $points to +2>>
+                <<set $optionSelected to true>>
                 <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
                     <<jump dtfGoodEnd>>
             -> No, I'd rather not
+                <<set $points to -2>>
+                <<set $optionSelected to true>>
                 <<set $expression to "Negative">> // Set visuals to negative expression
                 Jeremy: O-oh... I... I see... //negative EXPRESSION ONLY
                 Jeremy: Well... I-I had a good time at least... //negative EXPRESSION ONLY
                 Jeremy: I... I hope it wasn't too bad for you... //negative EXPRESSION ONLY
                     <<jump dtfSadEnd>>
     -> Sure, I'd love to!
+        <<set $points to +2>>
+        <<set $optionSelected to true>>
         <<set $expression to "Positive">> // Set visuals to positive expression
         Jeremy: O-oh, awesome! Great! //positive EXPRESSION ONLY
         <<set $expression to "Neutral">> // Set visuals to neutral expression
@@ -364,7 +390,8 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                         -> Please no...
                             <<set $expression to "Negative">>
                            Jeremy: Oh, uh... Sorry... // NEGATIVE
-                           <<set $points to $points - 2>> // Subtract 2 points from score
+                           <<set $points to - 2>> // Subtract 2 points from score
+                           <<set $optionSelected to true>>
                            <<jump entrees>> // Appetizers finished. Jump to entrees.
             -> No...
                 Jeremy: Oh, are you a fan of My Little Pony?
@@ -407,10 +434,37 @@ Jeremy: Aw man, tell me you've seen it?
                     -> Fair enough...
                         Jeremy: Yeah, it is a bit weird but she doesn't appear as often as some of the marketing would have you believe. //neutral
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
+
                     -> Oh good, I'm glad there's an in world explanation that justifies making fanservice of a child
                         <<set $expression to "Negative">>
                         Jeremy: Yeah... //negative
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
     -> The stupid magic girl anime harem I heard about online?
         Jeremy: Oh uh, yeah that one. //negative
         <<set $expression to "Positive">>
@@ -421,12 +475,38 @@ Jeremy: Aw man, tell me you've seen it?
                     -> Oh? How...pleasant?
                         Jeremy: Very much so, I will make a crown for you after this //positive EXPRESSION ONLY
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
                     -> At least I'm in the top 20.
                         <<set $expression to "Negative">>
                         Jeremy: Hmmm well, I might need to bump you down a few spots, depends on if tonight's episode reveals Maria Blackheart's face... //negative
                         <<set $expression to "Neutral">>
                         Jeremy: I have a love-hate relationship with her right now. //neutral
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
             ->Wait, Alice, the one that looks like a child?
                 <<set $expression to "Negative">>
                 Jeremy: Technically, she is a 40000-year-old vampire goddess who happens to look like a child due to a curse. //negative
@@ -434,10 +514,36 @@ Jeremy: Aw man, tell me you've seen it?
                         <<set $expression to "Neutral">>
                         Jeremy: Yeah, it is a bit weird but she doesn't appear as often as some of the marketing would have you believe. //neutral
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
                     -> Oh good, I'm glad there's an in world explanation that justifies making fanservice of a child
                         <<set $expression to "Negative">>
                         Jeremy: Yeah... //negative
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
 
 
 
@@ -459,6 +565,19 @@ Jeremy: That's easy! Cannibal Holocaust!
                         -> That's interesting, I may have to check it out myself
                             Jeremy: I'd gladly show it to you, if you'd like, of course.
                                 //jump to next meal
+                                <<if $courseStage == 0>>
+                                    <<jump appServe>>
+                                <<elseif $courseStage == 1>>
+                                    <<jump entree>>
+                                <<elseif $courseStage == 2>>
+                                    <<jump entServe>>
+                                <<elseif $courseStage == 3>>
+                                    <<jump dessert>>
+                                <<elseif $courseStage == 4>>
+                                    <<jump desServe>>
+                                <<elseif $courseStage == 5>>
+                                    <<jump billCheck>>
+                                <<endif>>
                         -> That's stupid
                             Jeremy: What? How so?
                                 -> "Who are the real savages?" only works as a message if one side isn't literal cannibals
@@ -471,10 +590,36 @@ Jeremy: That's easy! Cannibal Holocaust!
                                     Jeremy: Nah, you're right. I'm not gonna defend that.
                                         -> Good
                                             //jump to next course
+                                            <<if $courseStage == 0>>
+                                                <<jump appServe>>
+                                            <<elseif $courseStage == 1>>
+                                                <<jump entree>>
+                                            <<elseif $courseStage == 2>>
+                                                <<jump entServe>>
+                                            <<elseif $courseStage == 3>>
+                                                <<jump dessert>>
+                                            <<elseif $courseStage == 4>>
+                                                <<jump desServe>>
+                                            <<elseif $courseStage == 5>>
+                                                <<jump billCheck>>
+                                            <<endif>>
                 -> That's... Cool?
                     Jeremy: I think so, despite the brutality. It's remembered for a reason.
                         -> Sure...
                             //jump to next course
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
             -> What's unique about the style?
                 Jeremy: Its pretty much the original found footage film. It came out nearly 20 years before The Blair Witch Project popularized the style and it had a similar effect.
                 Jeremy: The audience wasn't familiar with the found footage style, so many people thought it was real.
@@ -486,6 +631,19 @@ Jeremy: That's easy! Cannibal Holocaust!
                 Jeremy: Or I could lend you the DVD, if you'd prefer...
                     -> Maybe sometime
                         //jump to next course
+                        <<if $courseStage == 0>>
+                            <<jump appServe>>
+                        <<elseif $courseStage == 1>>
+                            <<jump entree>>
+                        <<elseif $courseStage == 2>>
+                            <<jump entServe>>
+                        <<elseif $courseStage == 3>>
+                            <<jump dessert>>
+                        <<elseif $courseStage == 4>>
+                            <<jump desServe>>
+                        <<elseif $courseStage == 5>>
+                            <<jump billCheck>>
+                        <<endif>>
 ===
 
 title: funFacts
@@ -518,9 +676,35 @@ Jeremy: Look deep into my eyes, tell me what you see.
                             -> That's cool
                                 Jeremy: Isn't it? Its something special about me.
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
                             -> That's cool, but did you have to mention the pinkeye?
                                 Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
                     -> Really...
                         Jeremy: Yes, they are! My right one is green and the other is blue.
                         Jeremy: It happened when I was 6 years old.
@@ -529,10 +713,36 @@ Jeremy: Look deep into my eyes, tell me what you see.
                             -> That's... cool?
                                 Jeremy: Isn't it? Its something special about me.
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
                             -> Why did you tell me you got pinkeye?
                                 Jeremy: Oh, uh... Well...
                                 Jeremy: I thought it was cool...
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
             -> No...?
                 Jeremy: My eyes, they're two different colors.
     -> I don't really want to...
@@ -547,9 +757,35 @@ Jeremy: Look deep into my eyes, tell me what you see.
                             -> That's cool
                                 Jeremy: Isn't it? Its something special about me.
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
                             -> That's cool, but did you have to mention the pinkeye?
                                 Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
                     -> No
                         Jeremy: Oh well. My right eye is green and the other is blue.
                         Jeremy: It happened when I was 6 years old.
@@ -558,12 +794,51 @@ Jeremy: Look deep into my eyes, tell me what you see.
                             -> That's cool
                                 Jeremy: Isn't it? Its something special about me.
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
                             -> That's cool, but did you have to mention the pinkeye?
                                 Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
                                     //Jump to next course
+                                    <<if $courseStage == 0>>
+                                        <<jump appServe>>
+                                    <<elseif $courseStage == 1>>
+                                        <<jump entree>>
+                                    <<elseif $courseStage == 2>>
+                                        <<jump entServe>>
+                                    <<elseif $courseStage == 3>>
+                                        <<jump dessert>>
+                                    <<elseif $courseStage == 4>>
+                                        <<jump desServe>>
+                                    <<elseif $courseStage == 5>>
+                                        <<jump billCheck>>
+                                    <<endif>>
             -> Not really
                 Jeremy: Oh...
                     //Jump to next course
+                    <<if $courseStage == 0>>
+                        <<jump appServe>>
+                    <<elseif $courseStage == 1>>
+                        <<jump entree>>
+                    <<elseif $courseStage == 2>>
+                        <<jump entServe>>
+                    <<elseif $courseStage == 3>>
+                        <<jump dessert>>
+                    <<elseif $courseStage == 4>>
+                        <<jump desServe>>
+                    <<elseif $courseStage == 5>>
+                        <<jump billCheck>>
+                    <<endif>>
 ===
 
 title: figurines
@@ -583,4 +858,17 @@ Jeremy: Do you -heh- own any collectibles? //positive
                                     Jeremy: Yeah, had to use a special liquid to- //positive EXPRESSION ONLY
                                         -> WAITER!!!
                                             //jump to next course
+                                            <<if $courseStage == 0>>
+                                                <<jump appServe>>
+                                            <<elseif $courseStage == 1>>
+                                                <<jump entree>>
+                                            <<elseif $courseStage == 2>>
+                                                <<jump entServe>>
+                                            <<elseif $courseStage == 3>>
+                                                <<jump dessert>>
+                                            <<elseif $courseStage == 4>>
+                                                <<jump desServe>>
+                                            <<elseif $courseStage == 5>>
+                                                <<jump billCheck>>
+                                            <<endif>>
 ===
