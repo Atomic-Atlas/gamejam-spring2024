@@ -211,37 +211,20 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 
 //Insert chosen appetizer here
 Waiter: Here is your {$entreeChoice}.
-
-if ({$appetizerChoice} = "Lamb Shank")
+<<if $appetizerChoice == "Lamb Shank">>
     Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. // NEUTRAL
-if ({$appetizerChoice} = "Salmon")
-    Jeremy: Strange, I don't see any shark in this SHARK-cuterie. Like my love of salmon and my solitary lifestyle. // POINTS: POSITIVE | EXPRESSION: POSITIVE
-if ({$appetizerChoice} = "Duck Confit")
-    Jeremy: Want to hear my Donald Duck impression? Its pretty good. //positive EXPRESSION ONLY
-    Jeremy: 
+<<elseif $appetizerChoice == "Salmon">>
+    Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. Like my love of salmon and my solitary lifestyle. // POINTS: POSITIVE | EXPRESSION: POSITIVE
+<<elseif $appetizerChoice == "Duck Confit">>
+    Jeremy: Want to hear my Donald Duck impression? It's pretty good. // EXPRESSION: POSITIVE
+    -> Sure! // POINTS: NEGATIVE & POSITIVE (because a bystandard was disturbed)
+        Narrator: Your date proceeds to let out a loud, ear-piercing rendition of the classic cartoon character. Chattering heads around the restaurant silence themselves and swivel in your direction.
+        Narrator: Jeremy remains pleased, despite the waterworks from an infant a few tables over.
+        <<set $points to $points + 3 - 1>> // Add 2 points to score
+    -> No, thank you.
+        Jeremy: Oh, okay... // POINTS: Negative | EXPRESSION: NEGATIVE
+        <<set $points to $points - 2>> // Add 1 point to score
 
-
-
-
-
-//Comment from Jeremy about the chosen food
-//if LAMB
-Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. //neutral
-//if SALMON
-Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. //positive EXPRESSION ONLY
-Jeremy: Like my love of salmon and my solitary lifestyle. //positive
-//if DUCK
-Jeremy: Want to hear my Donald Duck impression? Its pretty good. //positive EXPRESSION ONLY
-Jeremy: No? Okay, maybe later. //negative
-
-
-
-
-
-
-
-
-// Comment from Jeremy about the chosen food
 // Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
     -> Ask about his job
