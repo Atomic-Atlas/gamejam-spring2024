@@ -1,55 +1,3 @@
-title: tableofcontents
----
-
-// This "chapter" of the code is just a way
-// to easily navigate in the coding viewport.
-// Please ignore during actual implementation.
-
-// === TABLE OF CONTENTS ===
-// 1. Start
-<<jump Start>>
-// 2. meetup
-<<jump meetup>>
-// 3. appetizers
-<<jump appetizers>>
-// 4. appServe
-<<jump appServe>>
-// 5. entrees
-<<jump entrees>>
-// 6. entServe
-<<jump entServe>>
-// 7. dessert
-<<jump dessert>>
-// 8. desServe
-<<jump desServe>>
-// 9. billCheck
-<<jump billCheck>>
-// 10. dtf
-<<jump dtf>>
-// 11. goodEnd
-<<jump goodEnd>>
-// 12. splitEnd
-<<jump splitEnd>>
-// 13. badEnd
-<<jump badEnd>>
-// 14. job
-<<jump job>>
-// 15. discord
-<<jump discord>>
-// 17. hobbies
-<<jump hobbies>>
-// 18. anime
-<<jump anime>>
-// 19. cannibal
-<<jump cannibal>>
-// 20. funFacts
-<<jump funFacts>>
-// 21. heterochromia
-<<jump heterochromia>>
-
-===
-
-
 title: Start
 position: -1063,-815
 ---
@@ -62,7 +10,7 @@ position: -1063,-815
 <<declare $points = 0>> // Points that are added up at the end of the game
 <<declare $optionSelected to false>>
 <<declare $moveOn to false>>
-<<declare $expression to "Neutral">>
+<<declare $expression to "Neutral">> // Alters between Negative, Neutral, and Positive
 <<declare $courseStage = 0>>
 
 // Question Availability -- optimize this feature later
@@ -135,12 +83,14 @@ Waiter: Welcome to The French Bathtub, we will be serving you a three course mea
 Waiter: We will offer you a choice for each course then give you some time to enjoy it.
 Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster Bisque, a Charcuterie and Cheese Plate, or the Escargots.
     -> Lobster Bisque // POSITIVE
+        <<set $expression to "Positive">>
         Waiter: Very good, I will bring your food shortly.
         Jeremy: Bisque, haha that sounds kind of like bitch.
             <<set $appetizerChoice to "Lobster Bisque">> // appetizer is now Lobster Bisque
             <<set $points to $points + 1>> // Add 1 point to score
             <<jump appServe>>
     -> Charcuterie and Cheese Plate // NEUTRAL
+        <<set $expression to "Neutral">> // Set visuals to neutral expression
         Waiter: Very good, I will bring your food shortly.
         Jeremy: // fill in here
             <<set $appetizerChoice to "Charcuterie and Cheese Plate">> // appetizer is now Charcuterie and Cheese Plate
@@ -220,27 +170,31 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 Waiter: Here is your {$entreeChoice}.
 
 <<if $appetizerChoice == "Lamb Shank">>
+    <<set $expression to "Neutral">> // Set visuals to neutral expression
     Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. // NEUTRAL
 <<elseif $appetizerChoice == "Salmon">>
+    <<set $expression to "Positive">>
     Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. Like my love of salmon and my solitary lifestyle. // POINTS: POSITIVE | EXPRESSION: POSITIVE
 <<elseif $appetizerChoice == "Duck Confit">>
     Jeremy: Want to hear my Donald Duck impression? It's pretty good. // EXPRESSION: POSITIVE
     -> Sure! // POINTS: NEGATIVE & POSITIVE (because a bystandard was disturbed)
+        <<set $expression to "Positive">>
         Narrator: Your date proceeds to let out a loud, ear-piercing rendition of the classic cartoon character. Chattering heads around the restaurant silence themselves and swivel in your direction.
-        Narrator: Jeremy remains pleased, despite the waterworks from an infant a few tables over.
+        Narrator: Jeremy remains pleased, despite the sudden waterworks from a sleepy infant a few tables over.
         <<set $points to $points + 3 - 1>> // Add 2 points to score
     -> No, thank you.
+        <<set $expression to "Negative">>
         Jeremy: Oh, okay... // POINTS: Negative | EXPRESSION: NEGATIVE
         <<set $points to $points - 2>> // Add 1 point to score
 <<endif>> // end the if-statement
 
 // Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
-    -> Ask about his job
+    -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
-    -> Ask about his hobbies
+    -> Ask about his hobbies <<if $hobbyAvailAnime == true || $hobbyAvailMovie == true>>
         <<jump hobbies>>
-    -> Ask about himself
+    -> Ask about himself <<if $factAvailFigurines == true || $factAvailHeterochromia == true>>
         <<jump funFacts>>
 
 ===
@@ -282,11 +236,11 @@ Waiter: Here is your {$dessertChoice}.
 //Comment from Jeremy about the chosen food
 //Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
-    -> Ask about his job
+    -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
-    -> Ask about his hobbies
+    -> Ask about his hobbies <<if $hobbyAvailAnime == true || $hobbyAvailMovie == true>>
         <<jump hobbies>>
-    -> Ask about himself
+    -> Ask about himself <<if $factAvailFigurines == true || $factAvailHeterochromia == true>>
         <<jump funFacts>>
 ===
 
@@ -298,35 +252,47 @@ title: billCheck
 
 title: dtf
 ---
-//You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
-Jeremy: You know what, I'll handle this. //positive EXPRESSION ONLY
-Jeremy: I had a fantastic time tonight! This may surprise you, but I don't get out too often. //positive EXPRESSION ONLY
-Jeremy: Or have many friends. Or talk to many people in general... //negative EXPRESSION ONLY
+
+Narrator: You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
+<<set $expression to "Positive">> // Set visuals to positive expression
+Jeremy: You know what, I'll handle this.
+Narrator: Your date picks up the bill, unfazed by the likely horrors of debt that you know all too well.
+Jeremy: I had a fantastic time tonight! //positive EXPRESSION ONLY
+<<set $expression to "Negative">> // Set visuals to neutral expression
+Jeremy: This may surprise you, but I don't get out too often. Or have many friends. Or talk to many people in general... //negative EXPRESSION ONLY
+<<set $expression to "Positive">> // Set visuals to positive expression
 Jeremy: But that's besides the point. I had a great evening with you and I... Uhh... //positive EXPRESSION ONLY
-Jeremy: I was wondering... If... Uhhh... //neutral
-Jeremy: If you'd like to come with me back to my place? //neutral
+<<set $expression to "Neutral">> // Set visuals to neutral expression
+Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to my place? //neutral
     -> No thanks, I've got to work on my thesis
+        <<set $expression to "Neutral">> // Set visuals to neutral expression
         Jeremy: O-oh, of course! You mentioned that! //neutral
         Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime... //neutral
             -> Sure
+                <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
-                    //jump to dtfGoodEnd
+                    <<jump dtfGoodEnd>>
             -> No, I'd rather not
+                <<set $expression to "Negative">> // Set visuals to negative expression
                 Jeremy: O-oh... I... I see... //negative EXPRESSION ONLY
                 Jeremy: Well... I-I had a good time at least... //negative EXPRESSION ONLY
                 Jeremy: I... I hope it wasn't too bad for you... //negative EXPRESSION ONLY
-                    //jump to dtfSadEnd
+                    <<jump dtfSadEnd>>
     -> Sure, I'd love to!
+        <<set $expression to "Positive">> // Set visuals to positive expression
         Jeremy: O-oh, awesome! Great! //positive EXPRESSION ONLY
+        <<set $expression to "Neutral">> // Set visuals to neutral expression
         Jeremy: Just being up front, I'm not expecting you to... to p-put out or anything... //neutral
         Jeremy: I just thought we could watch a movie or something... //neutral
             -> A movie sounds nice
+                <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Yeah! Me too. Come on, we can talk movies on the way. //positive EXPRESSION ONLY
-                    //jump to dtfMovieEnd
+                <<jump dtfMovieEnd>>
             -> We'll see where the night takes us~
+                <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: O-o-oh-oh my... Uh... O-okay! We'll see, I g-guess! //positive EXPRESSION ONLY
                 Jeremy: This'll be... a-a first for me... I've never had someone over before... //positive EXPRESSION ONLY
-                    //jump to dtfHappyEnd
+                <<jump dtfHappyEnd>>
 ===
 
 title: goodEnd
@@ -344,6 +310,7 @@ Narrator: You're not entirely sure, but either way, you enjoyed your time.
 title: splitEnd
 ---
 //You had to split the bill with Jeremy
+<<set $expression to "Neutral">>
 Jeremy: Should we split it? That seems fair to me. //neutral
 Narrator: Trapped by social convention, you reluctantly agree to split the bill.
 Narrator: You return home on your own with your stomach fuller and your wallet somewhat lighter. Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
@@ -356,6 +323,7 @@ Narrator: You eventually agree and set up another date, this time at a pho resta
 title: badEnd
 ---
 //Jeremy ditched you with the bill, forcing you to pay it
+<<set $expression to "Positive">>
 Jeremy: Will excuse me for a moment? I have to use the restroom. //positive EXPRESSION ONLY
 Narrator: You wait for what seems like an eternity. Eventually you go to check the bathrooms, only to realize that Jeremy ditched you with the bill.
 Narrator: Seems like he didn't enjoy his time with you. With no other choice, you're forced to pay the bill.
@@ -387,21 +355,26 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
             -> What?
                 Jeremy: MLP, its short for My Little Pony, specifically the shows Friendship is Magic and Equestria Girls. Its an 18+ roleplay server for bronies and pegasisters who like the show.
                     -> That's... cool...
+                        <<set $expression to "Neutral">>
                         Jeremy: It's an interesting community to say the least. // NEUTRAL
                             <<jump entrees>> // Appetizers finished. Jump to entrees.
                     -> That sounds disgusting. // EDITREACT: Evokes negative reaction
+                        <<set $expression to "Negative">>
                         Jeremy: Haha... It can be some times like one time-
                         -> Please no...
+                            <<set $expression to "Negative">>
                            Jeremy: Oh, uh... Sorry... // NEGATIVE
                            <<set $points to $points - 2>> // Subtract 2 points from score
                            <<jump entrees>> // Appetizers finished. Jump to entrees.
             -> No...
                 Jeremy: Oh, are you a fan of My Little Pony?
                     -> Yes...? // REACTION: POSITIVE
+                        <<set $expression to "Positive">>
                         Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony?
                             -> Uhh...
                                 <<jump entrees>> // Appetizers finished. Jump to entrees.
                     -> Absolutely not // REACTION: NEGATIVE
+                        <<set $expression to "Negative">>
                         Jeremy: Oh, I see...
                             <<jump entrees>> // Appetizers finished. Jump to entrees.
 ===
@@ -423,20 +396,24 @@ Jeremy: I'm also a bit of a film buff. I've watched and enjoyed a number of obsc
 title: anime
 ---
 //Jeremy tells us about the harem anime he is a fan of
+<<set $expression to "Positive">>
 Jeremy: That would have to be Super Kawaii Girls 2: Revenge of the Black Heart! //positive
 Jeremy: Aw man, tell me you've seen it?
     -> Oh yeah, the one with Mojo dojo, right?
         Jeremy: Oh haha! You have! Is your favorite character my queen Alice Kartheart? Oh, and Lady Karila! Of course, I can't forget about- //positive
             ->Wait, Alice, the one that looks like a child?
+                <<set $expression to "Neutral">>
                 Jeremy: Technically, she is a 40000-year-old vampire goddess who happens to look like a child due to a curse. //neutral
                     -> Fair enough...
                         Jeremy: Yeah, it is a bit weird but she doesn't appear as often as some of the marketing would have you believe. //neutral
                             //jump to next course
                     -> Oh good, I'm glad there's an in world explanation that justifies making fanservice of a child
+                        <<set $expression to "Negative">>
                         Jeremy: Yeah... //negative
                             //jump to next course
     -> The stupid magic girl anime harem I heard about online?
         Jeremy: Oh uh, yeah that one. //negative
+        <<set $expression to "Positive">>
         Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love. //postive EXPRESSION ONLY
         Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who- //postive EXPRESSION ONLY
             -> Fascinating...
@@ -445,15 +422,20 @@ Jeremy: Aw man, tell me you've seen it?
                         Jeremy: Very much so, I will make a crown for you after this //positive EXPRESSION ONLY
                             //jump to next course
                     -> At least I'm in the top 20.
+                        <<set $expression to "Negative">>
                         Jeremy: Hmmm well, I might need to bump you down a few spots, depends on if tonight's episode reveals Maria Blackheart's face... //negative
+                        <<set $expression to "Neutral">>
                         Jeremy: I have a love-hate relationship with her right now. //neutral
                             //jump to next course
             ->Wait, Alice, the one that looks like a child?
+                <<set $expression to "Negative">>
                 Jeremy: Technically, she is a 40000-year-old vampire goddess who happens to look like a child due to a curse. //negative
                     -> Fair enough...
+                        <<set $expression to "Neutral">>
                         Jeremy: Yeah, it is a bit weird but she doesn't appear as often as some of the marketing would have you believe. //neutral
                             //jump to next course
                     -> Oh good, I'm glad there's an in world explanation that justifies making fanservice of a child
+                        <<set $expression to "Negative">>
                         Jeremy: Yeah... //negative
                             //jump to next course
 
@@ -586,16 +568,19 @@ Jeremy: Look deep into my eyes, tell me what you see.
 
 title: figurines
 ---
+<<set $expression to "Positive">>
 Jeremy: Do you -heh- own any collectibles? //positive
     -> Collectibles, Do you mean like… Lego sets?
+        <<set $expression to "Neutral">>
         Jeremy: Oh no I mean figurines. I have a couple dozen of them in my room. They are really expensive. //neutral
             -> Surely they cant be that expensive?
+                <<set $expression to "Positive">>
                 Jeremy: I took out a $30,000 loan to buy a few of the rare ones, like my pride and joy Alice Kartheart. //positive
                 Jeremy: She was so expensive that I had to keep her in a special showcase.
                     -> Thats nice to hear, protecting a very questionable purchase. A nice case with good lighting?
                         Jeremy: Oh no no! Regular LED lights will strip the paint! No, I put her in a pickle jar. //positive EXPRESSION ONLY
                             -> I beg your pardon?
                                     Jeremy: Yeah, had to use a special liquid to- //positive EXPRESSION ONLY
-                                        -> WAITER
+                                        -> WAITER!!!
                                             //jump to next course
 ===
