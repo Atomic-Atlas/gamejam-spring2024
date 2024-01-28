@@ -48,7 +48,7 @@ title: tableofcontents
 <<jump funFacts>>
 // 21. heterochromia
 <<jump heterochromia>>
-// 21. heterochromia
+// 21. incontinence
 <<jump incontinence>>
 
 ===
@@ -62,6 +62,11 @@ position: -1063,-815
 <<declare $appetizerChoice = "x">> /// Assigned in appetizers; used inappServe.
 <<declare $entreeChoice = "x">> /// Assigned in entrees; used <>.
 <<declare $dessertChoice = "x">> /// Assigned in desserts; used <>.
+<<declare $jobQuestionAvail = 0>> // Default is 0. If it's 1, the second question is eliminated.
+<<declare $points = 0>> // Points that are added up at the end of the game
+<<declare $optionSelected to false>>
+<<declare $moveOn to false>>
+<<declare $expression to "Neutral">>
 
 
 // Possibly prompt user for name here in future version -- Nikki (1/28/24)
@@ -91,11 +96,15 @@ Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
 title: meetup
 position: -1063,-621
 ---
+// Change the visuals to the next scene
+<<set $moveOn to true>>
+
+// Continue story
 Narrator: You arrive first. You grab a table and message Jeremy that you've arrived. He repiles quickly, saying that he's almost there.
 Narrator: Eventually you hear a brief commotion near the entrance to the restaurant. And you hear someone approach your table.
 
 // Insert player name here in future version -- Nikki (1/28/24)
-Jeremy: Hello, are you y/n? //**playername**?
+Jeremy: Hello, are you {$playerName}? //**playername**?
     -> That's me.
         Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
 Jeremy: Oh that's right, my mom told me to ask people about themselves!
@@ -120,22 +129,23 @@ Narrator: The moment is interrupted by a waiter who glides swiftly up to your ta
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
 Waiter: We will offer you a choice for each course then give you some time to enjoy it.
 Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster Bisque, a Charcuterie and Cheese Plate, or the Escargots.
-    -> Lobster Bisque
+    -> Lobster Bisque // POSITIVE
         Waiter: Very good, I will bring your food shortly.
         Jeremy: Bisque, haha that sounds kind of like bitch.
             <<set $appetizerChoice to "Lobster Bisque">> // appetizer is now Lobster Bisque
+            <<set $points to $points + 1>> // Add 1 point to score
             <<jump appServe>>
-    -> Charcuterie and Cheese Plate
+    -> Charcuterie and Cheese Plate // NEUTRAL
         Waiter: Very good, I will bring your food shortly.
         Jeremy: // fill in here
             <<set $appetizerChoice to "Charcuterie and Cheese Plate">> // appetizer is now Charcuterie and Cheese Plate
             <<jump appServe>>
-    -> Escargots
+    -> Escargots // NEGATIVE
         Waiter: Very good, I will bring your food shortly.
         Jeremy: What's an es-car-gouts? Sounds made up.
             <<set $appetizerChoice to "Escargots">> // appetizer is now Escargots
+            <<set $points to $points - 1>> // Subtract 1 point to score
             <<jump appServe>>
-
 ===
 
 title: appServe
@@ -145,9 +155,40 @@ title: appServe
 Narrator: *Exactly 8 minutes and 23 seconds later*
 
 //Insert chosen appetizer here
-Waiter: Here is your {$appetizerChoice}.
+if ({$appetizerChoice} = "Lobster Bisque" or "Charcuterie and Cheese Plate")
+    -> Waiter: Here is your {$appetizerChoice}.
+if ({$appetizerChoice} = "Escargots")
+    -> Waiter: Here are your {$appetizerChoice}.
+
+if ({$appetizerChoice} = "Lobster Bisque")
+    -> Jeremy: Oh, its a soup? I didn't know what a bisque was. // POSITIVE
+if ({$appetizerChoice} = "Charcuterie and Cheese Plate")
+    -> Jeremy: Strange, I don't see any shark in this SHARK-cuterie. // POSITIVE
+if ({$appetizerChoice} = "Escargots")
+    Jeremy: Ewww... Are those SNAILS? //negative
 
 //Comment from Jeremy about the chosen food
+Jeremy: So do you have any questions about me? // Question LVL 0
+    -> Ask about his job
+        <<jump job>>
+    -> Ask about his hobbies
+        <<jump hobbies>>
+    -> Ask about himself
+        <<jump funFacts>>
+
+
+
+
+
+
+//Insert chosen appetizer here
+Waiter: Here is your *appetizers*
+//if BISQUE
+Jeremy: Oh, its a soup? I didn't know what a bisque was. //positive
+//if CHARCUTERIE
+Jeremy: Strange, I don't see any shark in this SHARK-cuterie. //positive
+//if ESCARGOTS
+Jeremy: Ewww... Are those SNAILS? //negative
 Jeremy: So do you have any questions about me?
     -> Ask about his job
         <<jump job>>
@@ -155,6 +196,13 @@ Jeremy: So do you have any questions about me?
         <<jump hobbies>>
     -> Ask about himself
         <<jump funFacts>>
+
+
+
+
+
+
+
 ===
 
 title: entrees
@@ -233,7 +281,8 @@ title: desServe
 // Transitional statement
 Narrator: *Exactly 16 minutes and 8 seconds later*
 
-
+// Insert chosen Dessert here
+Waiter: Here is your {$dessertChoice}.
 
 //Comment from Jeremy about the chosen food
 //Need to put a check here to eliminate the conversation topic that was previously chosen
@@ -281,8 +330,10 @@ Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... 
         Jeremy: Well, my mom says its not real, but that's not true. I put a lot of work into it.
 Jeremy: I'm a moderator for two different online communities, though they overlap somewhat. One on Reddit and one on Discord.
     -> Discord
+        <<set $jobQuestionAvail to 1>> // Eliminate job 1 from available list
         <<jump discord>>
     -> Reddit
+        <<set $jobQuestionAvail to 2>> // Eliminate job 2 from available list
         <<jump reddit>>
 ===
 
@@ -298,7 +349,7 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                     -> That sounds disgusting. // EDITREACT: Evokes negative reaction
                         Jeremy: Haha... It can be some times like one time-
                         -> Please no...
-                           // FILLINLATER: is text supposed to go here? 
+                           // FILLINLATER: is text supposed to go here?
                             <<jump entrees>> // Appetizers finished. Jump to entrees.
             -> No...
                 Jeremy: Oh, are you a fan of My Little Pony?
@@ -319,6 +370,12 @@ title: reddit
 title: hobbies
 ---
 //Jeremy tells us about either his interest in harem anime or his favorite movie, Cannibal Holocaust
+Jeremy: I'm an otaku, that's a fan of Japanese culture, especially anime, if you didn't know.
+Jeremy: I'm also a bit of a film buff. I've watched and enjoyed a number of obscure films.
+    -> What's your favorite anime?
+        <<jump anime>>
+    -> What's your favorite movie?
+        <<jump cannibal>>
 ===
 
 title: anime
@@ -329,6 +386,46 @@ title: anime
 title: cannibal
 ---
 //Jeremy tells us about the cinematic masterpiece, Cannibal Holocaust
+Jeremy: Of all the obscure films I've seen, which is my favorite?
+Jeremy: That's easy! Cannibal Holocaust!
+    -> Cannibal What?
+        Jeremy: Cannibal Holocaust. Its an Italian film released in 1980. I admire it for the plot and filmmaking style.
+            -> What's the plot about?
+                Jeremy: Its about an anthropologist who leads a rescue team to find a crew of filmmakers who went missing while filming a documentary about cannibals in the Amazon.
+                Jeremy: The anthropologist finds the film that the missing filmmakers took and it shows how they set up shots by killing and mutilating natives to make them seem more savage.
+                Jeremy: Its famous for its extreme gore and brutality. It includes multiple actual animal deaths. In fact, there were rumors that the actors in the film were actually killed while filming.
+                -> That's cool
+                    Jeremy: Its pretty foul at times, but it uses the gore to tell an interesting story and make a cogent commentary about western society and who are the real savages.
+                        -> That's interesting, I may have to check it out myself
+                            Jeremy: I'd gladly show it to you, if you'd like, of course.
+                                //jump to next meal
+                        -> That's stupid
+                            Jeremy: What? How so?
+                                -> "Who are the real savages?" only works as a message if one side isn't literal cannibals
+                                    Jeremy: Well its about the brutality of the so-called "civilized" compared to the so-called "uncivilized" and how civilization didn't make the filmmaker characters actually civilized.
+                                        -> A few bad eggs don't debase western civilization as a whole
+                                            Jeremy: Fair enough, I suppose.
+                                -> Fliming yourself slaughtering real animals for a fake movie about the brutality of man forces you to cede any moral high ground
+                                    Jeremy: Well if you think about it...
+                                    Jeremy: Uh...
+                                    Jeremy: Nah, you're right. I'm not gonna defend that.
+                                        -> Good
+                                            //jump to next course
+                -> That's... Cool?
+                    Jeremy: I think so, despite the brutality. It's remembered for a reason.
+                        -> Sure...
+                            //jump to next course
+            -> What's unique about the style?
+                Jeremy: Its pretty much the original found footage film. It came out nearly 20 years before The Blair Witch Project popularized the style and it had a similar effect.
+                Jeremy: The audience wasn't familiar with the found footage style, so many people thought it was real.
+                Jeremy: It didn't help that the director had the actors take a low profile for a year after filming to feed the rumors that they were actually murdered in the movie.
+    -> I've heard about that one, you actually watched it?
+        Jeremy: Yes I have! I have the 2011 DVD version with the fewest cuts. Only 15 seconds was cut in that version.
+            -> That's... Cool?
+                Jeremy: I'd love to show it to you if you're interested.
+                Jeremy: Or I could lend you the DVD, if you'd prefer...
+                    -> Maybe sometime
+                        //jump to next course
 ===
 
 title: funFacts
@@ -338,7 +435,67 @@ title: funFacts
 
 title: heterochromia
 ---
-//Jeremy tells us about his indistinguishably different colored eyes and how he thinks it was caused by pinkeye when he was 6
+// Jeremy tells us about his indistinguishably different colored
+// eyes and how he thinks it was caused by pinkeye when he was 6.
+Jeremy: Look deep into my eyes, tell me what you see.
+    -> Okay?
+        Jeremy: Do you see it?
+            -> No
+                Jeremy: My eyes, they're two different colors.
+                    -> Really?
+                        Jeremy: Yes, they are! My right one is green and the other is blue.
+                        Jeremy: It happened when I was 6 years old.
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.
+                        Jeremy: I think it was the eyedrops that caused it.
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me.
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
+                                    //Jump to next course
+                    -> Really...
+                        Jeremy: Yes, they are! My right one is green and the other is blue.
+                        Jeremy: It happened when I was 6 years old.
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.
+                        Jeremy: I think it was the eyedrops that caused it.
+                            -> That's... cool?
+                                Jeremy: Isn't it? Its something special about me.
+                                    //Jump to next course
+                            -> Why did you tell me you got pinkeye?
+                                Jeremy: Oh, uh... Well...
+                                Jeremy: I thought it was cool...
+                                    //Jump to next course
+            -> No...?
+                Jeremy: My eyes, they're two different colors.
+    -> I don't really want to...
+        Jeremy: Oh, sorry. Well, do you want to know what you'd see in them?
+            -> Sure
+                Jeremy: I have heterochromia! My eyes are two different colors, see?
+                    -> Yes?
+                        Jeremy: It's cool isn't it?
+                        Jeremy: It happened when I was 6 years old.
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.
+                        Jeremy: I think it was the eyedrops that caused it.
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me.
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
+                                    //Jump to next course
+                    -> No
+                        Jeremy: Oh well. My right eye is green and the other is blue.
+                        Jeremy: It happened when I was 6 years old.
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.
+                        Jeremy: I think it was the eyedrops that caused it.
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me.
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
+                                    //Jump to next course
+            -> Not really
+                Jeremy: Oh...
+                    //Jump to next course
 ===
 
 title: incontinence
