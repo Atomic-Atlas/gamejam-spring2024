@@ -1,6 +1,56 @@
+title: tableofcontents
+---
+
+// This "chapter" of the code is just a way
+// to easily navigate in the coding viewport.
+// Please ignore during actual implementation.
+
+// === TABLE OF CONTENTS ===
+// 1. Start
+<<jump Start>>
+// 2. meetup
+<<jump meetup>>
+// 3. appetizers
+<<jump appetizers>>
+// 4. appServe
+<<jump appServe>>
+// 5. entrees
+<<jump entrees>>
+// 6. entServe
+<<jump entServe>>
+// 7. dessert
+<<jump dessert>>
+// 8. desServe
+<<jump desServe>>
+// 9. billCheck
+<<jump billCheck>>
+// 10. dtf
+<<jump dtf>>
+// 11. goodEnd
+<<jump goodEnd>>
+// 12. splitEnd
+<<jump splitEnd>>
+// 13. badEnd
+<<jump badEnd>>
+// 14. job
+<<jump job>>
+// 15. discord
+<<jump discord>>
+// 16. reddit
+<<jump reddit>>
+// 17. hobbies
+<<jump hobbies>>
+// 18. anime
+<<jump anime>>
+
+
+===
+
+
 title: Start
 position: -1063,-815
 ---
+
 // Possibly prompt user for name here in future version -- Nikki (1/28/24)
 
 // Continue with intro scene
@@ -33,8 +83,7 @@ Narrator: Eventually you hear a brief commotion near the entrance to the restaur
 
 // Insert player name here in future version -- Nikki (1/28/24)
 Jeremy: Hello, are you y/n? //**playername**?
-Jeremy: I'm Jeremy, I'm uhh...
-Jeremy: I'm not really sure how to start this...
+Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
 Jeremy: Oh that's right, my mom told me to ask people about themselves!
 Jeremy: So uh, what do you do?
     -> I'm a grad student working on my master's thesis.
@@ -47,11 +96,16 @@ Jeremy: So uh, what do you do?
 
 title: appetizers
 ---
-// First food choice, influences Jeremy's attitude.
+// Note: the appetizer is the first food choice, and it
+//  will influence Jeremy's attitude towards the player.
+
+// Transitional statement
+Narrator: The moment is interrupted as a waiter glides swiftly up to your table, pen and notepad in hand. 
 
 /// Create an appetizer variable to be used in appServe.
 <<declare $appetizerChoice = "x">>
 
+// Waiter introduces appetizers.
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
 Waiter: We will offer you a choice for each course then give you some time to enjoy it.
 Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster Bisque, a Charcuterie and Cheese Plate, or the Escargots.
@@ -72,6 +126,7 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
             <<jump appServe>>
 
 ===
+
 title: appServe
 ---
 //Insert chosen appetizer here
@@ -86,12 +141,17 @@ Jeremy: So do you have any questions about me?
     -> Ask about himself
         <<jump funFacts>>
 ===
+
 title: entrees
 ---
-//Entrees are chosen after appServe
+
+// Transitional statement
+Narrator: You finish your appetizers and once again the waiter approaches.
+
+// Entrees are chosen after appServe
 Waiter: Good evening, are we ready for the main course?
 Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, and a Duck Confit.
-//Need to add comments from Jeremy
+// Need to add comments from Jeremy
     -> Lamb Shank
         Waiter: Very good, I will bring your food shortly.
             <<jump entServe>>
@@ -103,6 +163,7 @@ Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, an
             <<jump entServe>>
 
 ===
+
 title: entServe
 ---
 //Comment from Jeremy about the chosen food
@@ -115,6 +176,7 @@ Jeremy: So do you have any other questions about me?
     -> Ask about himself
         <<jump funFacts>>
 ===
+
 title: dessert
 ---
 //Desserts are chosen after entServe
@@ -132,6 +194,7 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
             <<jump desServe>>
 
 ===
+
 title: desServe
 ---
 //Comment from Jeremy about the chosen food
@@ -144,30 +207,37 @@ Jeremy: So do you have any other questions about me?
     -> Ask about himself
         <<jump funFacts>>
 ===
+
 title: billCheck
 ---
 //Player's performance is checked
 //If player gets highest score, send to dtf, otherwise send to appropriate ending
 ===
+
 title: dtf
 ---
 //You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
 ===
+
 title: goodEnd
 ---
 //You got Jeremy to pay the bill
 ===
+
 title: splitEnd
 ---
 //You had to split the bill with Jeremy
 ===
+
 title: badEnd
 ---
 //Jeremy ditched you with the bill, forcing you to pay it
 ===
+
 title: job
 ---
-//Jeremy tells us about either his job as a moderator for an MLP Discord server or as a moderator for a subreddit
+// Jeremy tells us about job, which is either a moderator for
+// an MLP Discord server or as a moderator for a subreddit.
 Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... real... job, so to speak.
     -> What do you mean by that?
         Jeremy: Well, my mom says its not real, but that's not true. I put a lot of work into it.
@@ -177,30 +247,32 @@ Jeremy: I'm a moderator for two different online communities, though they overla
     -> Reddit
         <<jump reddit>>
 ===
+
 title: discord
 ---
 Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the rules and make sure nobody is breaking TOS.
     -> What fandom?
         Jeremy: Its an MLP server.
             -> What?
-                Jeremy: MLP, its short for My Little Pony, specifically the shows Friendship is Magic and Equestria Girls.
-                Jeremy: Its an 18+ roleplay server for bronies and pegasisters who like the show.
-                    -> That's... cool...
+                Jeremy: MLP, its short for My Little Pony, specifically the shows Friendship is Magic and Equestria Girls. Its an 18+ roleplay server for bronies and pegasisters who like the show.
+                    -> That's... cool... // EDITREACT: Evokes semi negative reaction
                         //jump to next meal serve
-                    -> That sounds disgusting.
+                    -> That sounds disgusting. // EDITREACT: Evokes negative reaction
                         Jeremy: Haha... It can be some times like one time-
                         -> Please no...
-                            //jump to next meal serve
+                           // FILLINLATER: is text supposed to go here? 
+                            <<jump entrees>> // Appetizers finished. Jump to entrees.
             -> No...
-                Jeremy: Oh, are you a fan of MLP?
-                    -> Yes...?
+                Jeremy: Oh, are you a fan of My Little Pony?
+                    -> Yes...? // EDITREACT: Evokes positive reaction
                         Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony?
                             -> Uhh...
-                                //jump to next meal serve
-                    -> Absolutely not
+                                <<jump entrees>> // Appetizers finished. Jump to entrees.
+                    -> Absolutely not // EDITREACT: Evokes negative reaction
                         -> Oh, I see...
-                            //jump to next meal serve
+                            <<jump entrees>> // Appetizers finished. Jump to entrees.
 ===
+
 title: reddit
 ---
 //Jeremy tells us about the subreddit he moderates
