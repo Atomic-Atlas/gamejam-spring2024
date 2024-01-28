@@ -20,12 +20,14 @@
       "outputPath": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Unity Files\\V_1\\Assets\\Scripts\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\nikki\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\nikki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

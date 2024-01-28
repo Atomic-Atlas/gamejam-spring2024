@@ -3,10 +3,10 @@
    could not be found"
  */
 
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+//using UnityEngine;
 
 public class LoverBaseClass {
 
@@ -15,7 +15,8 @@ public class LoverBaseClass {
     public int age;
     public string occupation;
 
-    public LoverBaseClass(String title, String author){
+    public LoverBaseClass(string firstName, string lastName, int age, string occupation)
+    {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,7 +25,7 @@ public class LoverBaseClass {
 
     }
 
-    public void loverInfo(){
+    public void LoverInfo(){
         Console.WriteLine("My name is " + this.firstName + " " + this.lastName + ".");
     }
 
@@ -34,7 +35,8 @@ class Lover {
 
     static void Main() {
 
-        LoverBaseClass lover = new LoverBaseClass("Jeremy", "Balls", "35", "Construction Worker");
+        // Not sure where to put this declaration of the object
+        LoverBaseClass lover = new LoverBaseClass("Jeremy", "Balls", 35, "Construction Worker");
 
     }
 
