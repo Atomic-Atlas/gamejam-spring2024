@@ -59,6 +59,7 @@ position: -1063,-815
 ---
 
 // Important Data Values
+<<declare $playerName = "temporary to avoid errors">>
 <<declare $appetizerChoice = "x">> /// Assigned in appetizers; used inappServe.
 <<declare $entreeChoice = "x">> /// Assigned in entrees; used <>.
 <<declare $dessertChoice = "x">> /// Assigned in desserts; used <>.
@@ -175,34 +176,6 @@ Jeremy: So do you have any questions about me? // Question LVL 0
         <<jump hobbies>>
     -> Ask about himself
         <<jump funFacts>>
-
-
-
-
-
-
-//Insert chosen appetizer here
-Waiter: Here is your *appetizers*
-//if BISQUE
-Jeremy: Oh, its a soup? I didn't know what a bisque was. //positive
-//if CHARCUTERIE
-Jeremy: Strange, I don't see any shark in this SHARK-cuterie. //positive
-//if ESCARGOTS
-Jeremy: Ewww... Are those SNAILS? //negative
-Jeremy: So do you have any questions about me?
-    -> Ask about his job
-        <<jump job>>
-    -> Ask about his hobbies
-        <<jump hobbies>>
-    -> Ask about himself
-        <<jump funFacts>>
-
-
-
-
-
-
-
 ===
 
 title: entrees
@@ -238,6 +211,35 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 
 //Insert chosen appetizer here
 Waiter: Here is your {$entreeChoice}.
+
+if ({$appetizerChoice} = "Lamb Shank")
+    Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. // NEUTRAL
+if ({$appetizerChoice} = "Salmon")
+    Jeremy: Strange, I don't see any shark in this SHARK-cuterie. Like my love of salmon and my solitary lifestyle. // POINTS: POSITIVE | EXPRESSION: POSITIVE
+if ({$appetizerChoice} = "Duck Confit")
+    Jeremy: Want to hear my Donald Duck impression? Its pretty good. //positive EXPRESSION ONLY
+    Jeremy: 
+
+
+
+
+
+//Comment from Jeremy about the chosen food
+//if LAMB
+Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. //neutral
+//if SALMON
+Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. //positive EXPRESSION ONLY
+Jeremy: Like my love of salmon and my solitary lifestyle. //positive
+//if DUCK
+Jeremy: Want to hear my Donald Duck impression? Its pretty good. //positive EXPRESSION ONLY
+Jeremy: No? Okay, maybe later. //negative
+
+
+
+
+
+
+
 
 // Comment from Jeremy about the chosen food
 // Need to put a check here to eliminate the conversation topic that was previously chosen
@@ -344,13 +346,16 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
         Jeremy: Its an MLP server.
             -> What?
                 Jeremy: MLP, its short for My Little Pony, specifically the shows Friendship is Magic and Equestria Girls. Its an 18+ roleplay server for bronies and pegasisters who like the show.
-                    -> That's... cool... // EDITREACT: Evokes semi negative reaction
-                        //jump to next meal serve
+                    -> That's... cool...
+                        Jeremy: It's an interesting community to say the least. // NEUTRAL
+                            <<jump entrees>> // Appetizers finished. Jump to entrees.
                     -> That sounds disgusting. // EDITREACT: Evokes negative reaction
                         Jeremy: Haha... It can be some times like one time-
                         -> Please no...
-                           // FILLINLATER: is text supposed to go here?
+                           Jeremy: Oh, uh... Sorry... // NEGATIVE
+                           <<set $points to $points - 2>> // Subtract 2 points from score
                             <<jump entrees>> // Appetizers finished. Jump to entrees.
+
             -> No...
                 Jeremy: Oh, are you a fan of My Little Pony?
                     -> Yes...? // EDITREACT: Evokes positive reaction
