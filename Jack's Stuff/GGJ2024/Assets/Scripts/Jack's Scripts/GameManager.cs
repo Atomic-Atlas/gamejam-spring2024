@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public DisplayManager myDisplayManager;
     public DialogueRunner myRunner;
+    public GameObject DialogueSystem;
     PlayerBaseClass myPlayer = new PlayerBaseClass();
     //Date class = new date class
     public VariableStorageBehaviour storage;
@@ -21,18 +22,28 @@ public class GameManager : MonoBehaviour
     public Image _meterFill;
     public Gradient meterGradient;
     GameObject[] myPanels;
-
+    public GameObject[] jeremyExpressions;
+    string _currentExp = "Neutral";
+    bool _atCheck = false;
     int index = 0;
+    string _playerName;
+    public TMP_InputField _nameGetter;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        
+        _playerName = _nameGetter.text;
         storage = FindObjectOfType<VariableStorageBehaviour>();
         scoreText.text = myPlayer.score.ToString();
         myPanels = myDisplayManager.myPanels.ToArray();
         _meterFill.color = meterGradient.Evaluate(myPlayer.score);
-
+        foreach (var exp in jeremyExpressions)
+        {
+            exp.SetActive(false);
+        }
+        //DialogueSystem.SetActive(false);
         NextScene();
 
     }
@@ -40,37 +51,47 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        storage.TryGetValue("$optionSelected", out _optionSelected);
-        storage.TryGetValue("$moveOn", out _moveOn);
-        Debug.Log(_optionSelected);
-        Debug.Log(points);
+        
+        
+            Debug.Log("here");
 
+            storage.SetValue("$playerName", _playerName);
+            storage.TryGetValue("$optionSelected", out _optionSelected);
+            storage.TryGetValue("$moveOn", out _moveOn);
+            storage.TryGetValue("$expression", out _currentExp);
+            //storage.TryGetValue("$atCheck", out _atCheck); //maybe I don't need to check win loss in code?
 
+            SetExpression(_currentExp);
 
-        if (_optionSelected)
-        {
-            storage.TryGetValue("$points", out points);
-            myPlayer.score += (int)points;
-            Debug.Log(myPlayer.score);
-            scoreText.text = myPlayer.score.ToString();
-            storage.SetValue("$points", 0);
-            storage.SetValue("$optionSelected", false);
-            meter.value = myPlayer.score;
-            _meterFill.color = meterGradient.Evaluate(_meterFill.fillAmount);
-        }
-        else
-        {
-            points = 0;
+            if (_optionSelected)
+            {
+                storage.TryGetValue("$points", out points);
+                int scoreToAdd = CheckScoreCap(myPlayer.score + (int)points);
+                myPlayer.score += scoreToAdd;
+                Debug.Log(myPlayer.score);
+                //scoreText.text = myPlayer.score.ToString();
+                storage.SetValue("$points", 0);
+                storage.SetValue("$optionSelected", false);
+                meter.value = myPlayer.score;
+                _meterFill.color = meterGradient.Evaluate(_meterFill.fillAmount);
+            }
+            else
+            {
+                points = 0;
 
-        }
-        if (_moveOn)
-        {
-            index++;
-            NextScene();
-            storage.SetValue("$moveOn", false);
+            }
+            if (_moveOn)
+            {
+                index++;
+                NextScene();
+                storage.SetValue("$moveOn", false);
 
-        }
-
+            }
+           /* if (_atCheck)
+            {
+                EndGameCheck();
+            } */
+        
     }
 
     public void NextScene()
@@ -88,5 +109,57 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetExpression(string expression)
+    {
+        foreach (var exp in jeremyExpressions)
+        {
+            if (exp.name.Equals(expression))
+            {
+                exp.SetActive(true);
+            }
+            else
+            {
+                exp.SetActive(false);
+            }
+        }
+    }
+
+    private int CheckScoreCap(int score)
+    {
+        if (score<0)
+        {
+            score = 0;
+        }
+        return score;
+    }
+
+    private void EndGameCheck()
+    {
+        switch (myPlayer.score)
+        {
+            case > 75:
+                Debug.Log("Passed");
+                break;
+            case >=50:
+                Debug.Log("Average");
+                break;
+            case <50:
+                Debug.Log("Failed");
+                break;
+            default:
+                Debug.Log("default");
+                break;
+        }
+    }
     
+    public void GetNameInput()
+    {
+        _playerName= _nameGetter.text;
+    }
+
+    public void NameEditDone()
+    {
+        myRunner.StartDialogue(myRunner.startNode);
+        _nameGetter.gameObject.SetActive(false);
+    }
 }
