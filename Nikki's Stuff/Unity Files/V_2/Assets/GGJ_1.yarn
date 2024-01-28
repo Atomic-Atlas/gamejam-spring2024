@@ -110,10 +110,10 @@ Jeremy: So uh, what do you do?
 title: appetizers
 ---
 // Note: the appetizer is the first food choice, and it
-//  will influence Jeremy's attitude towards the player.
+// will influence Jeremy's attitude towards the player.
 
 // Transitional statement
-Narrator: The moment is interrupted as a waiter glides swiftly up to your table, pen and notepad in hand. 
+Narrator: The moment is interrupted by a waiter who glides swiftly up to your table, pen and notepad in hand.
 
 // Waiter introduces appetizers.
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
@@ -139,6 +139,10 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
 
 title: appServe
 ---
+
+// Transitional statement
+Narrator: *Exactly 8 minutes and 23 seconds later*
+
 //Insert chosen appetizer here
 Waiter: Here is your {$appetizerChoice}.
 
@@ -179,6 +183,13 @@ Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, an
 
 title: entServe
 ---
+
+// Transitional statement
+Narrator: *Exactly 27 minutes and 49 seconds later*
+
+//Insert chosen appetizer here
+Waiter: Here is your {$entreeChoice}.
+
 //Comment from Jeremy about the chosen food
 //Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
@@ -192,6 +203,10 @@ Jeremy: So do you have any other questions about me?
 
 title: dessert
 ---
+
+// Transitional statement
+Narrator: You finish your appetizers and once again the waiter approaches.
+
 //Desserts are chosen after entServe
 Waiter: Good evening, are we ready for dessert?
 Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque.
@@ -213,6 +228,12 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
 
 title: desServe
 ---
+
+// Transitional statement
+Narrator: *Exactly 16 minutes and 8 seconds later*
+
+
+
 //Comment from Jeremy about the chosen food
 //Need to put a check here to eliminate the conversation topic that was previously chosen
 Jeremy: So do you have any other questions about me?
