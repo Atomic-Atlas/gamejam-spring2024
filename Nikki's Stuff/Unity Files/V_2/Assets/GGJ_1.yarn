@@ -42,7 +42,14 @@ title: tableofcontents
 <<jump hobbies>>
 // 18. anime
 <<jump anime>>
-
+// 19. cannibal
+<<jump cannibal>>
+// 20. funFacts
+<<jump funFacts>>
+// 21. heterochromia
+<<jump heterochromia>>
+// 21. heterochromia
+<<jump incontinence>>
 
 ===
 
@@ -50,6 +57,12 @@ title: tableofcontents
 title: Start
 position: -1063,-815
 ---
+
+// Important Data Values
+<<declare $appetizerChoice = "x">> /// Assigned in appetizers; used inappServe.
+<<declare $entreeChoice = "x">> /// Assigned in entrees; used <>.
+<<declare $dessertChoice = "x">> /// Assigned in desserts; used <>.
+
 
 // Possibly prompt user for name here in future version -- Nikki (1/28/24)
 
@@ -102,9 +115,6 @@ title: appetizers
 // Transitional statement
 Narrator: The moment is interrupted as a waiter glides swiftly up to your table, pen and notepad in hand. 
 
-/// Create an appetizer variable to be used in appServe.
-<<declare $appetizerChoice = "x">>
-
 // Waiter introduces appetizers.
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
 Waiter: We will offer you a choice for each course then give you some time to enjoy it.
@@ -154,12 +164,15 @@ Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, an
 // Need to add comments from Jeremy
     -> Lamb Shank
         Waiter: Very good, I will bring your food shortly.
+            <<set $entreeChoice to "Lamb Shank">> // entree is now Lamb Shank
             <<jump entServe>>
     -> Salmon
         Waiter: Very good, I will bring your food shortly.
+            <<set $entreeChoice to "Salmon">> // entree is now Salmon
             <<jump entServe>>
     -> Duck Confit
         Waiter: Very good, I will bring your food shortly.
+            <<set $entreeChoice to "Duck Confit">> // entree is now Duck Confit
             <<jump entServe>>
 
 ===
@@ -185,12 +198,15 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
 //Need to add comments from Jeremy
     -> Creme Brulee
         Waiter: Very good, I will bring your food shortly.
+            <<set $dessertChoice to "Creme Brulee">> // dessert is now Creme Brulee
             <<jump desServe>>
     -> Chocolate Mousse
         Waiter: Very good, I will bring your food shortly.
+            <<set $dessertChoice to "Chocolate Mousse">> // dessert is now Chocolate Mousse
             <<jump desServe>>
     -> Gateau Basque
         Waiter: Very good, I will bring your food shortly.
+            <<set $dessertChoice to "Gateau Basque">> // dessert is now Gateau Basque
             <<jump desServe>>
 
 ===
@@ -277,26 +293,32 @@ title: reddit
 ---
 //Jeremy tells us about the subreddit he moderates
 ===
+
 title: hobbies
 ---
 //Jeremy tells us about either his interest in harem anime or his favorite movie, Cannibal Holocaust
 ===
+
 title: anime
 ---
 //Jeremy tells us about the harem anime he is a fan of
 ===
+
 title: cannibal
 ---
 //Jeremy tells us about the cinematic masterpiece, Cannibal Holocaust
 ===
+
 title: funFacts
 ---
 //Jeremy tells us about either his pinkeye induced heterochromia or his troubles with fecal incontinence
 ===
+
 title: heterochromia
 ---
 //Jeremy tells us about his indistinguishably different colored eyes and how he thinks it was caused by pinkeye when he was 6
 ===
+
 title: incontinence
 ---
 //Jeremy tells us about his bowel problems in excruciating detail
