@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Nikki_s_Stuff
-build_property.ProjectDir = C:\Users\nikki\gamejam-spring2024\Nikki's Stuff\
+build_property.ProjectDir = C:\Users\nikki\Documents\TempGitFork\gamejam-spring2024\Nikki's Stuff\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

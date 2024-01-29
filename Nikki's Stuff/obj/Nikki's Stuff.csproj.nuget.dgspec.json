@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj": {}
+    "C:\\Users\\nikki\\Documents\\TempGitFork\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj": {
+    "C:\\Users\\nikki\\Documents\\TempGitFork\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj",
+        "projectUniqueName": "C:\\Users\\nikki\\Documents\\TempGitFork\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj",
         "projectName": "Nikki's Stuff",
-        "projectPath": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj",
+        "projectPath": "C:\\Users\\nikki\\Documents\\TempGitFork\\gamejam-spring2024\\Nikki's Stuff\\Nikki's Stuff.csproj",
         "packagesPath": "C:\\Users\\nikki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikki\\gamejam-spring2024\\Nikki's Stuff\\obj\\",
+        "outputPath": "C:\\Users\\nikki\\Documents\\TempGitFork\\gamejam-spring2024\\Nikki's Stuff\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\nikki\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\nikki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
