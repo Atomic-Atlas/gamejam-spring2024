@@ -289,7 +289,7 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
         Jeremy: O-oh, of course! You mentioned that! //neutral
         Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime... //neutral
             -> Sure
-                <<set $points to +2>>
+                <<set $points to 2>>
                 <<set $optionSelected to true>>
                 <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
