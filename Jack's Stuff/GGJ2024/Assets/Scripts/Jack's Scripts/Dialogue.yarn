@@ -1,7 +1,6 @@
 ﻿title: Start
 position: -1063,-815
 ---
-
 // Important Data Values
 <<declare $playerName = "temporary to avoid errors">>
 <<declare $appetizerChoice = "x">> /// Assigned in appetizers; used inappServe.
