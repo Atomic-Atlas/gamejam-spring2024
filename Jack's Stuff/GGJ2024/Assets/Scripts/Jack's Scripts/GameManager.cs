@@ -59,21 +59,26 @@ public class GameManager : MonoBehaviour
             storage.TryGetValue("$optionSelected", out _optionSelected);
             storage.TryGetValue("$moveOn", out _moveOn);
             storage.TryGetValue("$expression", out _currentExp);
+            storage.SetValue("$score", myPlayer.score);
             //storage.TryGetValue("$atCheck", out _atCheck); //maybe I don't need to check win loss in code?
 
             SetExpression(_currentExp);
 
             if (_optionSelected)
             {
+                points = 0;
                 storage.TryGetValue("$points", out points);
-                int scoreToAdd = CheckScoreCap(myPlayer.score + (int)points);
+                Debug.Log("points= " + points);
+                int scoreToAdd = CheckScoreCap(myPlayer.score + (int)points, (int)points);
+                Debug.Log("Adding: " + scoreToAdd);
                 myPlayer.score += scoreToAdd;
                 Debug.Log(myPlayer.score);
                 //scoreText.text = myPlayer.score.ToString();
                 storage.SetValue("$points", 0);
+                points = 0;
                 storage.SetValue("$optionSelected", false);
                 meter.value = myPlayer.score;
-                _meterFill.color = meterGradient.Evaluate(_meterFill.fillAmount);
+                _meterFill.color = meterGradient.Evaluate(_meterFill.fillAmount/100);
             }
             else
             {
@@ -124,13 +129,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private int CheckScoreCap(int score)
+    private int CheckScoreCap(int score, int points)
     {
+
         if (score<0)
         {
-            score = 0;
+            points = 0;
         }
-        return score;
+        return points;
     }
 
     private void EndGameCheck()
