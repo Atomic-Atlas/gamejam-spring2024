@@ -26,24 +26,26 @@ position: -1063,-815
 // Possibly prompt user for name here in future version -- Nikki (1/28/24)
 
 // Continue with intro scene
- Narrator: The rumbles of your stomach awake you from your stupor.
- Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
- {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
- Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
- Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
- Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
- Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
- Narrator: *Card Declined*
- Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
- Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
- Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
- Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
- Narrator: You swipe through the endless list of people, searching for a suitable mark.
- Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
- Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
-{$playerName}: Hook, line, and sinker...
+// Narrator: The rumbles of your stomach awake you from your stupor.
+// Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
+// {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
+// Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
+// Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
+// Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
+// Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
+// Narrator: *Card Declined*
+// Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
+// Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
+ //Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
+ //Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
+ //Narrator: You swipe through the endless list of people, searching for a suitable mark.
+ //Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
+ //Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
+//{$playerName}: Hook, line, and sinker...
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
+       // <<set $points to 2>> 
+       // <<set $optionSelected to true>>
         <<jump meetup>>
 ===
 
@@ -61,11 +63,15 @@ Narrator: Eventually you hear a brief commotion near the entrance to the restaur
 // Insert player name here in future version -- Nikki (1/28/24)
 Jeremy: Hello, are you {$playerName}? //**playername**?
     -> That's me.
+       // <<set $points to 4>> 
+       // <<set $optionSelected to true>>
         Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
 Jeremy: Oh that's right, my mom told me to ask people about themselves!
 Jeremy: So uh, what do you do?
     -> I'm a grad student working on my master's thesis.
         Jeremy: Oh that's cool. I'm, uhh... on a leave of absence...
+           // <<set $points to -1>> 
+           // <<set $optionSelected to true>>
             <<jump appetizers>>
     -> I have a part-time job at a local cafe.
         Jeremy: Oh that's cool. I don't have a traditional job per se at the moment, but I do have a job of sorts.
@@ -301,7 +307,7 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
             -> Sure
                 <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
-                    <<jump dtfGoodEnd>>
+                    <<jump goodEnd>>
             -> No, I'd rather not
                 <<set $expression to "Negative">> // Set visuals to negative expression
                 Jeremy: O-oh... I... I see... //negative EXPRESSION ONLY

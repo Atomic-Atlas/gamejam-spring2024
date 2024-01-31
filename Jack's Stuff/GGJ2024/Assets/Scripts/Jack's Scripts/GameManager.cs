@@ -35,10 +35,16 @@ public class GameManager : MonoBehaviour
     {
         
         _playerName = _nameGetter.text;
+        //myPlayer.score = 5;
+        meter.value = myPlayer.score;
         storage = FindObjectOfType<VariableStorageBehaviour>();
         scoreText.text = myPlayer.score.ToString();
         myPanels = myDisplayManager.myPanels.ToArray();
-        _meterFill.color = meterGradient.Evaluate(myPlayer.score);
+        _meterFill.color = meterGradient.Evaluate(meter.normalizedValue);
+
+        
+
+
         foreach (var exp in jeremyExpressions)
         {
             exp.SetActive(false);
@@ -51,7 +57,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         
             Debug.Log("here");
 
@@ -78,7 +87,8 @@ public class GameManager : MonoBehaviour
                 points = 0;
                 storage.SetValue("$optionSelected", false);
                 meter.value = myPlayer.score;
-                _meterFill.color = meterGradient.Evaluate(_meterFill.fillAmount/100);
+                Debug.Log(_meterFill.fillAmount);
+                _meterFill.color = meterGradient.Evaluate(meter.normalizedValue);
             }
             else
             {
