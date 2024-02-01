@@ -44,8 +44,8 @@ position: -1063,-815
 //{$playerName}: Hook, line, and sinker...
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
-        <<set $points to 12>> 
-        <<set $optionSelected to true>>
+       // <<set $points to 12>> 
+       // <<set $optionSelected to true>>
         <<jump meetup>>
 ===
 
