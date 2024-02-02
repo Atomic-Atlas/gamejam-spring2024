@@ -82,6 +82,7 @@ Jeremy: So uh, what do you do?
 ===
 
 title: appetizers
+position: -1064,-400
 ---
 // Note: the appetizer is the first food choice, and it
 // will influence Jeremy's attitude towards the player.
@@ -116,6 +117,7 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
 ===
 
 title: appServe
+position: -1068,-128
 ---
 <<set $courseStage = 1>>
 
@@ -155,6 +157,7 @@ Jeremy: So do you have any questions about me?
 ===
 
 title: entree
+position: -473,-140
 ---
 <<set $courseStage = 2>>
 <<set $moveOn to true>>
@@ -189,6 +192,7 @@ Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, an
 
 
 title: entServe
+position: -477,77
 ---
 <<set $courseStage = 3>>
 
@@ -233,6 +237,7 @@ Jeremy: So do you have any other questions about me?
 ===
 
 title: dessert
+position: 1,-145
 ---
  <<set $courseStage = 4>>
  <<set $moveOn to true>>
@@ -263,6 +268,7 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
 ===
 
 title: desServe
+position: -1,67
 ---
 <<set $courseStage = 5>>
 
@@ -298,6 +304,7 @@ Jeremy: So do you have any other questions about me?
 ===
 
 title: job
+position: -272,665
 ---
 // Jeremy tells us about job as MLP Discord server moderator.
 <<set $expression to "Negative">>
@@ -312,6 +319,7 @@ Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... 
 ===
 
 title: discord
+position: -992,869
 ---
 Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the rules and make sure nobody is breaking TOS.
     -> What fandom?
@@ -392,6 +400,7 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
 ===
 
 title: hobbies
+position: -654,1006
 ---
 //Jeremy tells us about either his interest in harem anime or his favorite movie, Cannibal Holocaust
 Jeremy: I'm an otaku, that's a fan of Japanese culture, especially anime, if you didn't know.
@@ -406,6 +415,7 @@ Jeremy: I'm also a bit of a film buff. I've watched and enjoyed a number of obsc
 ===
 
 title: anime
+position: -261,1099
 ---
 //Jeremy tells us about the harem anime he is a fan of
 <<set $expression to "Positive">>
@@ -532,6 +542,7 @@ Jeremy: Aw man, tell me you've seen it?
 ===
 
 title: cannibal
+position: -28,1104
 ---
 //Jeremy tells us about the cinematic masterpiece, Cannibal Holocaust
 Jeremy: Of all the obscure films I've seen, which is my favorite?
@@ -658,6 +669,7 @@ Jeremy: That's easy! Cannibal Holocaust! //MONKEY positive EXPRESSION ONLY
 ===
 
 title: funFacts
+position: 283,1106
 ---
 //Jeremy tells us about either his pinkeye induced heterochromia
 Jeremy: Well, there's a couple of fun facts about me.
@@ -671,6 +683,7 @@ Jeremy: I'm a collector and there's something special about my eyes.
 ===
 
 title: heterochromia
+position: 197,1296
 ---
 // Jeremy tells us about his indistinguishably different colored
 // eyes and how he thinks it was caused by pinkeye when he was 6.
@@ -931,6 +944,7 @@ Jeremy: Look deep into my eyes, tell me what you see.
 ===
 
 title: figurines
+position: 462,1293
 ---
 <<set $expression to "Positive">>
 Jeremy: Do you -heh- own any collectibles? //positive
@@ -963,6 +977,7 @@ Jeremy: Do you -heh- own any collectibles? //positive
 ===
 
 title: billCheck
+position: -57,2093
 ---
 <<set $moveOn to true>>
 Waiter: Here is the check, I hope you've had a lovely evening
@@ -981,6 +996,7 @@ Waiter: Here is the check, I hope you've had a lovely evening
 ===
 
 title: goodEnd
+position: 135,2278
 ---
 // You got him to pay the bill
 //You rejected Jeremy's offer to go home but agreed to set up another date
@@ -998,6 +1014,7 @@ Narrator: You're not entirely sure, but either way, you enjoyed your time.
 
 
 title: badEnd
+position: 316,2435
 ---
 //Jeremy ditched you with the bill, forcing you to pay it
 <<set $expression to "Positive">>
@@ -1016,6 +1033,7 @@ Narrator: Too exhausted to finish your thesis, decide to put it off until tomorr
 ===
 
 title: sadEnd
+position: 341,2600
 ---
 Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
 Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
@@ -1027,6 +1045,7 @@ Narrator: That weirdo was a meal ticket, nothing more.
 ===
 
 title: splitEnd
+position: 620,2612
 ---
 //You had to split the bill with Jeremy
 <<set $expression to "Neutral">>
@@ -1041,6 +1060,7 @@ Narrator: You eventually agree and set up another date, this time at a pho resta
 ===
 
 title: dtf
+position: 626,2823
 ---
 Narrator: You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
 <<set $expression to "Positive">> // Set visuals to positive expression
@@ -1081,18 +1101,8 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
                 <<jump dtfHappyEnd>>
 ===
 
-title: dtfSadEnd
----
-//You rejected Jeremy's offer to go home and to exchange contacts
-Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
-Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
-Narrator: You got a few messages from Jeremy through LoveQuest over the next few days.
-Narrator: But you ignored all of them.
-Narrator: That weirdo was a meal ticket, nothing more.
-//THE END
-//Back to title screen or something
-===
 title: dtfGoodEnd
+position: 987,3035
 ---
 //You rejected Jeremy's offer to go home but agreed to set up another date
 Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
@@ -1106,6 +1116,7 @@ Narrator: You're not entirely sure, but either way, you enjoyed your time.
 ===
 
 title: dtfMovieEnd
+position: 1117,3172
 ---
 //You accepted Jeremy's offer to watch a movie
 Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas.
@@ -1120,6 +1131,7 @@ Narrator: You set up another date after another evening of laughing at shitty ho
 //Back to title screen or something
 ===
 title: dtfHappyEnd
+position: 1250,3254
 ---
 //You accepted Jeremy's offer to go home and proposed a little more
 Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas, though movies weren't the first thing on your mind.
