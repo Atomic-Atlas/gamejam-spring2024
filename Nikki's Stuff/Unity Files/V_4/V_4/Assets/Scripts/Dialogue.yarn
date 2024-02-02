@@ -984,6 +984,9 @@ title: goodEnd
 ---
 // You got him to pay the bill
 //You rejected Jeremy's offer to go home but agreed to set up another date
+<<set $expression to "Positive">>
+Jeremy: You know what, I'll handle this. //MONKEY positive EXPRESSION ONLY
+Jeremy: I had a good time tonight, and besides, its the gentlemanly thing to do. Right, m'lady? //MONKEY positive EXPRESSION ONLY
 <<set $moveOn to true>>
 Narrator: You return home on your own with your stomach fuller and your wallet no lighter. Fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
 Narrator: You got a message from Jeremy the next day, asking about a future date. You agree and set up another date, this time at a pho restaurant he recommended.
@@ -1101,22 +1104,6 @@ Narrator: You're not entirely sure, but either way, you enjoyed your time.
 //THE END
 //Back to title screen or something
 ===
-
-
-title: goodEnd
----
-//You got Jeremy to pay the bill
-<<set $expression to "Positive">>
-Jeremy: You know what, I'll handle this. //MONKEY positive EXPRESSION ONLY
-Jeremy: I had a good time tonight, and besides, its the gentlemanly thing to do. Right, m'lady? //MONKEY positive EXPRESSION ONLY
-Narrator: And so, with stomach fuller and wallet no lighter, you returned to your apartment satisfied with yourself.
-Narrator: The dinner was a nice break from working on your thesis, and now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
-//THE END
-//Back to title screen or something
-===
-
-
-
 
 title: dtfMovieEnd
 ---
