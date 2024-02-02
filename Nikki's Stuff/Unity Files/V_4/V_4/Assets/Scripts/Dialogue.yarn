@@ -1,6 +1,7 @@
 ﻿title: Start
 position: -1063,-815
 ---
+
 // Important Data Values
 <<declare $playerName = "temporary to avoid errors">>
 <<declare $appetizerChoice = "x">> /// Assigned in appetizers; used inappServe.
@@ -25,24 +26,26 @@ position: -1063,-815
 // Possibly prompt user for name here in future version -- Nikki (1/28/24)
 
 // Continue with intro scene
- Narrator: The rumbles of your stomach awake you from your stupor.
- Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
- {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
- Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
- Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
- Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
- Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
- Narrator: *Card Declined*
- Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
- Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
- Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
- Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
- Narrator: You swipe through the endless list of people, searching for a suitable mark.
- Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
- Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
-{$playerName}: Hook, line, and sinker...
+// Narrator: The rumbles of your stomach awake you from your stupor.
+// Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
+// {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
+// Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
+// Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
+// Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
+// Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
+// Narrator: *Card Declined*
+// Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
+// Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
+ //Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
+ //Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
+ //Narrator: You swipe through the endless list of people, searching for a suitable mark.
+ //Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
+ //Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
+//{$playerName}: Hook, line, and sinker...
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
+       // <<set $points to 12>> 
+       // <<set $optionSelected to true>>
         <<jump meetup>>
 ===
 
@@ -60,11 +63,15 @@ Narrator: Eventually you hear a brief commotion near the entrance to the restaur
 // Insert player name here in future version -- Nikki (1/28/24)
 Jeremy: Hello, are you {$playerName}? //**playername**?
     -> That's me.
+       // <<set $points to 4>> 
+       // <<set $optionSelected to true>>
         Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
 Jeremy: Oh that's right, my mom told me to ask people about themselves!
 Jeremy: So uh, what do you do?
     -> I'm a grad student working on my master's thesis.
         Jeremy: Oh that's cool. I'm, uhh... on a leave of absence...
+           // <<set $points to -1>> 
+           // <<set $optionSelected to true>>
             <<jump appetizers>>
     -> I have a part-time job at a local cafe.
         Jeremy: Oh that's cool. I don't have a traditional job per se at the moment, but I do have a job of sorts.
@@ -94,7 +101,7 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
     -> Charcuterie and Cheese Plate // NEUTRAL
         <<set $expression to "Neutral">> // Set visuals to neutral expression
         Waiter: Very good, I will bring your food shortly.
-        Jeremy: // fill in here
+        Jeremy: You know, my uncle makes Italian-style salami. At least, I hope that's what he meant by "showing me his Italian sausage." //neutral
             <<set $appetizerChoice to "Charcuterie and Cheese Plate">> // appetizer is now Charcuterie and Cheese Plate
             <<jump appServe>>
     -> Escargots // NEGATIVE
@@ -148,7 +155,7 @@ Jeremy: So do you have any questions about me?
 title: entree
 ---
 <<set $courseStage = 2>>
-
+<<set $moveOn to true>>
 // Transitional statement
 Narrator: You finish your appetizers and once again the waiter approaches.
 
@@ -218,7 +225,7 @@ Jeremy: So do you have any other questions about me?
 title: dessert
 ---
  <<set $courseStage = 4>>
-
+ <<set $moveOn to true>>
 // Transitional statement
 Narrator: You finish your meals and once again the waiter approaches.
 
@@ -264,6 +271,7 @@ Jeremy: So do you have any other questions about me?
 
 title: billCheck
 ---
+<<set $moveOn to true>>
 Waiter: Here is the check, I hope you've had a lovely evening
 <<set $courseStage = 6>>
 <<if $score>=10>>
@@ -300,7 +308,7 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
             -> Sure
                 <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
-                    <<jump dtfGoodEnd>>
+                    <<jump goodEnd>>
             -> No, I'd rather not
                 <<set $expression to "Negative">> // Set visuals to negative expression
                 Jeremy: O-oh... I... I see... //negative EXPRESSION ONLY
@@ -328,6 +336,7 @@ title: goodEnd
 ---
 // You got him to pay the bill
 //You rejected Jeremy's offer to go home but agreed to set up another date
+<<set $moveOn to true>>
 Narrator: You return home on your own with your stomach fuller and your wallet no lighter. Fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
 Narrator: You got a message from Jeremy the next day, asking about a future date. You agree and set up another date, this time at a pho restaurant he recommended.
 Narrator: Maybe wanted to get another meal out of him, maybe you just wanted to spend more time with him.
@@ -342,6 +351,7 @@ title: splitEnd
 <<set $expression to "Neutral">>
 Jeremy: Should we split it? That seems fair to me. //neutral
 Narrator: Trapped by social convention, you reluctantly agree to split the bill.
+<<set $moveOn to true>>
 Narrator: You return home on your own with your stomach fuller and your wallet somewhat lighter. Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
 Narrator: You got a message from Jeremy the next day, asking about a future date. You waffle back and forth. You figure you can probably get him to pay the whole bill this time, but he was a bit of a weirdo.
 Narrator: You eventually agree and set up another date, this time at a pho restaurant he recommended.
@@ -357,6 +367,7 @@ Jeremy: Will excuse me for a moment? I have to use the restroom. //positive EXPR
 Narrator: You wait for what seems like an eternity. Eventually you go to check the bathrooms, only to realize that Jeremy ditched you with the bill.
 Narrator: Seems like he didn't enjoy his time with you. With no other choice, you're forced to pay the bill.
 Narrator: You feel nauseous as you see the total on the bill and hand the check to the waiter with trembling hands. So much for saving money.
+<<set $moveOn to true>>
 Narrator: You return home on your own with your stomach fuller and your wallet significantly lighter.
 Narrator: Too exhausted to finish your thesis, decide to put it off until tomorrow, you've got plenty of time after all. You never got another message from Jeremy.
 //THE END
@@ -386,26 +397,74 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                     -> That's... cool...
                         <<set $expression to "Neutral">>
                         Jeremy: It's an interesting community to say the least. // NEUTRAL
-                            <<jump entree>> // Appetizers finished. Jump to entree.
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>> // Appetizers finished. Jump to entree.
                     -> That sounds disgusting. // EDITREACT: Evokes negative reaction
                         <<set $expression to "Negative">>
                         Jeremy: Haha... It can be some times like one time-
                         -> Please no...
                             <<set $expression to "Negative">>
                            Jeremy: Oh, uh... Sorry... // NEGATIVE
-                           <<set $points to - 2>> // Subtract 2 points from score
-                           <<jump entree>> // Appetizers finished. Jump to entree.
+                               <<set $points to - 2>> // Subtract 2 points from score
+                               <<if $courseStage == 0>>
+                                    <<jump appServe>>
+                                <<elseif $courseStage == 1>>
+                                    <<jump entree>>
+                                <<elseif $courseStage == 2>>
+                                    <<jump entServe>>
+                                <<elseif $courseStage == 3>>
+                                    <<jump dessert>>
+                                <<elseif $courseStage == 4>>
+                                    <<jump desServe>>
+                                <<elseif $courseStage == 5>>
+                                    <<jump billCheck>>
+                                <<endif>> // Appetizers finished. Jump to entree.
             -> No...
                 Jeremy: Oh, are you a fan of My Little Pony?
                     -> Yes...? // REACTION: POSITIVE
                         <<set $expression to "Positive">>
                         Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony?
                             -> Uhh...
-                                <<jump entree>> // Appetizers finished. Jump to entree.
+                                <<if $courseStage == 0>>
+                                <<jump appServe>>
+                                <<elseif $courseStage == 1>>
+                                    <<jump entree>>
+                                <<elseif $courseStage == 2>>
+                                    <<jump entServe>>
+                                <<elseif $courseStage == 3>>
+                                    <<jump dessert>>
+                                <<elseif $courseStage == 4>>
+                                    <<jump desServe>>
+                                <<elseif $courseStage == 5>>
+                                    <<jump billCheck>>
+                                <<endif>> // Appetizers finished. Jump to entree.
                     -> Absolutely not // REACTION: NEGATIVE
                         <<set $expression to "Negative">>
                         Jeremy: Oh, I see...
-                            <<jump entree>> // Appetizers finished. Jump to entree.
+                            <<if $courseStage == 0>>
+                                <<jump appServe>>
+                            <<elseif $courseStage == 1>>
+                                <<jump entree>>
+                            <<elseif $courseStage == 2>>
+                                <<jump entServe>>
+                            <<elseif $courseStage == 3>>
+                                <<jump dessert>>
+                            <<elseif $courseStage == 4>>
+                                <<jump desServe>>
+                            <<elseif $courseStage == 5>>
+                                <<jump billCheck>>
+                            <<endif>>
 ===
 
 title: hobbies
