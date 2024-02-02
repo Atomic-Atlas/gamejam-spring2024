@@ -28,7 +28,33 @@ public class GameManager : MonoBehaviour
     int index = 0;
     string _playerName;
     public TMP_InputField _nameGetter;
-    
+
+
+
+
+
+    // // Activate Jeremy's presence on the screen
+    // void SetImageActive(GameObject image) {
+    //     Debug.Log("Jeremy is visible"); // line for debugging
+    //     image.GetComponent<SpriteRenderer>().enabled = true;
+    // }
+
+    // Disable Jeremy's presence
+    void SetImageDisable(GameObject image) {
+        Debug.Log("Jeremy is no longer visible."); // line for debugging
+        foreach (var exp in jeremyExpressions)
+        {
+            exp.SetActive(false);
+        }
+    }
+
+    // Run Awake() before anything else in the script.
+    void Awake() { // "image_active" and "image_disable" are the names of the command
+        //myRunner.AddCommandHandler<GameObject>("image_active", SetImageActive);
+        myRunner.AddCommandHandler<GameObject>("image_disable", SetImageDisable);
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -114,6 +140,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Activate specific expression from Jeremy
     public void SetExpression(string expression)
     {
         foreach (var exp in jeremyExpressions)

@@ -59,9 +59,12 @@ position: -1063,-621
 Narrator: You arrive first. You grab a table and message Jeremy that you've arrived. He repiles quickly, saying that he's almost there.
 Narrator: Eventually you hear a brief commotion near the entrance to the restaurant. And you hear someone approach your table.
 
+// Make Jeremy visible and set
+// his expression to neutral
 <<set $expression to "Neutral">>
-// Insert player name here in future version -- Nikki (1/28/24)
-Jeremy: Hello, are you {$playerName}? //**playername**?
+
+//Insert player's name here
+Jeremy: Hello, are you {$playerName}?
     -> That's me.
        // <<set $points to 4>> 
        // <<set $optionSelected to true>>
@@ -88,7 +91,6 @@ Narrator: The moment is interrupted by a waiter who glides swiftly up to your ta
 <<set $courseStage = 0>>
 // Waiter introduces appetizers.
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
-Waiter: We will offer you a choice for each course then give you some time to enjoy it.
 Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster Bisque, a Charcuterie and Cheese Plate, or the Escargots.
     -> Lobster Bisque // POSITIVE
         <<set $expression to "Positive">>
@@ -142,7 +144,7 @@ Narrator: *Exactly 8 minutes and 23 seconds later*
     <<set $optionSelected to true>>
 <<endif>> // end the if-statement
 
-// Prompt user for questions
+// Prompt user for questions about Jeremy
 Jeremy: So do you have any questions about me?
     -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
@@ -162,21 +164,29 @@ Narrator: You finish your appetizers and once again the waiter approaches.
 // entree are chosen after appServe
 Waiter: Good evening, are we ready for the main course?
 Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, and a Duck Confit.
-// Need to add comments from Jeremy
+
     -> Lamb Shank
         Waiter: Very good, I will bring your food shortly.
+        <<set $expression to "Neutral">>
+        Jeremy: Isn't it weird that a shank is both a cut of meat and a weapon? Are they related? Are shanks cut with shanks? // MONKEY neutral
             <<set $entreeChoice to "Lamb Shank">> // entree is now Lamb Shank
             <<jump entServe>>
     -> Salmon
         Waiter: Very good, I will bring your food shortly.
+        <<set $expression to "Positive">>
+        Jeremy: I'm a big salmon enjoyer. One time, I was on a cruise to Alaska and I got banned from the buffet because I was eating too much smoked salmon. //MONKEY positive
             <<set $entreeChoice to "Salmon">> // entree is now Salmon
             <<jump entServe>>
     -> Duck Confit
         Waiter: Very good, I will bring your food shortly.
+        <<set $expression to "Neutral">>
+        Jeremy: I don't think I've ever had duck before. If its good I'll need to set up some traps at my local pond. //MONKEY neutral
             <<set $entreeChoice to "Duck Confit">> // entree is now Duck Confit
             <<jump entServe>>
 
 ===
+
+
 
 title: entServe
 ---
@@ -193,25 +203,25 @@ Waiter: Here is your {$entreeChoice}.
     Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose. // NEUTRAL
 <<elseif $appetizerChoice == "Salmon">>
     <<set $expression to "Positive">>
-    Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. Like my love of salmon and my solitary lifestyle. // POINTS: POSITIVE | EXPRESSION: POSITIVE
+    Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. //MONKEY positive EXPRESSION ONLY
     <<set $points to 2>>
     <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Duck Confit">>
-    Jeremy: Want to hear my Donald Duck impression? It's pretty good. // EXPRESSION: POSITIVE
+    <<set $expression to "Positive">>
+    Jeremy: Want to hear my Donald Duck impression? It's pretty good. //MONKEY positive EXPRESSION ONLY
     -> Sure! // POINTS: NEGATIVE & POSITIVE (because a bystandard was disturbed)
-        <<set $expression to "Positive">>
         Narrator: Your date proceeds to let out a loud, ear-piercing rendition of the classic cartoon character. Chattering heads around the restaurant silence themselves and swivel in your direction.
         Narrator: Jeremy remains pleased, despite the sudden waterworks from a sleepy infant a few tables over.
         <<set $points to 2>> // Add 2 points to score
         <<set $optionSelected to true>>
     -> No, thank you.
         <<set $expression to "Negative">>
-        Jeremy: Oh, okay... // POINTS: Negative | EXPRESSION: NEGATIVE
+        Jeremy: No? Okay, maybe later... // POINTS: Negative | EXPRESSION: NEGATIVE
         <<set $points to 1>> // Add 1 point to score
         <<set $optionSelected to true>>
 <<endif>> // end the if-statement
 
-// Need to put a check here to eliminate the conversation topic that was previously chosen
+// Prompt user for questions about Jeremy
 Jeremy: So do you have any other questions about me?
     -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
@@ -235,14 +245,18 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
 //Need to add comments from Jeremy
     -> Creme Brulee
         Waiter: Very good, I will bring your food shortly.
+        Jeremy: I wonder how creme brulee was invented. //neutral
+        Jeremy: "Yeah, I've got some cream, I wonder what happens if I pour sugar on it and set it on fire, because that's something a normal person might do." //positive
             <<set $dessertChoice to "Creme Brulee">> // dessert is now Creme Brulee
             <<jump desServe>>
     -> Chocolate Mousse
         Waiter: Very good, I will bring your food shortly.
+        Jeremy: I'm quite a fan of mousse. Not a fan of moose, however. //neutral
             <<set $dessertChoice to "Chocolate Mousse">> // dessert is now Chocolate Mousse
             <<jump desServe>>
     -> Gateau Basque
         Waiter: Very good, I will bring your food shortly.
+        Jeremy: I haven't the slightest clue as to what either of those words mean. //neutral
             <<set $dessertChoice to "Gateau Basque">> // dessert is now Gateau Basque
             <<jump desServe>>
 
@@ -258,8 +272,22 @@ Narrator: *Exactly 16 minutes and 8 seconds later*
 // Insert chosen Dessert here
 Waiter: Here is your {$dessertChoice}.
 
-//Comment from Jeremy about the chosen food
-//Need to put a check here to eliminate the conversation topic that was previously chosen
+// Comment from Jeremy about the chosen food
+<<if $dessertChoice == "Creme Brulee">>
+    Jeremy: Gotta give it a good thwack to break through to the creamy innards. //positive
+    <<set $points to 1>>
+    <<set $optionSelected to true>>
+<<elseif $dessertChoice == "Chocolate Mousse">>
+    Jeremy: I retract my statement about moose earlier. If moose taste like mousse, then I'm a fan. //positive
+    <<set $points to 1>>
+    <<set $optionSelected to true>>
+<<elseif $dessertChoice == "Gateau Basque">>
+    Jeremy: So its some kind of cake? It looks somewhere between cream pie and cake. //neutral
+    <<set $points to 1>>
+    <<set $optionSelected to true>>
+<<endif>> // end the if-statement
+
+// Prompt user for questions about Jeremy
 Jeremy: So do you have any other questions about me?
     -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
@@ -269,115 +297,11 @@ Jeremy: So do you have any other questions about me?
         <<jump funFacts>>
 ===
 
-title: billCheck
----
-<<set $moveOn to true>>
-Waiter: Here is the check, I hope you've had a lovely evening
-<<set $courseStage = 6>>
-<<if $score>=10>>
-    <<jump dtf>>
-<<elseif $score>=7>>
-    <<jump goodEnd>>
-<<elseif $score>=4>>
-    <<jump splitEnd>>
-<<elseif $score<=3>>
-    <<jump badEnd>>
-<<endif>>
-//Player's performance is checked
-//If player gets highest score, send to dtf, otherwise send to appropriate ending
-===
-
-title: dtf
----
-
-Narrator: You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
-<<set $expression to "Positive">> // Set visuals to positive expression
-Jeremy: You know what, I'll handle this.
-Narrator: Your date picks up the bill, unfazed by the likely horrors of debt that you know all too well.
-Jeremy: I had a fantastic time tonight! //positive EXPRESSION ONLY
-<<set $expression to "Negative">> // Set visuals to neutral expression
-Jeremy: This may surprise you, but I don't get out too often. Or have many friends. Or talk to many people in general... //negative EXPRESSION ONLY
-<<set $expression to "Positive">> // Set visuals to positive expression
-Jeremy: But that's besides the point. I had a great evening with you and I... Uhh... //positive EXPRESSION ONLY
-<<set $expression to "Neutral">> // Set visuals to neutral expression
-Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to my place? //neutral
-    -> No thanks, I've got to work on my thesis
-        <<set $expression to "Neutral">> // Set visuals to neutral expression
-        Jeremy: O-oh, of course! You mentioned that! //neutral
-        Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime... //neutral
-            -> Sure
-                <<set $expression to "Positive">> // Set visuals to positive expression
-                Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
-                    <<jump goodEnd>>
-            -> No, I'd rather not
-                <<set $expression to "Negative">> // Set visuals to negative expression
-                Jeremy: O-oh... I... I see... //negative EXPRESSION ONLY
-                Jeremy: Well... I-I had a good time at least... //negative EXPRESSION ONLY
-                Jeremy: I... I hope it wasn't too bad for you... //negative EXPRESSION ONLY
-                    <<jump dtfSadEnd>>
-    -> Sure, I'd love to!
-        <<set $expression to "Positive">> // Set visuals to positive expression
-        Jeremy: O-oh, awesome! Great! //positive EXPRESSION ONLY
-        <<set $expression to "Neutral">> // Set visuals to neutral expression
-        Jeremy: Just being up front, I'm not expecting you to... to p-put out or anything... //neutral
-        Jeremy: I just thought we could watch a movie or something... //neutral
-            -> A movie sounds nice
-                <<set $expression to "Positive">> // Set visuals to positive expression
-                Jeremy: Yeah! Me too. Come on, we can talk movies on the way. //positive EXPRESSION ONLY
-                <<jump dtfMovieEnd>>
-            -> We'll see where the night takes us~
-                <<set $expression to "Positive">> // Set visuals to positive expression
-                Jeremy: O-o-oh-oh my... Uh... O-okay! We'll see, I g-guess! //positive EXPRESSION ONLY
-                Jeremy: This'll be... a-a first for me... I've never had someone over before... //positive EXPRESSION ONLY
-                <<jump dtfHappyEnd>>
-===
-
-title: goodEnd
----
-// You got him to pay the bill
-//You rejected Jeremy's offer to go home but agreed to set up another date
-<<set $moveOn to true>>
-Narrator: You return home on your own with your stomach fuller and your wallet no lighter. Fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
-Narrator: You got a message from Jeremy the next day, asking about a future date. You agree and set up another date, this time at a pho restaurant he recommended.
-Narrator: Maybe wanted to get another meal out of him, maybe you just wanted to spend more time with him.
-Narrator: You're not entirely sure, but either way, you enjoyed your time.
-//THE END
-//Back to title screen or something
-===
-
-title: splitEnd
----
-//You had to split the bill with Jeremy
-<<set $expression to "Neutral">>
-Jeremy: Should we split it? That seems fair to me. //neutral
-Narrator: Trapped by social convention, you reluctantly agree to split the bill.
-<<set $moveOn to true>>
-Narrator: You return home on your own with your stomach fuller and your wallet somewhat lighter. Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
-Narrator: You got a message from Jeremy the next day, asking about a future date. You waffle back and forth. You figure you can probably get him to pay the whole bill this time, but he was a bit of a weirdo.
-Narrator: You eventually agree and set up another date, this time at a pho restaurant he recommended.
-//THE END
-//Back to title screen or something
-===
-
-title: badEnd
----
-//Jeremy ditched you with the bill, forcing you to pay it
-<<set $expression to "Positive">>
-Jeremy: Will excuse me for a moment? I have to use the restroom. //positive EXPRESSION ONLY
-Narrator: You wait for what seems like an eternity. Eventually you go to check the bathrooms, only to realize that Jeremy ditched you with the bill.
-Narrator: Seems like he didn't enjoy his time with you. With no other choice, you're forced to pay the bill.
-Narrator: You feel nauseous as you see the total on the bill and hand the check to the waiter with trembling hands. So much for saving money.
-<<set $moveOn to true>>
-Narrator: You return home on your own with your stomach fuller and your wallet significantly lighter.
-Narrator: Too exhausted to finish your thesis, decide to put it off until tomorrow, you've got plenty of time after all. You never got another message from Jeremy.
-//THE END
-//Back to title screen or something
-===
-
 title: job
 ---
 // Jeremy tells us about job as MLP Discord server moderator.
-Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... real... job, so to speak.
+<<set $expression to "Negative">>
+Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... real... job, so to speak. //MONKEY negative EXPRESSION ONLY
     -> What do you mean by that?
         Jeremy: Well, my mom says its not real, but that's not true. I put a lot of work into it.
             -> What is it? <<if $jobAvailDiscord == true>>
@@ -411,8 +335,8 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                                 <<jump billCheck>>
                             <<endif>> // Appetizers finished. Jump to entree.
                     -> That sounds disgusting. // EDITREACT: Evokes negative reaction
-                        <<set $expression to "Negative">>
-                        Jeremy: Haha... It can be some times like one time-
+                        <<set $expression to "Positive">>
+                        Jeremy: Haha... It can be some times like one time- //MONKEY positive EXPRESSION ONLY
                         -> Please no...
                             <<set $expression to "Negative">>
                            Jeremy: Oh, uh... Sorry... // NEGATIVE
@@ -431,9 +355,9 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                                     <<jump billCheck>>
                                 <<endif>> // Appetizers finished. Jump to entree.
             -> No...
-                Jeremy: Oh, are you a fan of My Little Pony?
-                    -> Yes...? // REACTION: POSITIVE
-                        <<set $expression to "Positive">>
+                <<set $expression to "Positive">>
+                Jeremy: Oh, are you a fan of My Little Pony? //MONKEY positive EXPRESSION ONLY
+                    -> Yes...?
                         Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony?
                             -> Uhh...
                                 <<if $courseStage == 0>>
@@ -529,12 +453,12 @@ Jeremy: Aw man, tell me you've seen it?
     -> The stupid magic girl anime harem I heard about online?
         Jeremy: Oh uh, yeah that one. //negative
         <<set $expression to "Positive">>
-        Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love. //postive EXPRESSION ONLY
-        Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who- //postive EXPRESSION ONLY
+        Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love. //MONKEY positive EXPRESSION ONLY
+        Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who- //MONKEY positive EXPRESSION ONLY
             -> Fascinating...
                 Jeremy: Anyway! I love all my girls, with all off my heart! You are a close fifteenth after all! //positive
                     -> Oh? How...pleasant?
-                        Jeremy: Very much so, I will make a crown for you after this //positive EXPRESSION ONLY
+                        Jeremy: Very much so, I will make a crown for you after this. //MONKEY positive EXPRESSION ONLY
                             //jump to next course
                             <<if $courseStage == 0>>
                                 <<jump appServe>>
@@ -605,22 +529,20 @@ Jeremy: Aw man, tell me you've seen it?
                             <<elseif $courseStage == 5>>
                                 <<jump billCheck>>
                             <<endif>>
-
-
-
 ===
 
 title: cannibal
 ---
 //Jeremy tells us about the cinematic masterpiece, Cannibal Holocaust
 Jeremy: Of all the obscure films I've seen, which is my favorite?
-Jeremy: That's easy! Cannibal Holocaust!
+<<set $expression to "Positive">>
+Jeremy: That's easy! Cannibal Holocaust! //MONKEY positive EXPRESSION ONLY
     -> Cannibal What?
         Jeremy: Cannibal Holocaust. Its an Italian film released in 1980. I admire it for the plot and filmmaking style.
             -> What's the plot about?
-                Jeremy: Its about an anthropologist who leads a rescue team to find a crew of filmmakers who went missing while filming a documentary about cannibals in the Amazon.
-                Jeremy: The anthropologist finds the film that the missing filmmakers took and it shows how they set up shots by killing and mutilating natives to make them seem more savage.
-                Jeremy: Its famous for its extreme gore and brutality. It includes multiple actual animal deaths. In fact, there were rumors that the actors in the film were actually killed while filming.
+                Jeremy: Its about an anthropologist who leads a rescue team to find a crew of filmmakers who went missing while filming a documentary about cannibals in the Amazon. //positive
+                Jeremy: The anthropologist finds the film that the missing filmmakers took and it shows how they set up shots by killing and mutilating natives to make them seem more savage. //MONKEY positive EXPRESSION ONLY
+                Jeremy: Its famous for its extreme gore and brutality. It includes multiple actual animal deaths. In fact, there were rumors that the actors in the film were actually killed while filming. //MONKEY positive EXPRESSION ONLY
                 -> That's cool
                     Jeremy: Its pretty foul at times, but it uses the gore to tell an interesting story and make a cogent commentary about western society and who are the real savages.
                         -> That's interesting, I may have to check it out myself
@@ -695,9 +617,10 @@ Jeremy: That's easy! Cannibal Holocaust!
                                 <<jump billCheck>>
                             <<endif>>
             -> What's unique about the style?
-                Jeremy: Its pretty much the original found footage film. It came out nearly 20 years before The Blair Witch Project popularized the style and it had a similar effect.
-                Jeremy: The audience wasn't familiar with the found footage style, so many people thought it was real.
-                Jeremy: It didn't help that the director had the actors take a low profile for a year after filming to feed the rumors that they were actually murdered in the movie.
+                <<set $expression to "Positive">>
+                Jeremy: Its pretty much the original found footage film. It came out nearly 20 years before The Blair Witch Project popularized the style and it had a similar effect. //positive
+                Jeremy: The audience wasn't familiar with the found footage style, so many people thought it was real. //MONKEY positive EXPRESSION ONLY
+                Jeremy: It didn't help that the director had the actors take a low profile for a year after filming to feed the rumors that they were actually murdered in the movie. //MONKEY positive EXPRESSION ONLY
                 <<if $courseStage == 0>>
                     <<jump appServe>>
                 <<elseif $courseStage == 1>>
@@ -713,7 +636,8 @@ Jeremy: That's easy! Cannibal Holocaust!
                 <<endif>>
     -> I've heard about that one, you actually watched it?
         Jeremy: Yes I have! I have the 2011 DVD version with the fewest cuts. Only 15 seconds was cut in that version.
-            -> That's... Cool?
+            -> That's... Cool? //MONKEY positive EXPRESSION ONLY
+                <<set $expression to "Positive">>
                 Jeremy: I'd love to show it to you if you're interested.
                 Jeremy: Or I could lend you the DVD, if you'd prefer...
                     -> Maybe sometime
@@ -752,16 +676,17 @@ title: heterochromia
 // eyes and how he thinks it was caused by pinkeye when he was 6.
 Jeremy: Look deep into my eyes, tell me what you see.
     -> Okay?
-        Jeremy: Do you see it?
+        <<set $expression to "Positive">>
+        Jeremy: Do you see it? //MONKEY positive EXPRESSION ONLY
             -> No
                 Jeremy: My eyes, they're two different colors.
                     -> Really?
                         Jeremy: Yes, they are! My right one is green and the other is blue.
-                        Jeremy: It happened when I was 6 years old.
-                        Jeremy: I got pinkeye in my right eye and its been green ever since.
-                        Jeremy: I think it was the eyedrops that caused it.
+                        <<set $expression to "Neutral">>
+                        Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it. //MONKEY neutral EXPRESSION ONLY
                             -> That's cool
-                                Jeremy: Isn't it? Its something special about me.
+                                <<set $expression to "Positive">>
+                                Jeremy: Isn't it? It's something special about me. //MONKEY positive EXPRESSION ONLY
                                     //Jump to next course
                                     <<if $courseStage == 0>>
                                         <<jump appServe>>
@@ -777,7 +702,8 @@ Jeremy: Look deep into my eyes, tell me what you see.
                                         <<jump billCheck>>
                                     <<endif>>
                             -> That's cool, but did you have to mention the pinkeye?
-                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before...
+                                <<set $expression to "Negative">>
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before... //MONKEY negative EXPRESSION ONLY
                                     //Jump to next course
                                     <<if $courseStage == 0>>
                                         <<jump appServe>>
@@ -793,12 +719,13 @@ Jeremy: Look deep into my eyes, tell me what you see.
                                         <<jump billCheck>>
                                     <<endif>>
                     -> Really...
-                        Jeremy: Yes, they are! My right one is green and the other is blue.
-                        Jeremy: It happened when I was 6 years old.
-                        Jeremy: I got pinkeye in my right eye and its been green ever since.
-                        Jeremy: I think it was the eyedrops that caused it.
+                        <<set $expression to "Positive">>
+                        Jeremy: Yes, they are! My right one is green and the other is blue. //MONKEY positive EXPRESSION ONLY
+                        <<set $expression to "Neutral">>
+                        Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it. //MONKEY neutral EXPRESSION ONLY
                             -> That's... cool?
-                                Jeremy: Isn't it? Its something special about me.
+                                <<set $expression to "Positive">>
+                                Jeremy: Isn't it? It's something special about me. //MONKEY positive EXPRESSION ONLY
                                     //Jump to next course
                                     <<if $courseStage == 0>>
                                         <<jump appServe>>
@@ -814,8 +741,8 @@ Jeremy: Look deep into my eyes, tell me what you see.
                                         <<jump billCheck>>
                                     <<endif>>
                             -> Why did you tell me you got pinkeye?
-                                Jeremy: Oh, uh... Well...
-                                Jeremy: I thought it was cool...
+                                <<set $expression to "Negative">>
+                                Jeremy: Oh, uh... Well... I thought it was cool... //MONKEY negative EXPRESSION ONLY
                                     //Jump to next course
                                     <<if $courseStage == 0>>
                                         <<jump appServe>>
@@ -1010,12 +937,12 @@ Jeremy: Do you -heh- own any collectibles? //positive
     -> Collectibles, Do you mean like… Lego sets?
         <<set $expression to "Neutral">>
         Jeremy: Oh no I mean figurines. I have a couple dozen of them in my room. They are really expensive. //neutral
-            -> Surely they cant be that expensive?
+            -> Surely they can't be that expensive?
                 <<set $expression to "Positive">>
                 Jeremy: I took out a $30,000 loan to buy a few of the rare ones, like my pride and joy Alice Kartheart. //positive
                 Jeremy: She was so expensive that I had to keep her in a special showcase.
                     -> Thats nice to hear, protecting a very questionable purchase. A nice case with good lighting?
-                        Jeremy: Oh no no! Regular LED lights will strip the paint! No, I put her in a pickle jar. //positive EXPRESSION ONLY
+                        Jeremy: Oh no no! Regular LED lights will strip the paint! No, I put her in a pickle jar. //MONKEY positive EXPRESSION ONLY
                             -> I beg your pardon?
                                     Jeremy: Yeah, had to use a special liquid to- //positive EXPRESSION ONLY
                                         -> WAITER!!!
@@ -1033,4 +960,190 @@ Jeremy: Do you -heh- own any collectibles? //positive
                                             <<elseif $courseStage == 5>>
                                                 <<jump billCheck>>
                                             <<endif>>
+===
+
+title: billCheck
+---
+<<set $moveOn to true>>
+Waiter: Here is the check, I hope you've had a lovely evening
+<<set $courseStage = 6>>
+<<if $score>=10>>
+    <<jump dtf>>
+<<elseif $score>=7>>
+    <<jump goodEnd>>
+<<elseif $score>=4>>
+    <<jump splitEnd>>
+<<elseif $score<=3>>
+    <<jump badEnd>>
+<<endif>>
+//Player's performance is checked
+//If player gets highest score, send to dtf, otherwise send to appropriate ending
+===
+
+title: goodEnd
+---
+// You got him to pay the bill
+//You rejected Jeremy's offer to go home but agreed to set up another date
+<<set $moveOn to true>>
+Narrator: You return home on your own with your stomach fuller and your wallet no lighter. Fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a message from Jeremy the next day, asking about a future date. You agree and set up another date, this time at a pho restaurant he recommended.
+Narrator: Maybe wanted to get another meal out of him, maybe you just wanted to spend more time with him.
+Narrator: You're not entirely sure, but either way, you enjoyed your time.
+//THE END
+//Back to title screen or something
+===
+
+
+title: badEnd
+---
+//Jeremy ditched you with the bill, forcing you to pay it
+<<set $expression to "Positive">>
+Jeremy: Will excuse me for a moment? I have to use the restroom. //MONKEY positive EXPRESSION ONLY
+-> Sure
+<<image_disable  Jeremy>> // Need to disable Jeremy so he disappears offscreen
+
+Narrator: You wait for what seems like an eternity. Eventually you go to check the bathrooms, only to realize that Jeremy ditched you with the bill.
+Narrator: Seems like he didn't enjoy his time with you. With no other choice, you're forced to pay the bill.
+Narrator: You feel nauseous as you see the total on the bill and hand the check to the waiter with trembling hands. So much for saving money.
+<<set $moveOn to true>>
+Narrator: You return home on your own with your stomach fuller and your wallet significantly lighter.
+Narrator: Too exhausted to finish your thesis, decide to put it off until tomorrow, you've got plenty of time after all. You never got another message from Jeremy.
+//THE END
+//Back to title screen or something
+===
+
+title: sadEnd
+---
+Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
+Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a few messages from Jeremy through LoveQuest over the next few days.
+Narrator: But you ignored all of them.
+Narrator: That weirdo was a meal ticket, nothing more.
+//THE END
+//Back to title screen or something
+===
+
+title: splitEnd
+---
+//You had to split the bill with Jeremy
+<<set $expression to "Neutral">>
+Jeremy: Should we split it? That seems fair to me. //neutral
+Narrator: Trapped by social convention, you reluctantly agree to split the bill.
+<<set $moveOn to true>>
+Narrator: You return home on your own with your stomach fuller and your wallet somewhat lighter. Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a message from Jeremy the next day, asking about a future date. You waffle back and forth. You figure you can probably get him to pay the whole bill this time, but he was a bit of a weirdo.
+Narrator: You eventually agree and set up another date, this time at a pho restaurant he recommended.
+//THE END
+//Back to title screen or something
+===
+
+title: dtf
+---
+Narrator: You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
+<<set $expression to "Positive">> // Set visuals to positive expression
+Jeremy: You know what, I'll handle this. //MONKEY positive EXPRESSION ONLY
+Narrator: Your date picks up the bill, unfazed by the likely horrors of debt that you know all too well.
+Jeremy: I had a fantastic time tonight! //positive EXPRESSION ONLY
+<<set $expression to "Negative">> // Set visuals to neutral expression
+Jeremy: This may surprise you, but I don't get out too often. Or have many friends. Or talk to many people in general... //negative EXPRESSION ONLY
+<<set $expression to "Positive">> // Set visuals to positive expression
+Jeremy: But that's besides the point. I had a great evening with you and I... Uhh... //MONKEY positive EXPRESSION ONLY
+<<set $expression to "Neutral">> // Set visuals to neutral expression
+Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to my place? //neutral
+    -> No thanks, I've got to work on my thesis
+        <<set $expression to "Neutral">> // Set visuals to neutral expression
+        Jeremy: O-oh, of course! You mentioned that! //neutral
+        Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime... //neutral
+            -> Sure
+                <<set $expression to "Positive">> // Set visuals to positive expression
+                Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
+                    <<jump goodEnd>>
+            -> No, I'd rather not
+                <<set $expression to "Negative">> // Set visuals to negative expression
+                Jeremy: O-oh... I... I see. Well... I-I had a good time at least... //negative EXPRESSION ONLY
+                Jeremy: I... I hope it wasn't too bad for you... //MONKEY negative EXPRESSION ONLY
+                    <<jump sadEnd>>
+    -> Sure, I'd love to!
+        <<set $expression to "Positive">> // Set visuals to positive expression
+        Jeremy: O-oh, awesome! Great! //MONKEY positive EXPRESSION ONLY
+        <<set $expression to "Neutral">> // Set visuals to neutral expression
+        Jeremy: Just being up front, I'm not expecting you to... to p-put out or anything... I just thought we could watch a movie or something... //neutral
+            -> A movie sounds nice
+                <<set $expression to "Positive">> // Set visuals to positive expression
+                Jeremy: Yeah! Me too. Come on, we can talk movies on the way. //MONKEY positive EXPRESSION ONLY
+                <<jump dtfMovieEnd>>
+            -> We'll see where the night takes us~
+                <<set $expression to "Positive">> // Set visuals to positive expression
+                Jeremy: O-o-oh-oh my... Uh... O-okay! We'll see, I g-guess! This'll be... a-a first for me... I've never had someone over before... //MONKEY positive EXPRESSION ONLY
+                <<jump dtfHappyEnd>>
+===
+
+title: dtfSadEnd
+---
+//You rejected Jeremy's offer to go home and to exchange contacts
+Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
+Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a few messages from Jeremy through LoveQuest over the next few days.
+Narrator: But you ignored all of them.
+Narrator: That weirdo was a meal ticket, nothing more.
+//THE END
+//Back to title screen or something
+===
+title: dtfGoodEnd
+---
+//You rejected Jeremy's offer to go home but agreed to set up another date
+Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
+Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+Narrator: You got a message from Jeremy the next day, asking about a future date.
+Narrator: You agree and set up another date, this time at a pho restaurant he recommended.
+Narrator: Maybe wanted to get another meal out of him, maybe you just wanted to spend more time with him.
+Narrator: You're not entirely sure, but either way, you enjoyed your time.
+//THE END
+//Back to title screen or something
+===
+
+
+title: goodEnd
+---
+//You got Jeremy to pay the bill
+<<set $expression to "Positive">>
+Jeremy: You know what, I'll handle this. //MONKEY positive EXPRESSION ONLY
+Jeremy: I had a good time tonight, and besides, its the gentlemanly thing to do. Right, m'lady? //MONKEY positive EXPRESSION ONLY
+Narrator: And so, with stomach fuller and wallet no lighter, you returned to your apartment satisfied with yourself.
+Narrator: The dinner was a nice break from working on your thesis, and now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+//THE END
+//Back to title screen or something
+===
+
+
+
+
+title: dtfMovieEnd
+---
+//You accepted Jeremy's offer to watch a movie
+Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas.
+Narrator: At his apartment, the two of you stayed up late into the night howling with laughter at Jeremy's shitty b-movie collection.
+Narrator: Eventually you make your way back to your apartment, having thoroughly enjoyed yourself.
+Narrator: Too exhausted to finish your thesis, decide to put it off until tomorrow, you've got plenty of time after all.
+Narrator: You got a message from Jeremy the next day, asking about a future date.
+Narrator: You enthusiastically agree and set up another date, this time at a pho restaurant he recommended.
+Narrator: You eventually finish your thesis, which you explain to Jeremy in excruciating detail. He managed to keep up rather well.
+Narrator: You set up another date after another evening of laughing at shitty horror movies.
+//THE END
+//Back to title screen or something
+===
+title: dtfHappyEnd
+---
+//You accepted Jeremy's offer to go home and proposed a little more
+Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas, though movies weren't the first thing on your mind.
+Narrator: The two of you spend a while howling with laughter at Jeremy's shitty b-movie collection, before the night shifts.
+Narrator: You ended up spending the night with Jeremy. 
+Narrator: The next morning you make your way back to your apartment, having thoroughly enjoyed yourself.
+Narrator: Fully refreshed, reinvigorated, and the happiest you've been in a while, you breeze through the rest of your thesis proposal.
+Narrator: You got a message from Jeremy that day, asking about a future date.
+Narrator: You enthusiastically agree and set up another date, this time at a pho restaurant he recommended.
+Narrator: You eventually finish your thesis, which you explain to Jeremy in excruciating detail. He managed to keep up rather well.
+Narrator: You set up another date after another evening of laughing at shitty horror movies, though the two of you got distracted halfway through. Again.
+//THE END
+//Back to title screen or something
 ===
