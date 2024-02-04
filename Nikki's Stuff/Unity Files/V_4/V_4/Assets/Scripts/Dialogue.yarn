@@ -22,26 +22,16 @@ position: -1063,-815
 <<declare $factAvailHeterochromia to true>>
 
 
-
-// Possibly prompt user for name here in future version -- Nikki (1/28/24)
-
-// Continue with intro scene
-// Narrator: The rumbles of your stomach awake you from your stupor.
-// Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on the desk in front of you.
-// {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
-// Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
-// Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
-// Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
-// Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
-// Narrator: *Card Declined*
-// Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
-// Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptiness.
- //Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
- //Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
- //Narrator: You swipe through the endless list of people, searching for a suitable mark.
- //Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
- //Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
-//{$playerName}: Hook, line, and sinker...
+// Remember to uncomment this intro when exporting the game
+Narrator: The rumbles of your stomach awake you from your stupor.
+Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on your desk.
+{$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
+Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app. You fill your cart with food and place your order.
+Narrator: *Card Declined*
+Narrator: You let out a pained, desperate sigh as you close the app and lumber over to your apartment's tiny kitchen. You open up your fridge and pantry, only to be greeted by emptiness.
+Narrator: As you survey your famine stricken shelves, you begin to consider your other options. New plan: you turn to your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
+Narrator: You swipe through the endless list of people, searching for a suitable mark. Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
+Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
        // <<set $points to 12>> 
