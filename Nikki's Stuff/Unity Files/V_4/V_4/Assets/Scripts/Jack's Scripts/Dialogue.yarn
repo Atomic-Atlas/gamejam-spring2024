@@ -15,11 +15,11 @@ position: -1063,-815
 <<declare $courseStage = 0>>
 
 // Question Availability -- optimize this feature later
-<<declare $jobAvailDiscord to true>>
-<<declare $hobbyAvailAnime to true>>
-<<declare $hobbyAvailMovie to true>>
-<<declare $factAvailFigurines to true>>
-<<declare $factAvailHeterochromia to true>>
+<<declare $jobAvailDiscord to true>> // Job
+<<declare $hobbyAvailAnime to true>> // Hobbies
+<<declare $hobbyAvailMovie to true>> // Hobbies
+<<declare $factAvailFigurines to true>> // About Himself
+<<declare $factAvailHeterochromia to true>> // About Himself
 
 
 // Remember to uncomment this intro when exporting the game
