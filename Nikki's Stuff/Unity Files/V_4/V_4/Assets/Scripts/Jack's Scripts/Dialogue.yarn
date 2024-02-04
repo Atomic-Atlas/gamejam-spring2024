@@ -11,7 +11,7 @@ position: -1063,-815
 <<declare $score = 0>>
 <<declare $optionSelected to false>>
 <<declare $moveOn to false>>
-<<declare $expression to "Positive">> // Alters between Negative, Neutral, and Positive
+<<declare $expression to "">> // Alters between Negative, Neutral, and Positive
 <<declare $courseStage = 0>>
 
 // Question Availability -- optimize this feature later
@@ -20,6 +20,9 @@ position: -1063,-815
 <<declare $hobbyAvailMovie to true>> // Hobbies
 <<declare $factAvailFigurines to true>> // About Himself
 <<declare $factAvailHeterochromia to true>> // About Himself
+
+//<<set $expression to "Positive">>
+
 
 
 // Remember to uncomment this intro when exporting the game
