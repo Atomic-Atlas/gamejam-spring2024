@@ -11,7 +11,7 @@ position: -1063,-815
 <<declare $score = 0>>
 <<declare $optionSelected to false>>
 <<declare $moveOn to false>>
-<<declare $expression to "none">> // Alters between Negative, Neutral, and Positive
+<<declare $expression to "Positive">> // Alters between Negative, Neutral, and Positive
 <<declare $courseStage = 0>>
 
 // Question Availability -- optimize this feature later
@@ -20,6 +20,7 @@ position: -1063,-815
 <<declare $hobbyAvailMovie to true>>
 <<declare $factAvailFigurines to true>>
 <<declare $factAvailHeterochromia to true>>
+
 
 // Remember to uncomment this intro when exporting the game
 Narrator: The rumbles of your stomach awake you from your stupor.
@@ -954,7 +955,7 @@ Jeremy: Do you -heh- own any collectibles? //positive
 title: billCheck
 ---
 <<set $moveOn to true>>
-Waiter: Here is the check, I hope you've had a lovely evening
+Waiter: Here is the check, I hope you've had a lovely evening.
 <<set $courseStage = 6>>
 <<if $score>=10>>
     <<jump dtf>>
