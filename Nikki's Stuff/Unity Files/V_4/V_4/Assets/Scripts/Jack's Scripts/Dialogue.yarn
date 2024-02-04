@@ -21,9 +21,6 @@ position: -1063,-815
 <<declare $factAvailFigurines to true>>
 <<declare $factAvailHeterochromia to true>>
 
-// Testing to see what this sets the background to
-<<set $moveOn to true>>
-
 // Remember to uncomment this intro when exporting the game
 Narrator: The rumbles of your stomach awake you from your stupor.
 Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on your desk.
