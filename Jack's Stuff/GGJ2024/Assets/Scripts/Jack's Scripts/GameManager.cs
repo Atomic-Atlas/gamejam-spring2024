@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     //Date class = new date class
     public VariableStorageBehaviour storage;
     public static int stageIndex = 0;
-    bool _optionSelected=false;
+    bool _optionSelected = false;
     bool _moveOn = false;
     public float points = 0;
     public TMP_Text scoreText;
@@ -28,21 +28,21 @@ public class GameManager : MonoBehaviour
     int index = 0;
     string _playerName;
     public TMP_InputField _nameGetter;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         //set and get intial values
         _playerName = _nameGetter.text;
-        
+
         meter.value = myPlayer.score;
         storage = FindObjectOfType<VariableStorageBehaviour>();
         scoreText.text = myPlayer.score.ToString(); //this still exists technically, but I hid the object it's tied to
         myPanels = myDisplayManager.myPanels.ToArray();
         _meterFill.color = meterGradient.Evaluate(meter.normalizedValue);
 
-        
+
 
         //loop through all the images for Jermey and set them to inactive, hiding them from view
         foreach (var exp in jeremyExpressions)
@@ -52,9 +52,14 @@ public class GameManager : MonoBehaviour
         //load up the first scene/background
         NextScene();
         //turns off overlay for start screen
-        myPanels[myPanels.Length-1].SetActive(false);
+        myPanels[myPanels.Length - 1].SetActive(false);
     }
 
+    [YarnCommand("RizzMeterState")]
+    public void RizzMeterState(bool state)
+    {
+        meter.gameObject.SetActive(state);
+    }
     // Update is called once per frame
     void Update()
     {

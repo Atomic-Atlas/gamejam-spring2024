@@ -21,10 +21,15 @@ position: -1063,-815
 <<declare $factAvailFigurines to true>>
 <<declare $factAvailHeterochromia to true>>
 
+//set Rizz Meter active: <<RizzMeterState GameManager true>>
+//set Rizz Meter Inactive:  <<RizzMeterState GameManager false>>
 
 // Remember to uncomment this intro when exporting the game
+
 Narrator: The rumbles of your stomach awake you from your stupor.
+
 Narrator: You take a deep breath and attempt to refocus your eyes on the half-finished masters thesis on your desk.
+
 {$playerName}: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
 Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app. You fill your cart with food and place your order.
 Narrator: *Card Declined*
@@ -34,8 +39,8 @@ Narrator: You swipe through the endless list of people, searching for a suitable
 Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
-       // <<set $points to 12>> 
-       // <<set $optionSelected to true>>
+      // <<set $points to 12>> 
+      // <<set $optionSelected to true>>
         <<jump meetup>>
 ===
 
