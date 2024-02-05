@@ -447,7 +447,7 @@ Jeremy: Aw man, tell me you've seen it?
         Jeremy: Oh uh, yeah that one. //negative
         <<set $expression to "Positive">>
         Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love. //MONKEY positive EXPRESSION ONLY
-        Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who- //MONKEY positive EXPRESSION ONLY
+        Jeremy: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who- //MONKEY positive EXPRESSION ONLY
             -> Fascinating...
                 Jeremy: Anyway! I love all my girls, with all off my heart! You are a close fifteenth after all! //positive
                     -> Oh? How...pleasant?
@@ -1053,7 +1053,7 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
             -> Sure
                 <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: Great! I'm looking forwards to next time! //positive EXPRESSION ONLY
-                    <<jump goodEnd>>
+                    <<jump dtfGoodEnd>>
             -> No, I'd rather not
                 <<set $expression to "Negative">> // Set visuals to negative expression
                 Jeremy: O-oh... I... I see. Well... I-I had a good time at least... //negative EXPRESSION ONLY
