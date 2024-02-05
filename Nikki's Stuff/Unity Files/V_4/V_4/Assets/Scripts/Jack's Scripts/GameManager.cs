@@ -65,7 +65,9 @@ public class GameManager : MonoBehaviour
         
             //Debug.Log("here");
             
-            //continuously get and set values between Unity and Yarnspinner (This works, but it isn't the cleanest option, I just did it for time sake because it was a quick implementation)
+            // continuously get and set values between Unity and Yarnspinner (This works,
+            // but it isn't the cleanest option, I just did it for time sake because it
+            // was a quick implementation)
             storage.SetValue("$playerName", _playerName);
             storage.TryGetValue("$optionSelected", out _optionSelected);
             storage.TryGetValue("$moveOn", out _moveOn);
