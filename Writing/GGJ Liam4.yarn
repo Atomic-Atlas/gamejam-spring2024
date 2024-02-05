@@ -1,0 +1,403 @@
+title: Start
+position: -1063,-815
+---
+Narrator: The rumbles of your stomach awake you from your stupor.
+Narrator: You take a deep breath and attmept to refocus your eyes on the half-finished masters thesis on the desk in front of you.
+You: Ugghhh... I'm so hungry, I'm never gonna finish my thesis like this...
+Narrator: You reach for your phone and open up Street Vendor, your favorite food delivery app.
+Narrator: You feel yourself drool slightly as you browse your favorite restaurants.
+Narrator: You eventually settle on Dragon In Your Throat and fill your cart with their famous dim sum.
+Narrator: Now salivating vigorously, you place your order, only for a message to pop up on your phone.
+Narrator: *Card Declined*
+Narrator: You let out a pained, desperate sigh as you close the app and rise to your feet.
+Narrator: You lumber over to your apartment's tiny kitchen and open up your fridge and pantry, only to be greeted by emptyness.
+Narrator: As you survey your famine stricken shelves, you begin to consider your other options.
+Narrator: You sigh once more as you open your phone and open up LoveQuest. Maybe you can get dinner out of some sap.
+Narrator: You swipe through the endless list of people, searching for a suitable mark.
+Narrator: Eventually you find one with the right mix of low standards, desperation, and relative normality: "Jeremy"
+Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
+You: Hook, line, and sinker...
+Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
+    -> Go to Dinner
+        <<jump meetup>>
+===
+title: meetup
+position: -1063,-621
+---
+Narrator: You arrive first. You grab a table and message Jeremy that you've arrived. 
+Narrator: He repiles quickly, saying that he's almost there.
+Narrator: Eventually you hear a brief commotion near the entrance to the restaurant. And you hear someone approach your table.
+Jeremy: Hello, are you **playername**?
+Jeremy: I'm Jeremy, I'm uhh...
+Jeremy: I'm not really sure how to start this...
+Jeremy: Oh that's right, my mom told me to ask people about themselves!
+Jeremy: So uh, what do you do?
+    -> I'm a grad student working on my master's thesis.
+        Jeremy: Oh that's cool. I'm, uhh... on a leave of absence... //negative
+            <<jump appetizers>>
+    -> I have a part-time job at a local cafe.
+        Jeremy: Oh that's cool. I don't have a traditional job per se at the moment, but I do have a job of sorts. //neutral
+            <<jump appetizers>>
+===
+title: appetizers
+---
+//First food choice, influences Jeremy's attitude
+Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
+Waiter: We will offer you a choice for each course then give you some time to enjot it.
+Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster Bisque, a Charcuterie and Cheese Plate, or the Escargots.
+    -> Lobster Bisque
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: Bisque, haha that sounds kind of like bitch. //positive
+            <<jump appServe>>
+    -> Charcuterie and Cheese Plate
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: You know, my uncle makes Italian-style salami. At least, I hope that's what he meant by "showing me his Italian sausage." //neutral
+            <<jump appServe>>
+    -> Escargots
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: What's an es-car-gouts? Sounds made up. //neutral
+            <<jump appServe>>
+
+===
+title: appServe
+---
+//Insert chosen appetizer here
+Waiter: Here is your *appetizers*
+//if BISQUE
+Jeremy: Oh, its a soup? I didn't know what a bisque was. //positive
+//if CHARCUTERIE
+Jeremy: Strange, I don't see any shark in this SHARK-cuterie. //positive
+//if ESCARGOTS
+Jeremy: Ewww... Are those SNAILS? //negative
+Jeremy: So do you have any questions about me?
+    -> Ask about his job
+        <<jump job>>
+    -> Ask about his hobbies
+        <<jump hobbies>>
+    -> Ask about himself
+        <<jump funFacts>>
+===
+title: entrees
+---
+//Entrees are chosen after appServe
+Waiter: Good evening, are we ready for the main course?
+Waiter: Tonight, we have a Red Wine Braised Lamb Shank, a Pan Roasted Salmon, and a Duck Confit.
+//Need to add comments from Jeremy
+    -> Lamb Shank
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: Isn't it weird that a shank is both a cut of meat and a weapon? Are they related? Are shanks cut with shanks? //neutral
+            <<jump entServe>>
+    -> Salmon
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: I'm a big salmon enjoyer. One time, I was on a cruise to Alaska and I got banned from the buffet because I was eating too much smoked salmon. //positive
+            <<jump entServe>>
+    -> Duck Confit
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: I don't think I've ever had duck before. If its good I'll need to set up some traps at my local pond. //neutral
+            <<jump entServe>>
+
+===
+title: entServe
+---
+//Comment from Jeremy about the chosen food
+//if LAMB
+Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. //neutral
+Jeremy: Oh, except veal, I suppose. //neutral
+//if SALMON
+Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot. //positive EXPRESSION ONLY
+Jeremy: Like my love of salmon and my solitary lifestyle. //positive
+//if DUCK
+Jeremy: Want to hear my Donald Duck impression? Its pretty good. //positive EXPRESSION ONLY
+Jeremy: No? Okay, maybe later. //negative
+//Need to put a check here to eliminate the conversation topic that was previously chosen
+Jeremy: So do you have any other questions about me?
+    -> Ask about his job
+        <<jump job>>
+    -> Ask about his hobbies
+        <<jump hobbies>>
+    -> Ask about himself
+        <<jump funFacts>>
+===
+title: dessert
+---
+//Desserts are chosen after entServe
+Waiter: Good evening, are we ready for dessert?
+Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque.
+//Need to add comments from Jeremy
+    -> Creme Brulee
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: I wonder how creme brulee was invented. //neutral
+        Jeremy: "Yeah, I've got some cream, I wonder what happens if I pour sugar on it and set it on fire, because that's something a normal person might do." //positive
+            <<jump desServe>>
+    -> Chocolate Mousse
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: I'm quite a fan of mousse. Not a fan of moose, however. //neutral
+            <<jump desServe>>
+    -> Gateau Basque
+        Waiter: Very good, I will bring your food shortly.
+        Jeremy: I haven't the slightest clue as to what either of those words mean. //neutral
+            <<jump desServe>>
+
+===
+title: desServe
+---
+//Comment from Jeremy about the chosen food
+//if CREME
+Jeremy: Gotta give it a good thwack to break through to the creamy innards. //positive
+//if MOUSSE
+Jeremy: I retract my statement about moose earlier. If moose taste like mousse, then I'm a fan. //positive
+//if GATEAU
+Jeremy: So its some kind of cake? It looks somewhere between cream pie and cake. //neutral
+//Need to put a check here to eliminate the conversation topic that was previously chosen
+Jeremy: So do you have any other questions about me?
+    -> Ask about his job
+        <<jump job>>
+    -> Ask about his hobbies
+        <<jump hobbies>>
+    -> Ask about himself
+        <<jump funFacts>>
+===
+title: billCheck
+---
+//Player's performance is checked
+//If player gets highest score, send to dtf, otherwise send to appropriate ending
+Waiter: Are we all done here? How was everything? To your liking I hope?
+Jeremy: Yes, everything was great, thank you.
+Waiter: I'll leave the check here for you to handle as you wish.
+Jeremy: Thank you.
+Jeremy: Lets have a look at this then...
+//jump to appropriate end scene
+===
+title: dtf
+---
+//You have impressed and "excited" Jeremy, find a way to talk your way out of it or accept your fate (possibly willingly?)
+===
+title: goodEnd
+---
+//You got Jeremy to pay the bill
+Jeremy: You know what, I'll handle this. //positive
+Jeremy: I had a good time tonight, and besides, its the gentlemanly thing to do. //positive
+Jeremy: Right, m'lady? //positive
+Narrator: And so, with stomach fuller and wallet no lighter, you returned to your apartment satisfied with yourself.
+Narrator: The dinner was a nice break from working on your thesis, and now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
+//THE END
+//Back to title screen or something
+===
+title: splitEnd
+---
+//You had to split the bill with Jeremy
+===
+title: badEnd
+---
+//Jeremy ditched you with the bill, forcing you to pay it
+===
+title: job
+---
+//Jeremy tells us about either his job as a moderator for an MLP Discord server or as a moderator for a subreddit
+Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... real... job, so to speak. //negative EXPRESSION ONLY
+    -> What do you mean by that?
+        Jeremy: Well, my mom says its not real, but that's not true. I put a lot of work into it. //neutral
+Jeremy: I'm a moderator for two different online communities, though they overlap somewhat. One on Reddit and one on Discord.
+    -> Discord
+        <<jump discord>>
+    -> Reddit
+        <<jump reddit>>
+===
+title: discord
+---
+Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the rules and make sure nobody is breaking TOS. //neutral
+    -> What fandom?
+        Jeremy: Its an MLP server. //neutral
+            -> What?
+                Jeremy: MLP, its short for My Little Pony, specifically the shows Friendship is Magic and Equestria Girls. //neutral
+                Jeremy: Its an 18+ roleplay server for bronies and pegasisters who like the show. //neutral
+                    -> That's... cool...
+                        Jeremy: It's an interesting community to say the least. //neutral
+                            //jump to next course
+                    -> That sounds disgusting.
+                        Jeremy: Haha... It can be sometimes. Like one time- //positive EXPRESSION ONLY
+                        -> Please don't...
+                            Jeremy: Oh, uh... Sorry... //negative
+                                //jump to next course
+            -> No...
+                Jeremy: Oh, are you a fan of MLP? //positive EXPRESSION ONLY
+                    -> Yes...?
+                        Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony? //positive
+                            -> Uhh...
+                                //jump to next course
+                    -> Absolutely not
+                        -> Jeremy: Oh, I see... //negative
+                            //jump to next course
+===
+title: reddit
+---
+//Jeremy tells us about the subreddit he moderates
+===
+title: hobbies
+---
+//Jeremy tells us about either his interest in harem anime or his favorite movie, Cannibal Holocaust
+Jeremy: I'm an otaku, that's a fan of Japanese culture, especially anime, if you didn't know.
+Jeremy: I'm also a bit of a film buff. I've watched and enjoyed a number of obscure films.
+    -> What's your favorite anime?
+        <<jump anime>>
+    -> What's your favorite movie?
+        <<jump cannibal>>
+===
+title: anime
+---
+//Jeremy tells us about the harem anime he is a fan of
+===
+title: cannibal
+---
+//Jeremy tells us about the cinematic masterpiece, Cannibal Holocaust
+Jeremy: Of all the obscure films I've seen, which is my favorite?
+Jeremy: That's easy! Cannibal Holocaust! //positive EXPRESSION ONLY
+    -> Cannibal What?
+        Jeremy: Cannibal Holocaust. Its an Italian film released in 1980. I admire it for the plot and filmmaking style.
+            -> What's the plot about?
+                Jeremy: Its about an anthropologist who leads a rescue team to find a crew of filmmakers who went missing while filming a documentary about cannibals in the Amazon. //positive
+                Jeremy: The anthropologist finds the film that the missing filmmakers took and it shows how they set up shots by killing and mutilating natives to make them seem more savage. //positive EXPRESSION ONLY
+                Jeremy: Its famous for its extreme gore and brutality. It includes multiple actual animal deaths. In fact, there were rumors that the actors in the film were actually killed while filming. //positive EXPRESSION ONLY
+                -> That's cool
+                    Jeremy: Its pretty foul at times, but it uses the gore to tell an interesting story and make a cogent commentary about western society and who are the real savages. //positive
+                        -> That's interesting, I may have to check it out myself
+                            Jeremy: I'd gladly show it to you, if you'd like, of course. //positive
+                                //jump to next meal
+                        -> That's stupid
+                            Jeremy: What? How so? //negative
+                                -> "Who are the real savages?" only works as a message if one side isn't literal cannibals
+                                    Jeremy: Well its about the brutality of the so-called "civilized" compared to the so-called "uncivilized" and how civilization didn't make the filmmaker characters actually civilized.
+                                        -> A few bad eggs don't debase western civilization as a whole
+                                            Jeremy: Fair enough, I suppose. //neutral
+                                -> Fliming yourself slaughtering real animals for a fake movie about the brutality of man forces you to cede any moral high ground
+                                    Jeremy: Well if you think about it... //neutral
+                                    Jeremy: Uh... //neutral
+                                    Jeremy: Nah, you're right. I'm not gonna defend that. //neutral
+                                        -> Good
+                                            //jump to next course
+                -> That's... Cool?
+                    Jeremy: I think so, despite the brutality. It's remembered for a reason. //positive
+                        -> Sure...
+                            //jump to next course
+            -> What's unique about the style?
+                Jeremy: Its pretty much the original found footage film. It came out nearly 20 years before The Blair Witch Project popularized the style and it had a similar effect. //positive
+                Jeremy: The audience wasn't familiar with the found footage style, so many people thought it was real. //positive EXPRESSION ONLY
+                Jeremy: It didn't help that the director had the actors take a low profile for a year after filming to feed the rumors that they were actually murdered in the movie. //positive EXPRESSION ONLY
+    -> I've heard about that one, you actually watched it?
+        Jeremy: Yes I have! I have the 2011 DVD version with the fewest cuts. Only 15 seconds was cut in that version. //positive
+            -> That's... Cool?
+                Jeremy: I'd love to show it to you if you're interested. //positive EXPRESSION ONLY
+                Jeremy: Or I could lend you the DVD, if you'd prefer... //neutral
+                    -> Maybe sometime
+                        //jump to next course
+===
+title: funFacts
+---
+//Jeremy tells us about either his pinkeye induced heterochromia or his collection of female anime figurines
+
+===
+title: heterochromia
+---
+//Jeremy tells us about his indistinguishably different colored eyes and how he thinks it was caused by pinkeye when he was 6
+Jeremy: Look deep into my eyes, tell me what you see. //neutral
+    -> Okay?
+        Jeremy: Do you see it? //positive EXPRESSION ONLY
+            -> No
+                Jeremy: My eyes, they're two different colors. //neutral
+                    -> Really?
+                        Jeremy: Yes, they are! My right one is green and the other is blue. //positive
+                        Jeremy: It happened when I was 6 years old. //neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                        Jeremy: I think it was the eyedrops that caused it. //neutral
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me. //positive
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before... //negative
+                                    //Jump to next course
+                    -> Really...
+                        Jeremy: Yes, they are! My right one is green and the other is blue. //positive EXPRESSION ONLY
+                        Jeremy: It happened when I was 6 years old. //neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                        Jeremy: I think it was the eyedrops that caused it. //neutral
+                            -> That's... cool?
+                                Jeremy: Isn't it? Its something special about me. //positive EXPRESSION ONLY
+                                    //Jump to next course
+                            -> Why did you tell me you got pinkeye?
+                                Jeremy: Oh, uh... Well... //negative
+                                Jeremy: I thought it was cool... //negative EXPRESSION ONLY
+                                    //Jump to next course
+            -> No...?
+                Jeremy: My eyes, they're two different colors.
+                    -> Really?
+                        Jeremy: Yes, they are! My right one is green and the other is blue. //positive
+                        Jeremy: It happened when I was 6 years old. //neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                        Jeremy: I think it was the eyedrops that caused it. //neutral
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me. //positive
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before... //negative
+                                    //Jump to next course
+                    -> I don't see it
+                        Jeremy: Well they are. You sure you can't see the difference? //neutral
+                            -> I'm pretty sure there's no difference
+                                Jeremy: They are different! My right one is green and the other is blue. //negative
+                                Jeremy: It happened when I was 6 years old. //neutral
+                                Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                                Jeremy: I think it was the eyedrops that caused it. //neutral
+                                    -> That's... cool?
+                                        Jeremy: Isn't it? Its something special about me. //positive EXPRESSION ONLY
+                                            //Jump to next course
+                                    -> Why did you tell me you got pinkeye?
+                                        Jeremy: Oh, uh... Well... //negative
+                                        Jeremy: I thought it was cool... //negative EXPRESSION ONLY
+                                            //Jump to next course
+                            -> I think can see a slight difference...
+                                Jeremy: See? I told you they were different! My right one is green and the other is blue. //positive
+                                Jeremy: It happened when I was 6 years old. //neutral
+                                Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                                Jeremy: I think it was the eyedrops that caused it. //neutral
+                                    -> That's... cool?
+                                        Jeremy: Isn't it? Its something special about me. //positive EXPRESSION ONLY
+                                            //Jump to next course
+                                    -> Why did you tell me you got pinkeye?
+                                        Jeremy: Oh, uh... Well... //negative
+                                        Jeremy: I thought it was cool... //negative EXPRESSION ONLY
+                                            //Jump to next course
+
+    -> I don't really want to...
+        Jeremy: Oh, sorry. Well, do you want to know what you'd see in them? //neutral
+            -> Sure
+                Jeremy: I have heterochromia! My eyes are two different colors, see? //positive
+                    -> Yes?
+                        Jeremy: It's cool isn't it? //positive
+                        Jeremy: It happened when I was 6 years old. //neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                        Jeremy: I think it was the eyedrops that caused it. //neutral
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me. //positive
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before... //negative
+                                    //Jump to next course
+                    -> No
+                        Jeremy: Oh well. My right eye is green and the other is blue. //neutral
+                        Jeremy: It happened when I was 6 years old. //neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since. //neutral
+                        Jeremy: I think it was the eyedrops that caused it. //neutral
+                            -> That's cool
+                                Jeremy: Isn't it? Its something special about me. //positive
+                                    //Jump to next course
+                            -> That's cool, but did you have to mention the pinkeye?
+                                Jeremy: Oh, uh... I guess I hadn't thought about it that way before... //negative
+                                    //Jump to next course
+            -> Not really
+                Jeremy: Oh... //negative
+                    //Jump to next course
+===
+title: figurines
+---
+//Jeremy tells us about his bowel problems in excruciating detail
+===
