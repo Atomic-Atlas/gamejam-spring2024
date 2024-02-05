@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour
         }
         //load up the first scene/background
         NextScene();
-
+        //turns off overlay for start screen
+        myPanels[myPanels.Length-1].SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
         //Checks for input of escape key, and quits application if pressed (doesn't work in editor, only build)
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            ExitGame();
         }
         
             //Debug.Log("here");
@@ -116,6 +117,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void StartGame()
+    {
+        index++;
+        NextScene();
+    } 
     public void NextScene()
     {
         foreach (var item in myPanels)
