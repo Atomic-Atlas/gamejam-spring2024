@@ -1041,7 +1041,7 @@ Waiter: Just down that hall, to the right, sir.
 <<set $expression to "Positive">>
 Jeremy: Will excuse me for a moment? I have to use the restroom.//ALBATROSS Happy EXPRESSION ONLY
     -> Sure
-        <<image_disable  Jeremy>> // Need to disable Jeremy so he disappears offscreen
+        //<<image_disable  Jeremy>> // Need to disable Jeremy so he disappears offscreen
 
         Narrator: You wait for what seems like an eternity. Eventually you go to check the bathrooms, only to realize that Jeremy ditched you with the bill.
         Narrator: Seems like he didn't enjoy his time with you. With no other choice, you're forced to pay the bill.
