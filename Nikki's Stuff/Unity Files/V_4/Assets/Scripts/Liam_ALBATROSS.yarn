@@ -61,12 +61,15 @@ Narrator: Eventually you hear a brief commotion near the entrance to the restaur
 //Insert player's name here
 Jeremy: Hello, are you {$playerName}?
     -> That's me.
+       // <<set $points to 4>> 
+       // <<set $optionSelected to true>>
         Jeremy: I'm Jeremy, I'm uhh... I'm not really sure how to start this...
 Jeremy: Oh that's right, my mom told me to ask people about themselves!
 Jeremy: So uh, what do you do?
-
     -> I'm a grad student working on my master's thesis.
         Jeremy: Oh that's cool. I'm, uhh... on a leave of absence...
+           // <<set $points to -1>> 
+           // <<set $optionSelected to true>>
             <<jump appetizers>>
     -> I have a part-time job at a local cafe.
         Jeremy: Oh that's cool. I don't have a traditional job per se at the moment, but I do have a job of sorts.
@@ -123,17 +126,14 @@ Narrator: *Exactly 8 minutes and 23 seconds later*
 
 // Comment from Jeremy about the chosen food
 <<if $appetizerChoice == "Lobster Bisque">>
-    <<set $expression to "Positive">>
     Jeremy: Oh, its a soup? I didn't know what a bisque was.//ALBATROSS Happy
     <<set $points to 1>>
     <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Charcuterie and Cheese Plate">>
-    <<set $expression to "Positive">>
     Jeremy: Strange, I don't see any shark in this SHARK-cuterie.//ALBATROSS Happy
     <<set $points to 1>>
     <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Escargots">>
-    <<set $expression to "Positive">>
     Jeremy: Ewww... Are those SNAILS?//ALBATROSS Angry
     <<set $points to 1>>
     <<set $optionSelected to true>>
@@ -240,9 +240,7 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
 //Need to add comments from Jeremy
     -> Creme Brulee
         Waiter: Very good, I will bring your food shortly.
-        <<set $expression to "Neutral">>
         Jeremy: I wonder how creme brulee was invented. //ALBATROSS Neutral
-        <<set $expression to "Positive">>
         Jeremy: "Yeah, I've got some cream, I wonder what happens if I pour sugar on it and set it on fire, because that's something a normal person might do."//ALBATROSS Happy
             <<set $dessertChoice to "Creme Brulee">> // dessert is now Creme Brulee
             <<jump desServe>>
@@ -271,17 +269,14 @@ Waiter: Here is your {$dessertChoice}.
 
 // Comment from Jeremy about the chosen food
 <<if $dessertChoice == "Creme Brulee">>
-    <<set $expression to "Positive">>
     Jeremy: Gotta give it a good thwack to break through to the creamy innards.//ALBATROSS Happy
     <<set $points to 1>>
     <<set $optionSelected to true>>
 <<elseif $dessertChoice == "Chocolate Mousse">>
-    <<set $expression to "Positive">>
     Jeremy: I retract my statement about moose earlier. If moose taste like mousse, then I'm a fan.//ALBATROSS Happy
     <<set $points to 1>>
     <<set $optionSelected to true>>
 <<elseif $dessertChoice == "Gateau Basque">>
-    <<set $expression to "Neutral">>
     Jeremy: So its some kind of cake? It looks somewhere between cream pie and cake.//ALBATROSS Neutral
     <<set $points to 1>>
     <<set $optionSelected to true>>
@@ -359,7 +354,6 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
                 <<set $expression to "Positive">>
                 Jeremy: Oh, are you a fan of My Little Pony?//ALBATROSS Happy
                     -> Yes...?
-                        <<set $expression to "Positive">>
                         Jeremy: Wow! Its rare to find another brony in the wild. Who's your favorite pony?//ALBATROSS Happy
                             -> Uhh...
                                 <<if $courseStage == 0>>
@@ -414,7 +408,6 @@ title: anime
 Jeremy: That would have to be Super Kawaii Girls 2: Revenge of the Black Heart!//ALBATROSS Happy
 Jeremy: Aw man, tell me you've seen it?//ALBATROSS Happy
     -> Oh yeah, the one with Mojo dojo, right?
-        <<set $expression to "Positive">>
         Jeremy: Oh haha! You have! Is your favorite character my queen Alice Kartheart? Oh, and Lady Karila! Of course, I can't forget about-//ALBATROSS Happy
             ->Wait, Alice, the one that looks like a child?
                 <<set $expression to "Embarrassed">>
@@ -457,15 +450,12 @@ Jeremy: Aw man, tell me you've seen it?//ALBATROSS Happy
     -> The stupid magic girl anime harem I heard about online?
         <<set $expression to "Embarrassed">>
         Jeremy: Oh uh, yeah that one.//ALBATROSS Embarrassed
-        <<set $expression to "Neutral">>
-        Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love.//ALBATROSS Neutral EXPRESSION ONLY
         <<set $expression to "Positive">>
+        Jeremy: I'm obsessed with it! Especially how all the girls interact and fight with each other over Sir Anthony's love.//ALBATROSS Neutral EXPRESSION ONLY
         Jermey: However, since you don't know much, I will tell you all about my favorite characters so we may bond better! First is my queen Alice Kartheart who-//ALBATROSS Happy EXPRESSION ONLY
             -> Fascinating...
-                <<set $expression to "Positive">>
                 Jeremy: Anyway! I love all my girls, with all of my heart! You are a close fifteenth after all!//ALBATROSS Happy
                     -> Oh? How...pleasant?
-                        <<set $expression to "Positive">>
                         Jeremy: Very much so, I will make a crown for you after this.//ALBATROSS Happy EXPRESSION ONLY
                             //jump to next course
                             <<if $courseStage == 0>>
@@ -548,15 +538,12 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
     -> Cannibal What?
         Jeremy: Cannibal Holocaust. Its an Italian film released in 1980. I admire it for the plot and filmmaking style.//ALBATROSS Neutral
             -> What's the plot about?
-                <<set $expression to "Positive">>
                 Jeremy: Its about an anthropologist who leads a rescue team to find a crew of filmmakers who went missing while filming a documentary about cannibals in the Amazon.//ALBATROSS Happy
                 Jeremy: The anthropologist finds the film that the missing filmmakers took and it shows how they set up shots by killing and mutilating natives to make them seem more savage.//ALBATROSS Happy EXPRESSION ONLY
                 Jeremy: Its famous for its extreme gore and brutality. It includes multiple actual animal deaths. In fact, there were rumors that the actors in the film were actually killed while filming.//ALBATROSS Happy EXPRESSION ONLY
                 -> That's cool
-                    <<set $expression to "Neutral">>
                     Jeremy: Its pretty foul at times, but it uses the gore to tell an interesting story and make a cogent commentary about western society and who are the real savages.//ALBATROSS Neutral
                         -> That's interesting, I may have to check it out myself
-                            <<set $expression to "Positive">>
                             Jeremy: I'd gladly show it to you, if you'd like, of course.//ALBATROSS Happy
                                 //jump to next meal
                                 <<if $courseStage == 0>>
@@ -573,7 +560,6 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
                                     <<jump billCheck>>
                                 <<endif>>
                         -> That's stupid
-                            <<set $expression to "Shocked">>
                             Jeremy: What? How so?//ALBATROSS Shocked
                                 -> "Who are the real savages?" only works as a message if one side isn't literal cannibals
                                     Jeremy: Well its about the brutality of the so-called "civilized" compared to the so-called "uncivilized" and how civilization didn't make the filmmaker characters actually civilized.//ALBATROSS Neutral
@@ -649,12 +635,10 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
                     <<jump billCheck>>
                 <<endif>>
     -> I've heard about that one, you actually watched it?
-        <<set $expression to "Positive">>
         Jeremy: Yes I have! I have the 2011 DVD version with the fewest cuts. Only 15 seconds was cut in that version.//ALBATROSS Happy
             -> That's... Cool?
                 <<set $expression to "Positive">>
                 Jeremy: I'd love to show it to you if you're interested.//ALBATROSS Happy
-                <<set $expression to "Neutral">>
                 Jeremy: Or I could lend you the DVD, if you'd prefer...//ALBATROSS Neutral
                     -> Maybe sometime
                         //jump to next course
@@ -690,16 +674,13 @@ title: heterochromia
 ---
 // Jeremy tells us about his indistinguishably different colored
 // eyes and how he thinks it was caused by pinkeye when he was 6.
-<<set $expression to "Positive">>
 Jeremy: Look deep into my eyes, tell me what you see.//ALBATROSS Happy
     -> Okay?
         <<set $expression to "Positive">>
         Jeremy: Do you see it?//ALBATROSS Happy EXPRESSION ONLY
             -> No
-                <<set $expression to "Positive">>
                 Jeremy: My eyes, they're two different colors.//ALBATROSS Happy
                     -> Really?
-                        <<set $expression to "Positive">>
                         Jeremy: Yes, they are! My right one is green and the other is blue.//ALBATROSS Happy
                         <<set $expression to "Neutral">>
                         Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it.//ALBATROSS Neutral EXPRESSION ONLY
@@ -779,12 +760,11 @@ Jeremy: Look deep into my eyes, tell me what you see.//ALBATROSS Happy
             -> No...?
                 Jeremy: My eyes, they're two different colors.//ALBATROSS Neutral
                  -> Really?
-                        <<set $expression to "Positive">>
                         Jeremy: Yes, they are! My right one is green and the other is blue.//ALBATROSS Happy
-                        <<set $expression to "Neutral">>
-                        Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it.//ALBATROSS Neutral
+                        Jeremy: It happened when I was 6 years old.//ALBATROSS Neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.//ALBATROSS Neutral
+                        Jeremy: I think it was the eyedrops that caused it.//ALBATROSS Neutral
                             -> That's cool
-                                <<set $expression to "Positive">>
                                 Jeremy: Isn't it? Its something special about me.//ALBATROSS Happy
                                     //Jump to next course
                                     <<if $courseStage == 0>>
@@ -818,10 +798,10 @@ Jeremy: Look deep into my eyes, tell me what you see.//ALBATROSS Happy
                                         <<jump billCheck>>
                                     <<endif>>
                     -> Really...
-                        <<set $expression to "Positive">>
                         Jeremy: Yes, they are! My right one is green and the other is blue.//ALBATROSS Happy
-                        <<set $expression to "Neutral">>
-                        Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it.//ALBATROSS Neutral
+                        Jeremy: It happened when I was 6 years old.//ALBATROSS Neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.//ALBATROSS Neutral
+                        Jeremy: I think it was the eyedrops that caused it.//ALBATROSS Neutral
                             -> That's... cool?
                                 Jeremy: Isn't it? Its something special about me.//ALBATROSS Happy
                                     //Jump to next course
@@ -861,12 +841,11 @@ Jeremy: Look deep into my eyes, tell me what you see.//ALBATROSS Happy
             -> Sure
                 Jeremy: I have heterochromia! My eyes are two different colors, see?//ALBATROSS Happy
                     -> Yes?
-                        <<set $expression to "Positive">>
                         Jeremy: It's cool isn't it?//ALBATROSS Happy
-                        <<set $expression to "Neutral">>
-                        Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it.//ALBATROSS Neutral
+                        Jeremy: It happened when I was 6 years old.//ALBATROSS Neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.//ALBATROSS Neutral
+                        Jeremy: I think it was the eyedrops that caused it.//ALBATROSS Neutral
                             -> That's cool
-                                <<set $expression to "Positive">>
                                 Jeremy: Isn't it? Its something special about me.//ALBATROSS Happy
                                     //Jump to next course
                                     <<if $courseStage == 0>>
@@ -900,11 +879,11 @@ Jeremy: Look deep into my eyes, tell me what you see.//ALBATROSS Happy
                                         <<jump billCheck>>
                                     <<endif>>
                     -> No
-                        <<set $expression to "Neutral">>
                         Jeremy: Oh well. My right eye is green and the other is blue.//ALBATROSS Neutral
-                        Jeremy: It happened when I was 6 years old. I got pinkeye in my right eye and its been green ever since. I think it was the eyedrops that caused it.//ALBATROSS Neutral
+                        Jeremy: It happened when I was 6 years old.//ALBATROSS Neutral
+                        Jeremy: I got pinkeye in my right eye and its been green ever since.//ALBATROSS Neutral
+                        Jeremy: I think it was the eyedrops that caused it.//ALBATROSS Neutral
                             -> That's cool
-                                <<set $expression to "Positive">>
                                 Jeremy: Isn't it? Its something special about me.//ALBATROSS Happy
                                     //Jump to next course
                                     <<if $courseStage == 0>>
@@ -968,26 +947,24 @@ Jeremy: Do you -heh- own any collectibles?//ALBATROSS Happy
                 Jeremy: I took out a $30,000 loan to buy a few of the rare ones, like my pride and joy Alice Kartheart.//ALBATROSS Happy
                 Jeremy: She was so expensive that I had to keep her in a special showcase.//ALBATROSS Happy
                     -> Thats nice to hear, protecting a very questionable purchase. A nice case with good lighting?
-                        <<set $expression to "Positive">>
                         Jeremy: Oh no no! Regular LED lights will strip the paint! No, I put her in a pickle jar.//ALBATROSS Happy EXPRESSION ONLY
                             -> I beg your pardon?
-                                <<set $expression to "Positive">>
-                                Jeremy: Yeah, had to use a special liquid to-//ALBATROSS Happy EXPRESSION ONLY
-                                    -> WAITER!!!
-                                        //jump to next course
-                                        <<if $courseStage == 0>>
-                                            <<jump appServe>>
-                                        <<elseif $courseStage == 1>>
-                                            <<jump entree>>
-                                        <<elseif $courseStage == 2>>
-                                            <<jump entServe>>
-                                        <<elseif $courseStage == 3>>
-                                            <<jump dessert>>
-                                        <<elseif $courseStage == 4>>
-                                            <<jump desServe>>
-                                        <<elseif $courseStage == 5>>
-                                            <<jump billCheck>>
-                                        <<endif>>
+                                    Jeremy: Yeah, had to use a special liquid to-//ALBATROSS Happy EXPRESSION ONLY
+                                        -> WAITER!!!
+                                            //jump to next course
+                                            <<if $courseStage == 0>>
+                                                <<jump appServe>>
+                                            <<elseif $courseStage == 1>>
+                                                <<jump entree>>
+                                            <<elseif $courseStage == 2>>
+                                                <<jump entServe>>
+                                            <<elseif $courseStage == 3>>
+                                                <<jump dessert>>
+                                            <<elseif $courseStage == 4>>
+                                                <<jump desServe>>
+                                            <<elseif $courseStage == 5>>
+                                                <<jump billCheck>>
+                                            <<endif>>
 ===
 
 title: billCheck
@@ -1034,11 +1011,9 @@ Narrator: You notice Jeremy begin tapping his finger on the table rhythmically.
 Narrator: Tap-Tap-Tap-Tap. Pause. Tap. Pause. Tap-TapTap-Tap-Tap. Pause. Tap-TapTap-TapTap-Tap.
 Narrator: The waiter raises his eyebrow slightly.
 Waiter: Is there anything else I can do for you?
-<<set $expression to "Positive">>
 Jeremy: Yes! Do you- I mean- where is your bathroom.//ALBATROSS Happy
 Narrator: The waiter points towards a small hallway near the back of the restaurant.
 Waiter: Just down that hall, to the right, sir.
-<<set $expression to "Positive">>
 Jeremy: Will excuse me for a moment? I have to use the restroom.//ALBATROSS Happy EXPRESSION ONLY
     -> Sure
         <<image_disable  Jeremy>> // Need to disable Jeremy so he disappears offscreen
@@ -1098,7 +1073,6 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
     -> No thanks, I've got to work on my thesis
         <<set $expression to "Embarrassed">>
         Jeremy: O-oh, of course! You mentioned that!//ALBATROSS Embarrassed
-        <<set $expression to "Neutral">>
         Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime...//ALBATROSS Neutral
             -> Sure
                 <<set $expression to "Positive">> // Set visuals to positive expression
@@ -1113,7 +1087,6 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
                     <<jump sadEnd>>
     -> Sure, I'd love to!
         <<set $expression to "Positive">> // Set visuals to positive expression
-        <<set $expression to "Shocked">>
         Jeremy: O-oh, awesome! Great!//ALBATROSS Shocked EXPRESSION ONLY
         <<set $expression to "Embarrassed">>
         Jeremy: Just being up front, I'm not expecting you to... to p-put out or anything... I just thought we could watch a movie or something...//ALBATROSS Embarrassed
@@ -1122,7 +1095,7 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
                 Jeremy: Yeah! Me too. Come on, we can talk movies on the way.//ALBATROSS Happy
                 <<jump dtfMovieEnd>>
             -> We'll see where the night takes us~
-                <<set $expression to "Shocked">>
+                <<set $expression to "Positive">> // Set visuals to positive expression
                 Jeremy: O-o-oh-oh my... Uh... O-okay! We'll see, I g-guess! This'll be... a-a first for me... I've never had someone over before...//ALBATROSS Shocked
                 <<jump dtfHappyEnd>>
 ===
@@ -1170,7 +1143,7 @@ title: dtfHappyEnd
 //You accepted Jeremy's offer to go home and proposed a little more
 Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas, though movies weren't the first thing on your mind.
 Narrator: The two of you spend a while howling with laughter at Jeremy's shitty b-movie collection, before the night shifts.
-Narrator: You ended up spending the night with Jeremy.
+Narrator: You ended up spending the night with Jeremy. 
 Narrator: The next morning you make your way back to your apartment, having thoroughly enjoyed yourself.
 Narrator: Fully refreshed, reinvigorated, and the happiest you've been in a while, you breeze through the rest of your thesis proposal.
 Narrator: You got a message from Jeremy that day, asking about a future date.
