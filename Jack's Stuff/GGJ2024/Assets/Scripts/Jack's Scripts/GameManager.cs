@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
     private int CheckScoreCap(int score, int points)
     {
         //ensures the points being returned won't go above the min or max values- should have variable for max value realistically, but I hard code to save time
-        if (score<=0 || score>=13)
+        if (score<0 || score>13)
         {
             points = 0;
         }
