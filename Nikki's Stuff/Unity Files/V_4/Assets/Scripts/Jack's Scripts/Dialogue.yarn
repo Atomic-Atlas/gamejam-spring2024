@@ -85,15 +85,15 @@ Narrator: The moment is interrupted by a waiter who glides swiftly up to your ta
 Waiter: Welcome to The French Bathtub, we will be serving you a three course meal tonight.
 Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster Bisque, a Charcuterie and Cheese Plate, or the Escargots.
     -> Lobster Bisque // POSITIVE
-        Waiter: Very good, I will bring your food shortly.
         <<set $expression to "Positive">>
+        Waiter: Very good, I will bring your food shortly.
         Jeremy: Bisque, haha that sounds kind of like bitch.//ALBATROSS Happy
             <<set $appetizerChoice to "Lobster Bisque">> // appetizer is now Lobster Bisque
             <<set $points to 1>> // Add 1 point to score
             <<set $optionSelected to true>>
             <<jump appServe>>
     -> Charcuterie and Cheese Plate // NEUTRAL
-        <<set $expression to "Neutral">> // Set visuals to neutral expression
+        <<set $expression to "Neutral">>
         Waiter: Very good, I will bring your food shortly.//ALBATROSS Neutral
         Jeremy: You know, my uncle makes Italian-style salami. At least, I hope that's what he meant by "showing me his Italian sausage." //neutral
             <<set $appetizerChoice to "Charcuterie and Cheese Plate">> // appetizer is now Charcuterie and Cheese Plate
@@ -140,6 +140,7 @@ Narrator: *Exactly 8 minutes and 23 seconds later*
 <<endif>> // end the if-statement
 
 // Prompt user for questions about Jeremy
+<<set $expression to "Neutral">>
 Jeremy: So do you have any questions about me?//ALBATROSS Neutral
     -> Ask about his job <<if $jobAvailDiscord == true>>
         <<jump job>>
@@ -194,7 +195,7 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 Waiter: Here is your {$entreeChoice}.
 
 <<if $appetizerChoice == "Lamb Shank">>
-    <<set $expression to "Neutral">> // Set visuals to neutral expression
+    <<set $expression to "Neutral">>
     Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose.//ALBATROSS Neutral
 <<elseif $appetizerChoice == "Salmon">>
     <<set $expression to "Positive">>
@@ -303,6 +304,7 @@ title: job
 <<set $expression to "Embarrassed">>
 Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... real... job, so to speak.//ALBATROSS Embarrassed EXPRESSION ONLY
     -> What do you mean by that?
+        <<set $expression to "Neutral">>
         Jeremy: Well, my mom says its not real, but that's not true. I put a lot of work into it.//ALBATROSS Neutral
             -> What is it? <<if $jobAvailDiscord == true>>
             <<set $jobAvailDiscord to false>> // Question has been visited. Now remove.
@@ -1101,24 +1103,24 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
         <<set $expression to "Neutral">>
         Jeremy: I understand, school comes first, right... Well, in that case, can we exchange contacts? I'd love to go on another date with you sometime...//ALBATROSS Neutral
             -> Sure
-                <<set $expression to "Positive">> // Set visuals to positive expression
+                <<set $expression to "Positive">>
                 Jeremy: Great! I'm looking forwards to next time!//ALBATROSS Happy
                     <<jump dtfGoodEnd>>
             -> No, I'd rather not
-                <<set $expression to "Negative">> // Set visuals to negative expression
+                <<set $expression to "Negative">>
                 <<set $expression to "Shocked">>
                 Jeremy: O-oh... I... I see. Well... I-I had a good time at least...//ALBATROSS Shocked EXPRESSION ONLY
                 <<set $expression to "Embarrassed">>
                 Jeremy: I... I hope it wasn't too bad for you...//ALBATROSS Embarrassed EXPRESSION ONLY
                     <<jump sadEnd>>
     -> Sure, I'd love to!
-        <<set $expression to "Positive">> // Set visuals to positive expression
+        <<set $expression to "Positive">>
         <<set $expression to "Shocked">>
         Jeremy: O-oh, awesome! Great!//ALBATROSS Shocked EXPRESSION ONLY
         <<set $expression to "Embarrassed">>
         Jeremy: Just being up front, I'm not expecting you to... to p-put out or anything... I just thought we could watch a movie or something...//ALBATROSS Embarrassed
             -> A movie sounds nice
-                <<set $expression to "Positive">> // Set visuals to positive expression
+                <<set $expression to "Positive">>
                 Jeremy: Yeah! Me too. Come on, we can talk movies on the way.//ALBATROSS Happy
                 <<jump dtfMovieEnd>>
             -> We'll see where the night takes us~
