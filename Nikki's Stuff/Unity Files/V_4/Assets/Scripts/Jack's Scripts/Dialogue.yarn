@@ -99,6 +99,7 @@ Waiter: We shall start, of course, with appetizers. Tonight, we have a Lobster B
             <<set $appetizerChoice to "Charcuterie and Cheese Plate">> // appetizer is now Charcuterie and Cheese Plate
             <<jump appServe>>
     -> Escargots // NEGATIVE
+        <<set $expression to "Neutral">>
         Waiter: Very good, I will bring your food shortly.
         Jeremy: What's an es-car-gouts? Sounds made up.//ALBATROSS Neutral
             <<set $appetizerChoice to "Escargots">> // appetizer is now Escargots
@@ -133,7 +134,7 @@ Narrator: *Exactly 8 minutes and 23 seconds later*
     <<set $points to 1>>
     <<set $optionSelected to true>>
 <<elseif $appetizerChoice == "Escargots">>
-    <<set $expression to "Positive">>
+    <<set $expression to "Negative">>
     Jeremy: Ewww... Are those SNAILS?//ALBATROSS Angry
     <<set $points to 1>>
     <<set $optionSelected to true>>
@@ -249,11 +250,13 @@ Waiter: Tonight, we have a Creme Brulee, a Chocolate Mousse, and a Gateau Basque
             <<jump desServe>>
     -> Chocolate Mousse
         Waiter: Very good, I will bring your food shortly.
+        <<set $expression to "Neutral">>
         Jeremy: I'm quite a fan of mousse. Not a fan of moose, however.//ALBATROSS Neutral
             <<set $dessertChoice to "Chocolate Mousse">> // dessert is now Chocolate Mousse
             <<jump desServe>>
     -> Gateau Basque
         Waiter: Very good, I will bring your food shortly.
+        <<set $expression to "Neutral">>
         Jeremy: I haven't the slightest clue as to what either of those words mean.//ALBATROSS Neutral
             <<set $dessertChoice to "Gateau Basque">> // dessert is now Gateau Basque
             <<jump desServe>>
@@ -315,8 +318,10 @@ Jeremy: Well, I may have mentioned it before, but I don't exactly have a, uh... 
 
 title: discord
 ---
+<<set $expression to "Neutral">>
 Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the rules and make sure nobody is breaking TOS.//ALBATROSS Neutral
     -> What fandom?
+        <<set $expression to "Neutral">>
         Jeremy: Its an MLP server.//ALBATROSS Neutral
             -> What?
                 <<set $expression to "Embarrassed">>
@@ -398,6 +403,7 @@ Jeremy: I'm a moderator for a fandom discord server. Basically, I enforce the ru
 title: hobbies
 ---
 //Jeremy tells us about either his interest in harem anime or his favorite movie, Cannibal Holocaust
+<<set $expression to "Neutral">>
 Jeremy: I'm an otaku, that's a fan of Japanese culture, especially anime, if you didn't know.//ALBATROSS Neutral
 Jeremy: I'm also a bit of a film buff. I've watched and enjoyed a number of obscure films.//ALBATROSS Neutral
     -> What's your favorite anime? <<if $hobbyAvailAnime == true>>
@@ -484,9 +490,8 @@ Jeremy: Aw man, tell me you've seen it?//ALBATROSS Happy
                                 <<jump billCheck>>
                             <<endif>>
                     -> At least I'm in the top 20.
-                        <<set $expression to "Negative">>
-                        Jeremy: Hmmm well, I might need to bump you down a few spots, depends on if tonight's episode reveals Maria Blackheart's face...//ALBATROSS Neutral
                         <<set $expression to "Neutral">>
+                        Jeremy: Hmmm well, I might need to bump you down a few spots, depends on if tonight's episode reveals Maria Blackheart's face...//ALBATROSS Neutral
                         Jeremy: I have a love-hate relationship with her right now.//ALBATROSS Neutral
                             //jump to next course
                             <<if $courseStage == 0>>
@@ -548,6 +553,7 @@ Jeremy: Of all the obscure films I've seen, which is my favorite?
 <<set $expression to "Positive">>
 Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
     -> Cannibal What?
+        <<set $expression to "Neutral">>
         Jeremy: Cannibal Holocaust. Its an Italian film released in 1980. I admire it for the plot and filmmaking style.//ALBATROSS Neutral
             -> What's the plot about?
                 <<set $expression to "Positive">>
@@ -577,9 +583,11 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
                         -> That's stupid
                             <<set $expression to "Shocked">>
                             Jeremy: What? How so?//ALBATROSS Shocked
-                                -> "Who are the real savages?" only works as a message if one side isn't literal cannibals
+                                -> "Who are the real savages?" only works as a message if one side isn't literal cannibals.
+                                    <<set $expression to "Neutral">>
                                     Jeremy: Well its about the brutality of the so-called "civilized" compared to the so-called "uncivilized" and how civilization didn't make the filmmaker characters actually civilized.//ALBATROSS Neutral
                                         -> A few bad eggs don't debase western civilization as a whole
+                                            <<set $expression to "Neutral">>
                                             Jeremy: Fair enough, I suppose.//ALBATROSS Neutral
                                             <<if $courseStage == 0>>
                                                 <<jump appServe>>
@@ -594,12 +602,11 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
                                             <<elseif $courseStage == 5>>
                                                 <<jump billCheck>>
                                             <<endif>>
-                                -> Fliming yourself slaughtering real animals for a fake movie about the brutality of man forces you to cede any moral high ground
+                                -> Fliming yourself slaughtering real animals for a fake movie about the brutality of man forces you to cede any moral high ground.
                                     <<set $expression to "Neutral">>
                                     Jeremy: Well if you think about it...//ALBATROSS Neutral
                                     <<set $expression to "Embarrassed">>
-                                    Jeremy: Uh...//ALBATROSS Embarrassed
-                                    Jeremy: Nah, you're right. I'm not gonna defend that.//ALBATROSS Embarrassed
+                                    Jeremy: Uh... Nah, you're right. I'm not gonna defend that.//ALBATROSS Embarrassed
                                         -> Good
                                             //jump to next course
                                             <<if $courseStage == 0>>
@@ -616,6 +623,7 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
                                                 <<jump billCheck>>
                                             <<endif>>
                 -> That's... Cool?
+                    <<set $expression to "Neutral">>
                     Jeremy: I think so, despite the brutality. It's remembered for a reason.//ALBATROSS Neutral
                         -> Sure...
                             //jump to next course
@@ -678,8 +686,8 @@ Jeremy: That's easy! Cannibal Holocaust!//ALBATROSS Happy EXPRESSION ONLY
 title: funFacts
 ---
 //Jeremy tells us about either his pinkeye induced heterochromia
-Jeremy: Well, there's a couple of fun facts about me.//ALBATROSS Neutral
-Jeremy: I'm a collector and there's something special about my eyes.//ALBATROSS Neutral
+<<set $expression to "Neutral">>
+Jeremy: Well, there's a couple of fun facts about me. I'm a collector and there's something special about my eyes.//ALBATROSS Neutral
     -> Collector <<if $factAvailFigurines == true>>
         <<set $factAvailFigurines to false>> // Question has been visited. Now remove.
         <<jump figurines>>
@@ -779,6 +787,7 @@ Jeremy: Look deep into my eyes, tell me what you see.//ALBATROSS Happy
                                         <<jump billCheck>>
                                     <<endif>>
             -> No...?
+                <<set $expression to "Neutral">>
                 Jeremy: My eyes, they're two different colors.//ALBATROSS Neutral
                  -> Really?
                         <<set $expression to "Positive">>
@@ -1173,6 +1182,7 @@ title: dtfHappyEnd
 Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas, though movies weren't the first thing on your mind.
 Narrator: The two of you spend a while howling with laughter at Jeremy's shitty b-movie collection, before the night shifts.
 Narrator: You ended up spending the night with Jeremy.
+// UMBRELLA: Can we put a transition back to the daytime here?
 Narrator: The next morning you make your way back to your apartment, having thoroughly enjoyed yourself.
 Narrator: Fully refreshed, reinvigorated, and the happiest you've been in a while, you breeze through the rest of your thesis proposal.
 Narrator: You got a message from Jeremy that day, asking about a future date.
