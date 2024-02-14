@@ -39,8 +39,8 @@ Narrator: You swipe through the endless list of people, searching for a suitable
 Narrator: You message him, asking him out to dinner. He responds quickly and agrees to meet you at a nearby French Bistro.
 Narrator: You smirk as you get ready and leave. This shouldn't be too bad.
     -> Go to Dinner
-       // <<set $points to 12>> 
-       // <<set $optionSelected to true>>
+        //<<set $points to 13>> 
+        //<<set $optionSelected to true>>
         <<jump meetup>>
 ===
 
@@ -195,15 +195,15 @@ Narrator: *Exactly 27 minutes and 49 seconds later*
 //Insert chosen appetizer here
 Waiter: Here is your {$entreeChoice}.
 
-<<if $appetizerChoice == "Lamb Shank">>
+<<if $entreeChoice == "Lamb Shank">>
     <<set $expression to "Neutral">>
     Jeremy: I've always thought it was weird that lamb is more common than sheep. Like, you don't see calf or piglet in the supermarket. Oh, except veal, I suppose.//ALBATROSS Neutral
-<<elseif $appetizerChoice == "Salmon">>
+<<elseif $entreeChoice == "Salmon">>
     <<set $expression to "Positive">>
     Jeremy: Perhaps I was a grizzly bear in a previous life. It would explain a lot.//ALBATROSS Happy EXPRESSION ONLY
     <<set $points to 2>>
     <<set $optionSelected to true>>
-<<elseif $appetizerChoice == "Duck Confit">>
+<<elseif $entreeChoice == "Duck Confit">>
     <<set $expression to "Positive">>
     Jeremy: Want to hear my Donald Duck impression? It's pretty good.//ALBATROSS Happy EXPRESSION ONLY
     -> Sure! // POINTS: NEGATIVE & POSITIVE (because a bystandard was disturbed)
@@ -1140,6 +1140,8 @@ Jeremy: I was wondering... If... Uhhh... If you'd like to come with me back to m
 
 title: dtfSadEnd
 ---
+<<set $moveOn to true>>
+<<set $expression to "none">>
 //You rejected Jeremy's offer to go home and to exchange contacts
 Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
 Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
@@ -1151,6 +1153,8 @@ Narrator: That weirdo was a meal ticket, nothing more.
 ===
 title: dtfGoodEnd
 ---
+<<set $moveOn to true>>
+<<set $expression to "none">>
 //You rejected Jeremy's offer to go home but agreed to set up another date
 Narrator: You return home on your own with your stomach fuller and your wallet no lighter.
 Narrator: Now fully refuelled and reinvigorated, you breeze through the rest of your thesis proposal.
@@ -1164,6 +1168,8 @@ Narrator: You're not entirely sure, but either way, you enjoyed your time.
 
 title: dtfMovieEnd
 ---
+<<set $moveOn to true>>
+<<set $expression to "none">>
 //You accepted Jeremy's offer to watch a movie
 Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas.
 Narrator: At his apartment, the two of you stayed up late into the night howling with laughter at Jeremy's shitty b-movie collection.
@@ -1178,11 +1184,14 @@ Narrator: You set up another date after another evening of laughing at shitty ho
 ===
 title: dtfHappyEnd
 ---
+<<set $moveOn to true>>
+<<set $expression to "none">>
 //You accepted Jeremy's offer to go home and proposed a little more
 Narrator: You go home with Jeremy. On the car ride over you two pitch different movie ideas, though movies weren't the first thing on your mind.
 Narrator: The two of you spend a while howling with laughter at Jeremy's shitty b-movie collection, before the night shifts.
 Narrator: You ended up spending the night with Jeremy.
 // UMBRELLA: Can we put a transition back to the daytime here?
+<<set $moveOn to true>>
 Narrator: The next morning you make your way back to your apartment, having thoroughly enjoyed yourself.
 Narrator: Fully refreshed, reinvigorated, and the happiest you've been in a while, you breeze through the rest of your thesis proposal.
 Narrator: You got a message from Jeremy that day, asking about a future date.
